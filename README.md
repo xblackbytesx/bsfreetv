@@ -1,6 +1,7 @@
 # BSfreeTV
 
-An ad-free launcher for Android TV, made for the NVIDIA SHIELD TV Pro.
+An ad-free launcher for Android TV and Google TV. Built and tuned on the
+NVIDIA SHIELD TV Pro, made to run on any TV box with Android 11 or newer.
 
 [![CI](https://github.com/xblackbytesx/bsfreetv/actions/workflows/ci.yml/badge.svg)](https://github.com/xblackbytesx/bsfreetv/actions/workflows/ci.yml)
 [![Release](https://github.com/xblackbytesx/bsfreetv/actions/workflows/release.yml/badge.svg)](https://github.com/xblackbytesx/bsfreetv/actions/workflows/release.yml)
@@ -30,6 +31,16 @@ An ad-free launcher for Android TV, made for the NVIDIA SHIELD TV Pro.
     <td width="50%"><img src="docs/screenshots/all-apps-unsorted.webp" alt="All apps filtered to Unsorted"><br><sub>All apps, Unsorted: hold OK on an app to sort it</sub></td>
   </tr>
 </table>
+
+## Devices
+
+| Device | Status |
+|---|---|
+| NVIDIA SHIELD TV / TV Pro (2019) | Tested daily. Everything, including the in-app Home switch |
+| Other Android TV / Google TV, Android 11+ | Should work, not yet tested. If the in-app Home switch can't connect, use the PC commands below |
+| Android 10 and older | Not supported |
+
+Tested it on another box? Open an issue with the device and what worked.
 
 ## Install
 
