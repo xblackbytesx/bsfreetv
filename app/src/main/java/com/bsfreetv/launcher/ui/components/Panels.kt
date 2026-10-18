@@ -28,8 +28,14 @@ import androidx.compose.ui.unit.dp
 import com.bsfreetv.launcher.ui.BsfType
 import com.bsfreetv.launcher.ui.LocalBsfColors
 
-/** Keeps D-pad focus inside an overlay: nothing behind it can be reached. */
-fun Modifier.trapFocus(): Modifier = this.focusProperties { onExit = { cancelFocusChange() } }.focusGroup()
+/**
+ * Keeps D-pad focus inside an overlay: nothing behind it can be reached.
+ * The trap also blocks requestFocus() from outside, so an overlay that opens a
+ * menu on top of itself must pass enabled = false while the menu shows, or the
+ * menu can never take focus.
+ */
+fun Modifier.trapFocus(enabled: Boolean = true): Modifier =
+    this.focusProperties { onExit = { if (enabled) cancelFocusChange() } }.focusGroup()
 
 /** Overline section header inside a panel. */
 @Composable

@@ -2,6 +2,12 @@
 
 An ad-free launcher for Android TV, made for the NVIDIA SHIELD TV Pro.
 
+[![CI](https://github.com/xblackbytesx/bsfreetv/actions/workflows/ci.yml/badge.svg)](https://github.com/xblackbytesx/bsfreetv/actions/workflows/ci.yml)
+[![Release](https://github.com/xblackbytesx/bsfreetv/actions/workflows/release.yml/badge.svg)](https://github.com/xblackbytesx/bsfreetv/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/xblackbytesx/bsfreetv?sort=semver)](https://github.com/xblackbytesx/bsfreetv/releases/latest)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![Android TV 11+](https://img.shields.io/badge/Android%20TV-11%2B-3DDC84?logo=android&logoColor=white)](#install)
+
 - Your media apps up front as large banners; tools in a small tray (or hidden).
 - 40 built-in paintings from [Impasto](https://github.com/andreumassanet/impasto);
   the accent colour follows the wallpaper.
@@ -9,6 +15,21 @@ An ad-free launcher for Android TV, made for the NVIDIA SHIELD TV Pro.
   slow pixel shift on everything static.
 - Optional Next Up row from apps that publish Watch Next (Jellyfin does).
 - Makes itself the Home app from its own settings (self-ADB), with one-click undo.
+
+## Screenshots
+
+![BSfreeTV home screen: media apps as banners over an Impasto painting](docs/screenshots/homescreen.webp)
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/wallpaper-picker.webp" alt="Wallpaper picker with live full-screen preview"><br><sub>Wallpaper picker: focus previews full screen, the accent follows</sub></td>
+    <td width="50%"><img src="docs/screenshots/settings.webp" alt="Settings panel"><br><sub>Settings: only what changes something, including screen care</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/all-apps-media.webp" alt="All apps filtered to Media"><br><sub>All apps, Media: what the home row shows</sub></td>
+    <td width="50%"><img src="docs/screenshots/all-apps-unsorted.webp" alt="All apps filtered to Unsorted"><br><sub>All apps, Unsorted: hold OK on an app to sort it</sub></td>
+  </tr>
+</table>
 
 ## Install
 
@@ -53,4 +74,11 @@ Restore the stock launcher before uninstalling BSfreeTV.
 
 ## License
 
-GPL-3.0. Wallpapers by Andreu Massanet (Impasto), GPL-3.0; see `CREDITS.md`.
+Copyright (C) 2026 xblackbytesx. BSfreeTV is free software, released under the
+[GNU General Public License v3.0](LICENSE): use it, change it, share it. If you
+distribute a modified version, your users get the same source and the same
+freedoms you did.
+
+The built-in wallpapers are by Andreu Massanet, from
+[Impasto](https://github.com/andreumassanet/impasto), also GPL-3.0. See
+[CREDITS.md](CREDITS.md).

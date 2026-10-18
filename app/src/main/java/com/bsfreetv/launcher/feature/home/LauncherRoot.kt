@@ -79,7 +79,7 @@ fun LauncherRoot(vm: HomeViewModel) {
                 )
                 when (val o = overlay) {
                     Overlay.None -> Unit
-                    is Overlay.AllApps -> AllAppsOverlay(ui, o.filter, vm)
+                    is Overlay.AllApps -> AllAppsOverlay(ui, o.filter, vm, menuOpen = menuFor != null)
                     is Overlay.Settings -> SettingsPanel(
                         page = o.page,
                         ui = ui,

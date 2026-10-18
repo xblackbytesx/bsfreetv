@@ -83,6 +83,10 @@ posters only), dadb (self-ADB).
 - **Focus.** Overlays trap focus (`trapFocus`); closing one restores the last
   focused home item; Home press returns to the first media app. A key release
   only clicks if the same element saw the press (long-press opens menus).
+  An overlay that opens a menu over itself releases its trap meanwhile
+  (`trapFocus(enabled = !menuOpen)`): the trap also cancels `requestFocus()`
+  from outside (`AppMenuFocusTest`). `tvClickable` also takes pointer taps and
+  holds (air mice).
 - **First key after idle only wakes.** Root `onPreviewKeyEvent` in `LauncherRoot`.
 - **Self-ADB never runs unasked** and only the commands in `HomeCommands`.
   `READ_TV_LISTINGS` is not in `Manifest.permission`: use the string.

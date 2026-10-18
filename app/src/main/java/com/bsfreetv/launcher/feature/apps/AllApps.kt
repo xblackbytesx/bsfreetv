@@ -64,16 +64,22 @@ private fun Section?.tag(): String? = when (this) {
 
 /** Every app, filterable by section. Hold OK (or Menu) on one to sort it. */
 @Composable
-fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions) {
+fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions, menuOpen: Boolean = false) {
     val colors = LocalBsfColors.current
     val apps = ui.filtered(filter)
-    val first = remember { FocusRequester() }
     val tabFocus = remember { FocusRequester() }
-    LaunchedEffect(Unit) {
+    val requesters = remember { HashMap<String, FocusRequester>() }
+    fun requester(pkg: String) = requesters.getOrPut(pkg) { FocusRequester() }
+    var lastFocused by remember { mutableStateOf<String?>(null) }
+    // On open and whenever the menu closes: back to the app the menu was opened
+    // on, or the first app (sorting may have moved it out of this filter).
+    LaunchedEffect(menuOpen) {
+        if (menuOpen) return@LaunchedEffect
         withFrameNanos { }
-        runCatching { if (apps.isNotEmpty()) first.requestFocus() else tabFocus.requestFocus() }
+        val target = (lastFocused?.takeIf { pkg -> apps.any { it.packageName == pkg } } ?: apps.firstOrNull()?.packageName)
+        runCatching { (target?.let(::requester) ?: tabFocus).requestFocus() }
     }
-    Box(Modifier.fillMaxSize().background(BsfColors.Black.copy(alpha = 0.93f)).trapFocus()) {
+    Box(Modifier.fillMaxSize().background(BsfColors.Black.copy(alpha = 0.93f)).trapFocus(enabled = !menuOpen)) {
         Column(Modifier.fillMaxSize().padding(horizontal = 48.dp, vertical = 28.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(if (filter == AppFilter.TOOLS) "Tools" else "All apps", style = BsfType.title, color = colors.text)
@@ -114,13 +120,14 @@ fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions) {
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 items(apps, key = { it.packageName }, contentType = { "app" }) { app ->
-                    val m = if (app == apps.first()) Modifier.focusRequester(first) else Modifier
+                    val m = Modifier.focusRequester(requester(app.packageName))
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         AppBannerCard(
                             app = app,
                             width = 152.dp,
                             badge = if (filter == AppFilter.ALL) ui.sections[app.packageName].tag() else null,
                             modifier = m,
+                            onFocus = { if (it) lastFocused = app.packageName },
                             onLongClick = { actions.openMenu(app.packageName) },
                             onClick = { actions.launch(app.packageName) },
                         )
