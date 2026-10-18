@@ -1,0 +1,40 @@
+# Reproducible builds; no host toolchain needed.
+name: bsfreetv
+
+x-gradle: &gradle
+  image: bsfreetv-build
+  build:
+    context: ..
+    dockerfile: docker/Dockerfile
+  volumes:
+    - ..:/src/bsfreetv
+    - gradle-cache:/opt/gradle-home
+
+services:
+  build:
+    <<: *gradle
+    command: ["bash", "docker/run-gradle.sh", ":app:assembleDebug"]
+  build-release:
+    <<: *gradle
+    command: ["bash", "docker/run-gradle.sh", ":app:assembleRelease"]
+  test:
+    <<: *gradle
+    command: ["bash", "docker/run-gradle.sh", ":app:testDebugUnitTest"]
+  screenshots:
+    <<: *gradle
+    command: ["bash", "docker/run-gradle.sh", ":app:testDebugUnitTest", "--tests", "*ScreenshotTest*", "--rerun-tasks", "-PbsfScreenshots=/src/bsfreetv/build-output/screenshots"]
+  lint:
+    <<: *gradle
+    command: ["bash", "docker/run-gradle.sh", ":app:lintDebug"]
+  # Drives the launcher on the Shield over network adb (accept the prompt on the TV).
+  baseline-profile:
+    <<: *gradle
+    environment:
+      SHIELD: ${SHIELD:-shield:5555}
+    command: ["bash", "-c", "adb connect $$SHIELD && adb -s $$SHIELD wait-for-device && ANDROID_SERIAL=$$SHIELD bash docker/run-gradle.sh :app:generateBaselineProfile"]
+  keystore:
+    <<: *gradle
+    command: ["bash", "docker/make-keystore.sh"]
+
+volumes:
+  gradle-cache:

@@ -1,0 +1,9 @@
+.git
+.gradle
+build
+app/build
+build-output
+.idea
+*.iml
+local.properties
+.kotlin

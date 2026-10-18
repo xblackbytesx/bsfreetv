@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose draws everything; the window is true black so a cold start never flashes grey. -->
+    <style name="Theme.BSfreeTV" parent="@android:style/Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@color/bsf_black</item>
+        <item name="android:colorBackground">@color/bsf_black</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">false</item>
+    </style>
+</resources>

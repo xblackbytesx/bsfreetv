@@ -1,0 +1,66 @@
+# --- Gradle / Android build output ---
+.gradle/
+build/
+app/release/
+app/debug/
+build-output/
+.kotlin/
+.cxx/
+.externalNativeBuild/
+captures/
+*.apk
+*.aab
+*.aar
+*.ap_
+*.dex
+local.properties
+
+# CI staging dir (.github/workflows/release.yml collects the APK here)
+dist/
+
+# --- IDE / assistant tooling ---
+.idea/
+.vscode/
+.claude/
+.cursor/
+.aider*
+.continue/
+.windsurf/
+*.iml
+*.ipr
+*.iws
+
+# --- Signing ---
+# The committed debug keystore is the only exception, so every debug build signs
+# identically and reinstalls never hit "signatures do not match".
+*.jks
+*.keystore
+!keystore/debug.keystore
+keystore.properties
+keystore/*.base64
+*.p12
+*.pem
+
+# adb client keys (make baseline-profile, manual adb sessions). Whoever holds
+# these can connect to a Shield that once tapped "Always allow".
+adbkey
+adbkey.pub
+
+# --- Secrets / local config ---
+.env
+.env.*
+!.env.example
+secrets.properties
+
+# --- Diagnostics ---
+# Logcat captures and heap dumps can contain installed-app lists and paths.
+*.logcat
+*.log
+*.hprof
+run.txt
+
+# --- OS noise ---
+.DS_Store
+Thumbs.db
+*~
+*.swp

@@ -1,0 +1,63 @@
+package com.bsfreetv.launcher.feature.settings
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.bsfreetv.launcher.domain.home.AdbStep
+import com.bsfreetv.launcher.domain.home.HomeCommands
+import com.bsfreetv.launcher.domain.home.HomeStatus
+import com.bsfreetv.launcher.system.AdbOutcome
+import com.bsfreetv.launcher.system.HomeControl
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+
+sealed interface SetupState {
+    data object Idle : SetupState
+    /** Waiting for adb; the TV may be showing "Allow debugging?". */
+    data class Working(val what: String) : SetupState
+    data class Result(val title: String, val outcome: AdbOutcome) : SetupState
+}
+
+@HiltViewModel
+class HomeSetupViewModel @Inject constructor(private val control: HomeControl) : ViewModel() {
+    private val _status = MutableStateFlow(control.status())
+    val status: StateFlow<HomeStatus> = _status.asStateFlow()
+    private val _state = MutableStateFlow<SetupState>(SetupState.Idle)
+    val state: StateFlow<SetupState> = _state.asStateFlow()
+
+    fun refresh() { _status.value = control.status() }
+
+    fun makeDefault() = run("Make BSfreeTV the Home app") { HomeCommands.makeDefault(it, control.homeActivity) }
+
+    fun restoreStock() = run("Restore the stock launcher") { HomeCommands.restoreStock(it) }
+
+    fun grantNextUp() = run("Allow Next Up") { listOf(HomeCommands.grantTvListings(it.selfPackage)) }
+
+    fun probe() {
+        if (_state.value is SetupState.Working) return
+        _state.value = SetupState.Working("Connecting to this device's adb")
+        viewModelScope.launch {
+            val outcome = control.probe()
+            _state.value = SetupState.Result("Connection test", outcome)
+        }
+    }
+
+    fun pcCommands(): List<String> = HomeCommands.forPc(HomeCommands.makeDefault(status.value, control.homeActivity))
+
+    fun homeActivity() = control.homeActivity
+
+    private fun run(title: String, steps: (HomeStatus) -> List<AdbStep>) {
+        if (_state.value is SetupState.Working) return
+        refresh()
+        val plan = steps(_status.value)
+        _state.value = SetupState.Working(title)
+        viewModelScope.launch {
+            val outcome = control.run(plan)
+            refresh()
+            _state.value = SetupState.Result(title, outcome)
+        }
+    }
+}

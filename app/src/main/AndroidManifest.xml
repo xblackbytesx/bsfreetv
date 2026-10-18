@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.software.leanback" android:required="true" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <!-- Self-ADB to the Shield's own adbd (127.0.0.1:5555), Next Up posters. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Next Up: other apps' Watch Next rows. Dangerous permission, user granted. -->
+    <uses-permission android:name="android.permission.READ_TV_LISTINGS" />
+    <!-- App menu: Uninstall. -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+        </intent>
+        <!-- Wallpaper import, when the device has a document picker at all. -->
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <!-- Stock launchers whose enabled state the Default launcher screen reports. -->
+        <package android:name="com.google.android.tvlauncher" />
+        <package android:name="com.google.android.leanbacklauncher" />
+        <package android:name="com.google.android.apps.tv.launcherx" />
+    </queries>
+
+    <application
+        android:name=".BsfApp"
+        android:allowBackup="false"
+        android:banner="@drawable/banner"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BSfreeTV"
+        tools:targetApi="37">
+
+        <activity
+            android:name=".MainActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|density"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resumeWhilePausing="true"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

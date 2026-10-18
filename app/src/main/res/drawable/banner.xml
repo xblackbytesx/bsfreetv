@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 16:9 launcher banner (320x180 at xhdpi). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp" android:height="90dp"
+    android:viewportWidth="160" android:viewportHeight="90">
+    <path android:fillColor="#000000" android:pathData="M0,0h160v90h-160z" />
+    <path android:fillColor="#00000000" android:strokeColor="#EEF2F7" android:strokeWidth="2.5"
+        android:pathData="M58,26 h44 a4,4 0 0 1 4,4 v26 a4,4 0 0 1 -4,4 h-44 a4,4 0 0 1 -4,-4 v-26 a4,4 0 0 1 4,-4 z" />
+    <path android:fillColor="#E8A87C" android:pathData="M80,41 m-6,0 a6,6 0 1,0 12,0 a6,6 0 1,0 -12,0" />
+    <path android:fillColor="#00000000" android:strokeColor="#94A1B2" android:strokeWidth="2"
+        android:strokeLineCap="round" android:pathData="M60,53 h40" />
+    <path android:fillColor="#00000000" android:strokeColor="#94A1B2" android:strokeWidth="2"
+        android:strokeLineCap="round" android:pathData="M68,68 h24" />
+</vector>

@@ -1,0 +1,152 @@
+name: Build release APK
+
+# A stable version tag (v1.2.0; pre-releases like v1.2.0-rc1 are skipped)
+# builds a signed release APK and publishes it as a GitHub release, where
+# Obtainium picks it up. Also runnable by hand (a dispatch run may be
+# unsigned and publishes nothing).
+#
+# Repo secrets (Settings > Secrets and variables > Actions), from `make keystore`:
+#   RELEASE_KEYSTORE_BASE64    contents of keystore/release.jks.base64
+#   RELEASE_KEYSTORE_PASSWORD  store password
+#   RELEASE_KEY_ALIAS          bsfreetv
+#   RELEASE_KEY_PASSWORD       key password (same as the store password)
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+# gh release create needs this.
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.ref_name, '-')
+    runs-on: ubuntu-latest
+    env:
+      # Keep in lockstep with docker/Dockerfile.
+      CMDLINE_TOOLS_VERSION: "16111833"
+      ANDROID_PLATFORM: android-37.0
+      BUILD_TOOLS_VERSION: "37.0.0"
+      GRADLE_VERSION: "9.8.0"
+      ANDROID_HOME: /opt/android-sdk
+      ANDROID_SDK_ROOT: /opt/android-sdk
+      SIGNING_ENABLED: ${{ secrets.RELEASE_KEYSTORE_BASE64 != '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # An unsigned tag build would publish an APK Obtainium cannot update to.
+      - name: Signing secrets are set for tag builds
+        if: startsWith(github.ref, 'refs/tags/') && env.SIGNING_ENABLED != 'true'
+        run: |
+          echo "::error::RELEASE_KEYSTORE_BASE64 is not set; refusing to publish an unsigned release"
+          exit 1
+
+      - name: Version from tag
+        id: version
+        run: |
+          ref="${{ github.ref_name }}"
+          if [[ "$ref" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            name="${ref#v}"
+            # Monotonic and independent of run numbers: 1.2.3 -> 1002003.
+            code=$(( BASH_REMATCH[1] * 1000000 + BASH_REMATCH[2] * 1000 + BASH_REMATCH[3] ))
+          else
+            name="0.0.0-dev.${{ github.run_number }}"
+            code=1
+          fi
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "version $name ($code)"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Cache SDK + Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            /opt/android-sdk
+            /opt/gradle
+            ~/.gradle/caches
+          key: android-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml', '**/build.gradle.kts') }}
+
+      - name: Install Android SDK + Gradle
+        run: |
+          if [ ! -d "$ANDROID_HOME/cmdline-tools/latest" ]; then
+            sudo mkdir -p "$ANDROID_HOME/cmdline-tools" && sudo chown -R "$USER" "$ANDROID_HOME"
+            curl -sL "https://dl.google.com/android/repository/commandlinetools-linux-${CMDLINE_TOOLS_VERSION}_latest.zip" -o /tmp/ct.zip
+            unzip -q /tmp/ct.zip -d "$ANDROID_HOME/cmdline-tools"
+            mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+            set +o pipefail
+            yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+            set -o pipefail
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;${ANDROID_PLATFORM}" "build-tools;${BUILD_TOOLS_VERSION}" > /dev/null
+          fi
+          if [ ! -d "/opt/gradle/gradle-${GRADLE_VERSION}" ]; then
+            sudo mkdir -p /opt/gradle && sudo chown -R "$USER" /opt/gradle
+            curl -sL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip
+            unzip -q /tmp/gradle.zip -d /opt/gradle
+          fi
+          echo "/opt/gradle/gradle-${GRADLE_VERSION}/bin" >> "$GITHUB_PATH"
+
+      # The release gate: a tag that fails the suite produces no APK.
+      - name: Unit tests
+        run: gradle --no-daemon :app:testDebugUnitTest
+
+      - name: Materialize release keystore
+        if: env.SIGNING_ENABLED == 'true'
+        env:
+          KS_B64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+        run: echo "$KS_B64" | base64 -d > /tmp/release.jks
+
+      - name: Build release APK
+        env:
+          RELEASE_STORE_FILE: ${{ env.SIGNING_ENABLED == 'true' && '/tmp/release.jks' || '' }}
+          RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          gradle --no-daemon :app:assembleRelease \
+            -PappVersionName="${{ steps.version.outputs.name }}" \
+            -PappVersionCode="${{ steps.version.outputs.code }}"
+
+      - name: Remove keystore
+        if: always()
+        run: rm -f /tmp/release.jks
+
+      # The certificate digest is what Obtainium (and Android) pin updates to;
+      # printed so it can be checked against the key you generated.
+      - name: Collect and verify the APK
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          out=app/build/outputs/apk/release
+          if [ "$SIGNING_ENABLED" = "true" ]; then
+            apk="dist/bsfreetv-${{ github.ref_name }}.apk"
+            cp "$out/app-release.apk" "$apk"
+            "$ANDROID_HOME/build-tools/${BUILD_TOOLS_VERSION}/apksigner" verify --print-certs "$apk" | grep -i "SHA-256"
+          else
+            cp "$out/app-release-unsigned.apk" "dist/bsfreetv-${{ github.ref_name }}-unsigned.apk"
+          fi
+          cp LICENSE CREDITS.md dist/
+          ls -la dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bsfreetv-apk
+          path: dist/*
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "${{ github.ref_name }}" \
+            --generate-notes \
+            dist/*

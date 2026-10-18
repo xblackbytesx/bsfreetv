@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags-ignore: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      # Keep in lockstep with docker/Dockerfile: CI must test what `make` builds.
+      CMDLINE_TOOLS_VERSION: "16111833"
+      ANDROID_PLATFORM: android-37.0
+      BUILD_TOOLS_VERSION: "37.0.0"
+      GRADLE_VERSION: "9.8.0"
+      ANDROID_HOME: /opt/android-sdk
+      # The runner exports its own ANDROID_SDK_ROOT; AGP fails when the two disagree.
+      ANDROID_SDK_ROOT: /opt/android-sdk
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # CI builds natively, so nothing else would notice a broken compose file.
+      - name: Validate the build container definition
+        run: |
+          docker compose -f docker/docker-compose.yml config -q
+          services=$(docker compose -f docker/docker-compose.yml config --services)
+          for target in build build-release test lint screenshots keystore baseline-profile; do
+            echo "$services" | grep -qx "$target" \
+              || { echo "compose has no '$target' service, but the Makefile invokes it"; exit 1; }
+          done
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Cache SDK + Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            /opt/android-sdk
+            /opt/gradle
+            ~/.gradle/caches
+          key: android-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml', '**/build.gradle.kts') }}
+
+      - name: Install Android SDK + Gradle
+        run: |
+          if [ ! -d "$ANDROID_HOME/cmdline-tools/latest" ]; then
+            sudo mkdir -p "$ANDROID_HOME/cmdline-tools" && sudo chown -R "$USER" "$ANDROID_HOME"
+            curl -sL "https://dl.google.com/android/repository/commandlinetools-linux-${CMDLINE_TOOLS_VERSION}_latest.zip" -o /tmp/ct.zip
+            unzip -q /tmp/ct.zip -d "$ANDROID_HOME/cmdline-tools"
+            mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+            # `yes` dies of SIGPIPE once sdkmanager stops reading; only sdkmanager's status counts.
+            set +o pipefail
+            yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+            set -o pipefail
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;${ANDROID_PLATFORM}" "build-tools;${BUILD_TOOLS_VERSION}" > /dev/null
+          fi
+          if [ ! -d "/opt/gradle/gradle-${GRADLE_VERSION}" ]; then
+            sudo mkdir -p /opt/gradle && sudo chown -R "$USER" /opt/gradle
+            curl -sL "https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip" -o /tmp/gradle.zip
+            unzip -q /tmp/gradle.zip -d /opt/gradle
+          fi
+          echo "/opt/gradle/gradle-${GRADLE_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Unit tests (incl. screenshots)
+        run: gradle --no-daemon :app:testDebugUnitTest
+
+      - name: Lint
+        run: gradle --no-daemon :app:lintDebug
+
+      - name: Debug APK
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: app/build/screenshots/
+
+      - name: Upload reports on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: app/build/reports/
