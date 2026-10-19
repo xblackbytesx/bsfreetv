@@ -91,6 +91,14 @@ posters only), dadb (self-ADB).
   from outside (`AppMenuFocusTest`). `tvClickable` also takes pointer taps and
   holds (air mice).
 - **First key after idle only wakes.** Root `onPreviewKeyEvent` in `LauncherRoot`.
+- **The Home switch never bricks a device.** It only acts on
+  `DeviceKind.CLASSIC_ANDROID_TV` (tvlauncher present, no Google TV launcher).
+  `com.google.android.apps.tv.launcherx` is never disabled: Google TV's Home
+  key starts it explicitly, so disabling it boot-loops the device (v0.2.0 did
+  this to a Google TV Streamer). Order is set Home, then grant, then disable
+  tvlauncher last; `HomeCommands.runSteps` stops at the first required failure.
+  Every restore path re-enables all stock launchers (launcherx too) and sets
+  Home back. `HomeCommandsTest` pins all of this.
 - **Self-ADB never runs unasked** and only the commands in `HomeCommands`.
   `READ_TV_LISTINGS` is not in `Manifest.permission`: use the string.
 - `@Serializable` classes never get a private companion (ART-only decode failure).
@@ -112,6 +120,9 @@ posters only), dadb (self-ADB).
   No Home picker exists; disabling tvlauncher makes ours the only HOME handler.
   Settings and notifications are separate packages and keep working. OTAs or a
   factory reset can re-enable it: the Default launcher page shows the state.
+- Google TV (launcherx) is not a Shield: its Home key bypasses HOME
+  resolution and starts launcherx directly. Replacing Home there needs an
+  accessibility override (roadmap), never disabling.
 - `READ_TV_LISTINGS` (dangerous) lets TvProvider return other apps' searchable
   Watch Next rows. Custom selections throw; filter in code. Jellyfin publishes.
 - The UI renders at the output resolution: 960x540 dp at 2x on a 1080p TV,
@@ -127,8 +138,9 @@ posters only), dadb (self-ADB).
 
 ## Roadmap
 
-- Accessibility-service Home watcher (Projectivy style) for when an OTA
-  re-enables the stock launcher.
+- Accessibility-service Home watcher (Projectivy style): the only acceptable
+  route to a Home switch on Google TV, and a fallback when an OTA re-enables
+  the stock launcher on the Shield.
 - DreamService screensaver using the built-in wallpapers.
 - Next Up straight from the Jellyfin API (`/Shows/NextUp`, `/UserItems/Resume`).
 - Layout/settings export and import.

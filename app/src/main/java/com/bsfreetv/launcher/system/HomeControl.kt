@@ -12,6 +12,7 @@ import com.bsfreetv.launcher.domain.home.HomeStatus
 import com.bsfreetv.launcher.domain.home.StockLauncher
 import com.bsfreetv.launcher.domain.home.StockLaunchers
 import com.bsfreetv.launcher.domain.home.StepKind
+import com.bsfreetv.launcher.domain.home.StepResult
 import com.bsfreetv.launcher.MainActivity
 import dadb.AdbKeyPair
 import dadb.Dadb
@@ -27,11 +28,9 @@ import kotlinx.coroutines.withContext
 /** Why self-ADB failed; the UI words it (ui/Labels.kt). */
 enum class AdbError { UNREACHABLE, PROMPT_TIMEOUT, REFUSED, OTHER }
 
-/** Outcome of one step sent over self-ADB. */
-data class StepResult(val step: AdbStep, val ok: Boolean, val output: String)
-
 sealed interface AdbOutcome {
-    data class Done(val results: List<StepResult>) : AdbOutcome {
+    /** [stopped]: a required step failed and the steps after it were not run. */
+    data class Done(val results: List<StepResult>, val stopped: Boolean = false) : AdbOutcome {
         val ok get() = results.all { it.ok || it.step.optional }
     }
     data class Failed(val error: AdbError, val detail: String? = null) : AdbOutcome
@@ -69,12 +68,9 @@ class HomeControl @Inject constructor(@ApplicationContext private val context: C
         if (steps.isEmpty()) return@withContext AdbOutcome.Done(emptyList())
         try {
             Dadb.create(HOST, PORT, keyPair(), CONNECT_TIMEOUT_MS, promptTimeoutMs).use { adb ->
-                AdbOutcome.Done(
-                    steps.map { step ->
-                        val r = adb.shell(step.command)
-                        StepResult(step, step.succeeded(r.exitCode, r.allOutput), r.allOutput.trim())
-                    },
-                )
+                // Stops at the first required failure: never disable after something went wrong.
+                val results = HomeCommands.runSteps(steps) { cmd -> adb.shell(cmd).let { it.exitCode to it.allOutput } }
+                AdbOutcome.Done(results, stopped = results.size < steps.size)
             }
         } catch (e: Exception) {
             Log.w(TAG, "self-adb failed", e)

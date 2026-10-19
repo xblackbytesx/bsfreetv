@@ -1,15 +1,11 @@
 package com.bsfreetv.launcher.domain
 
 import com.bsfreetv.launcher.data.WatchNext
-import com.bsfreetv.launcher.domain.home.HomeCommands
-import com.bsfreetv.launcher.domain.home.HomeStatus
-import com.bsfreetv.launcher.domain.home.StockLauncher
 import com.bsfreetv.launcher.domain.idle.IdlePhase
 import com.bsfreetv.launcher.domain.idle.IdlePolicy
 import com.bsfreetv.launcher.domain.idle.PixelShift
 import com.bsfreetv.launcher.feature.settings.after
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -39,41 +35,6 @@ class IdleAndHomeTest {
         val offsets = (0 until 9).map { PixelShift.offset(it * 3 * min) }
         assertTrue(offsets.all { (x, y) -> x in -4..4 && y in -4..4 })
         assertEquals(9, offsets.toSet().size)
-    }
-
-    private val status = HomeStatus(
-        stock = listOf(StockLauncher("com.google.android.tvlauncher", true)),
-        currentHome = "com.google.android.tvlauncher",
-        selfPackage = "com.bsfreetv.launcher",
-        tvListingsGranted = false,
-        adbEnabled = true,
-    )
-
-    @Test fun `make default disables the stock launcher, prefers us and grants Next Up`() {
-        val cmds = HomeCommands.makeDefault(status, "com.bsfreetv.launcher.MainActivity").map { it.command }
-        assertEquals(
-            listOf(
-                "pm disable-user --user 0 com.google.android.tvlauncher",
-                "cmd package set-home-activity --user 0 com.bsfreetv.launcher/com.bsfreetv.launcher.MainActivity",
-                "pm grant com.bsfreetv.launcher android.permission.READ_TV_LISTINGS",
-            ),
-            cmds,
-        )
-        assertEquals("adb shell pm disable-user --user 0 com.google.android.tvlauncher", HomeCommands.forPc(HomeCommands.makeDefault(status, "x")).first())
-    }
-
-    @Test fun `restore only re-enables what is disabled`() {
-        assertTrue(HomeCommands.restoreStock(status).isEmpty())
-        val disabled = status.copy(stock = listOf(StockLauncher("com.google.android.tvlauncher", false)))
-        assertEquals(listOf("pm enable com.google.android.tvlauncher"), HomeCommands.restoreStock(disabled).map { it.command })
-    }
-
-    @Test fun `step success reads exit code and output`() {
-        val step = HomeCommands.grantTvListings("p")
-        assertTrue(step.succeeded(0, ""))
-        assertFalse(step.succeeded(255, ""))
-        assertFalse(step.succeeded(0, "Exception occurred while executing 'grant'"))
-        assertTrue(step.succeeded(0, "Package com.google.android.tvlauncher new state: disabled-user"))
     }
 
     @Test fun `next up text helpers`() {

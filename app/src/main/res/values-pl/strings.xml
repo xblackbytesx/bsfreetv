@@ -183,4 +183,11 @@
     <string name="about_wallpapers">Tapety</string>
     <string name="about_wallpapers_credit">Z Impasto autorstwa Andreu Massaneta (github.com/andreumassanet/impasto), GPL-3.0. Kolory są dobierane tak jak w Impasto.</string>
     <string name="about_your_wallpapers">Twoje tapety</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">To wygląda na Google TV. Ustawienie BSfreeTV jako ekranu głównego nie jest tu obsługiwane: Google TV po naciśnięciu Home od razu otwiera własny launcher, a jego wyłączenie może sprawić, że urządzenie będzie się ciągle restartować. Nadal możesz otwierać BSfreeTV z listy aplikacji. Jeśli starsza wersja zmieniła to urządzenie, użyj poniżej Przywróć fabryczny.</string>
+    <string name="dh_unsupported_other">BSfreeTV może zostać ekranem głównym tylko na klasycznych urządzeniach Android TV, takich jak NVIDIA Shield. Nadal możesz go otwierać z listy aplikacji.</string>
+    <string name="home_value_unsupported">Nieobsługiwane</string>
+    <string name="step_restore_home">Przywróć %1$s jako ekran główny</string>
+    <string name="setup_stopped">Zatrzymano tutaj: pozostałe kroki nie zostały wykonane, nic więcej nie zmieniono.</string>
 </resources>

@@ -193,4 +193,11 @@
     <string name="about_wallpapers">الخلفيات</string>
     <string name="about_wallpapers_credit">من Impasto لـ Andreu Massanet (github.com/andreumassanet/impasto)، بترخيص GPL-3.0. يُستخرج اللون بطريقة Impasto نفسها.</string>
     <string name="about_your_wallpapers">خلفياتك</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">يبدو أن هذا الجهاز يعمل بنظام Google TV. لا يمكن تعيين BSfreeTV كشاشة رئيسية هنا: يفتح Google TV المشغّل الخاص به مباشرة عند الضغط على زر الصفحة الرئيسية، وتعطيله قد يجعل الجهاز يعيد التشغيل باستمرار. لا يزال بإمكانك فتح BSfreeTV من تطبيقاتك. إذا كان إصدار أقدم قد غيّر هذا الجهاز، فاستخدم استعادة الأصلي أدناه.</string>
+    <string name="dh_unsupported_other">لا يمكن أن يصبح BSfreeTV الشاشة الرئيسية إلا على أجهزة Android TV الكلاسيكية مثل NVIDIA Shield. لا يزال بإمكانك فتحه من تطبيقاتك.</string>
+    <string name="home_value_unsupported">غير مدعوم</string>
+    <string name="step_restore_home">إعادة %1$s كشاشة رئيسية</string>
+    <string name="setup_stopped">توقف هنا: لم تُنفَّذ الخطوات المتبقية، ولم يتغيّر أي شيء آخر.</string>
 </resources>
