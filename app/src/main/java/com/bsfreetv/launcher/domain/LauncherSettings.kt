@@ -3,13 +3,14 @@ package com.bsfreetv.launcher.domain
 import com.bsfreetv.launcher.domain.palette.PaletteBuilder
 import kotlinx.serialization.Serializable
 
-enum class CardSize(val label: String, val widthDp: Int) { SMALL("Small", 136), MEDIUM("Medium", 160), LARGE("Large", 200) }
+// User-facing names live in ui/Labels.kt (string resources), not here.
+enum class CardSize(val widthDp: Int) { SMALL(136), MEDIUM(160), LARGE(200) }
 
-enum class ToolsStyle(val label: String) { TRAY("Tray"), HIDDEN("Hidden") }
+enum class ToolsStyle { TRAY, HIDDEN }
 
-enum class Motion(val label: String) { FULL("Full"), REDUCED("Reduced"), OFF("Off") }
+enum class Motion { FULL, REDUCED, OFF }
 
-enum class Rotation(val label: String) { OFF("Off"), DAILY("Daily"), ON_WAKE("Every wake") }
+enum class Rotation { OFF, DAILY, ON_WAKE }
 
 /** Every user-facing setting, persisted as one JSON document. Defaults are the out-of-box experience. */
 @Serializable

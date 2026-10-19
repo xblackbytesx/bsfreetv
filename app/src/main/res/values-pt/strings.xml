@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Brazilian Portuguese; also the fallback for pt-PT until it has its own folder. -->
+<resources>
+    <string name="home_apps">Apps</string>
+    <plurals name="home_apps_new">
+        <item quantity="one">Apps · %d novo</item>
+        <item quantity="many">Apps · %d novos</item>
+        <item quantity="other">Apps · %d novos</item>
+    </plurals>
+    <string name="home_tools">Ferramentas</string>
+    <string name="home_settings">Configurações</string>
+    <string name="home_up_next">Continuar assistindo</string>
+    <string name="home_tool">Ferramenta</string>
+    <string name="home_move_hint">Esquerda e direita para mover, OK para terminar</string>
+    <string name="card_move">mover</string>
+    <string name="home_empty_title">Escolha seus apps de mídia</string>
+    <string name="home_empty_body">Abra Todos os apps, mantenha OK pressionado em um app e escolha Mídia.</string>
+
+    <string name="apps_title">Todos os apps</string>
+    <string name="apps_hint">Mantenha OK pressionado em um app para organizá-lo</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">Tudo está organizado.</string>
+    <string name="apps_empty_hidden">Nada oculto.</string>
+    <string name="apps_empty">Nenhum app aqui ainda.</string>
+
+    <string name="section_all">Todos</string>
+    <string name="section_unsorted">Não organizados</string>
+    <string name="section_media">Mídia</string>
+    <string name="section_tools">Ferramentas</string>
+    <string name="section_hidden">Ocultos</string>
+    <string name="badge_media">Mídia</string>
+    <string name="badge_tool">Ferramenta</string>
+    <string name="badge_hidden">Oculto</string>
+
+    <string name="menu_add_media">Adicionar a Mídia</string>
+    <string name="menu_move_tools">Mover para Ferramentas</string>
+    <string name="menu_reorder">Reordenar</string>
+    <string name="menu_move_unsorted">Mover para Não organizados</string>
+    <string name="menu_hide">Ocultar</string>
+    <string name="menu_app_info">Informações do app</string>
+    <string name="menu_uninstall">Desinstalar</string>
+
+    <string name="wp_title">Plano de fundo</string>
+    <string name="wp_your_image">Sua imagem</string>
+    <string name="wp_keep_hint">OK para manter · Voltar para cancelar</string>
+    <string name="wp_add_own">Adicione os seus: coloque imagens em %1$s</string>
+    <string name="wp_current">Atual</string>
+    <string name="wp_add_image">Adicionar imagem</string>
+
+    <string name="value_on">Ativado</string>
+    <string name="value_off">Desativado</string>
+    <string name="value_never">Nunca</string>
+    <string name="value_shown">Visível</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="one">+%d min</item>
+        <item quantity="many">+%d min</item>
+        <item quantity="other">+%d min</item>
+    </plurals>
+
+    <string name="settings_title">Configurações</string>
+    <string name="settings_default_home">Launcher padrão</string>
+    <string name="settings_next_up_apps">Apps em Continuar assistindo</string>
+    <string name="settings_about">Sobre</string>
+
+    <string name="header_look">Aparência</string>
+    <string name="header_layout">Layout</string>
+    <string name="header_screen_care">Cuidado com a tela</string>
+    <string name="header_next_up">Continuar assistindo</string>
+    <string name="header_system">Sistema</string>
+    <string name="header_apps">Apps</string>
+    <string name="header_from_pc">Ou pelo computador</string>
+
+    <string name="set_wallpaper">Plano de fundo</string>
+    <string name="set_colours">Cores</string>
+    <string name="colours_adaptive">Do plano de fundo</string>
+    <string name="palette_ember">Brasa</string>
+    <string name="palette_sea">Mar</string>
+    <string name="palette_moss">Musgo</string>
+    <string name="palette_iris">Íris</string>
+    <string name="palette_rose">Rosa</string>
+    <string name="palette_mono">Mono</string>
+    <string name="set_brightness">Brilho do plano de fundo</string>
+    <string name="set_brightness_desc">Mais baixo poupa a tela OLED com imagens claras</string>
+    <string name="set_rotation">Trocar plano de fundo</string>
+    <string name="rotation_daily">Todo dia</string>
+    <string name="rotation_on_wake">A cada ativação</string>
+    <string name="set_language">Idioma</string>
+    <string name="language_system">Idioma do sistema</string>
+
+    <string name="set_card_size">Tamanho dos cards de mídia</string>
+    <string name="size_small">Pequeno</string>
+    <string name="size_medium">Médio</string>
+    <string name="size_large">Grande</string>
+    <string name="set_tools">Ferramentas</string>
+    <string name="tools_tray">Barra</string>
+    <string name="tools_hidden">Ocultas</string>
+    <string name="set_tools_desc_tray">Fileira pequena abaixo da sua mídia</string>
+    <string name="set_tools_desc_hidden">Só atrás do botão Ferramentas</string>
+    <string name="set_clock">Relógio</string>
+    <string name="set_animations">Animações</string>
+    <string name="motion_full">Completas</string>
+    <string name="motion_reduced">Reduzidas</string>
+    <string name="set_sort_apps">Organizar apps</string>
+    <plurals name="value_unsorted">
+        <item quantity="one">%d não organizado</item>
+        <item quantity="many">%d não organizados</item>
+        <item quantity="other">%d não organizados</item>
+    </plurals>
+
+    <string name="set_ambient">Só o plano de fundo após</string>
+    <string name="set_ambient_desc">Oculta o relógio e as fileiras quando ocioso</string>
+    <string name="set_black">Tela preta após</string>
+    <string name="set_black_desc">Preto total, pixels apagados</string>
+    <string name="set_drift">Plano de fundo em movimento</string>
+    <string name="set_drift_desc">Movimento bem lento; usa um pouco da GPU</string>
+
+    <string name="set_next_up">Fileira Continuar assistindo</string>
+    <string name="set_next_up_desc">Continue assistindo nos apps que oferecem isso (o Jellyfin oferece)</string>
+    <string name="value_needs_access">Precisa de acesso</string>
+    <string name="set_next_up_apps">Apps em Continuar assistindo</string>
+    <string name="value_media_apps">Apps de mídia</string>
+    <plurals name="value_chosen">
+        <item quantity="one">%d escolhido</item>
+        <item quantity="many">%d escolhidos</item>
+        <item quantity="other">%d escolhidos</item>
+    </plurals>
+    <string name="next_up_use_media">Usar meus apps de mídia</string>
+
+    <string name="home_value_stock">Launcher original</string>
+    <string name="home_value_not_set">Não definido</string>
+    <string name="set_android_settings">Configurações do Android</string>
+
+    <string name="dh_intro">A Shield não permite escolher o app de tela inicial. O BSfreeTV vira a tela inicial desativando o launcher original via adb, e pode fazer isso sozinho assim que a depuração de rede estiver ativada.</string>
+    <string name="status_home_ours">O botão Início abre o BSfreeTV</string>
+    <string name="status_home_stock">O botão Início abre o launcher original</string>
+    <string name="status_home_other">O botão Início abre %1$s</string>
+    <string name="status_home_chooser">O botão Início abre um seletor</string>
+    <string name="status_pkg_enabled">%1$s: ativado</string>
+    <string name="status_pkg_disabled">%1$s: desativado</string>
+    <string name="status_next_up_granted">Acesso ao Continuar assistindo concedido</string>
+    <string name="status_next_up_missing">Acesso ao Continuar assistindo não concedido</string>
+    <string name="status_debug_on">A depuração está ativada</string>
+    <string name="status_debug_off">A depuração está desativada (Opções do desenvolvedor)</string>
+    <string name="dh_steps">1. Configurações > Preferências do dispositivo > Sobre > toque 7 vezes em Versão.\n2. Opções do desenvolvedor > ative Depuração de rede.\n3. Pressione um botão abaixo e escolha Permitir (marque Sempre permitir) no aviso.</string>
+    <string name="btn_make_home">BSfreeTV como inicial</string>
+    <string name="btn_test">Testar conexão</string>
+    <string name="btn_allow_next_up">Permitir Continuar assistindo</string>
+    <string name="btn_restore">Restaurar original</string>
+    <string name="dh_turn_off">Depois, desative a depuração de rede de novo: caso contrário, qualquer pessoa na sua rede pode pedir para se conectar.</string>
+    <string name="dh_recovery">Desfazer / recuperação:</string>
+    <string name="dh_uninstall_warning">Restaure o launcher original antes de desinstalar o BSfreeTV, senão o botão Início não abrirá nada.</string>
+
+    <string name="task_make_home">Definir o BSfreeTV como app de tela inicial</string>
+    <string name="task_restore">Restaurar o launcher original</string>
+    <string name="task_allow_next_up">Permitir Continuar assistindo</string>
+    <string name="task_test">Teste de conexão</string>
+    <string name="setup_working">%1$s… Se a TV pedir para permitir a depuração, escolha Permitir.</string>
+    <string name="setup_done">%1$s: concluído</string>
+    <string name="setup_failed">%1$s: algumas etapas falharam</string>
+    <string name="setup_nothing">Nada para alterar.</string>
+    <string name="step_disable">Desativar %1$s</string>
+    <string name="step_enable">Ativar %1$s</string>
+    <string name="step_preferred_home">Definir tela inicial preferida</string>
+    <string name="step_allow_next_up">Permitir Continuar assistindo</string>
+    <string name="step_read_version">Ler a versão do Android</string>
+    <string name="adb_err_unreachable">Não foi possível acessar o adb neste dispositivo. Ative Configurações > Preferências do dispositivo > Opções do desenvolvedor > Depuração de rede e tente de novo.</string>
+    <string name="adb_err_timeout">Sem resposta ao aviso na TV. Escolha Permitir (marque Sempre permitir) quando ele aparecer e tente de novo.</string>
+    <string name="adb_err_refused">A TV recusou a conexão. Tente de novo e escolha Permitir no aviso.</string>
+    <string name="adb_err_other">Falha no Self-ADB: %1$s</string>
+
+    <string name="about_desc">Um launcher sem anúncios. GPL-3.0.</string>
+    <string name="about_wallpapers">Planos de fundo</string>
+    <string name="about_wallpapers_credit">Do Impasto, de Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. As cores são escolhidas como no Impasto.</string>
+    <string name="about_your_wallpapers">Seus planos de fundo</string>
+</resources>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">Додатки</string>
+    <plurals name="home_apps_new">
+        <item quantity="one">Додатки · %d новий</item>
+        <item quantity="few">Додатки · %d нові</item>
+        <item quantity="many">Додатки · %d нових</item>
+        <item quantity="other">Додатки · %d нового</item>
+    </plurals>
+    <string name="home_tools">Інструменти</string>
+    <string name="home_settings">Налаштування</string>
+    <string name="home_up_next">Продовжити перегляд</string>
+    <string name="home_tool">Інструмент</string>
+    <string name="home_move_hint">Ліворуч і праворуч, щоб перемістити, OK, щоб завершити</string>
+    <string name="card_move">перемістити</string>
+    <string name="home_empty_title">Виберіть медіадодатки</string>
+    <string name="home_empty_body">Відкрийте «Усі додатки», утримуйте OK на додатку й виберіть «Медіа».</string>
+
+    <string name="apps_title">Усі додатки</string>
+    <string name="apps_hint">Утримуйте OK на додатку, щоб його впорядкувати</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">Усе впорядковано.</string>
+    <string name="apps_empty_hidden">Нічого не приховано.</string>
+    <string name="apps_empty">Тут ще немає додатків.</string>
+
+    <string name="section_all">Усі</string>
+    <string name="section_unsorted">Невпорядковані</string>
+    <string name="section_media">Медіа</string>
+    <string name="section_tools">Інструменти</string>
+    <string name="section_hidden">Приховані</string>
+    <string name="badge_media">Медіа</string>
+    <string name="badge_tool">Інструмент</string>
+    <string name="badge_hidden">Приховано</string>
+
+    <string name="menu_add_media">Додати до «Медіа»</string>
+    <string name="menu_move_tools">Перемістити в «Інструменти»</string>
+    <string name="menu_reorder">Змінити порядок</string>
+    <string name="menu_move_unsorted">Перемістити в «Невпорядковані»</string>
+    <string name="menu_hide">Приховати</string>
+    <string name="menu_app_info">Про додаток</string>
+    <string name="menu_uninstall">Видалити</string>
+
+    <string name="wp_title">Шпалери</string>
+    <string name="wp_your_image">Ваше зображення</string>
+    <string name="wp_keep_hint">OK, щоб залишити · Назад, щоб скасувати</string>
+    <string name="wp_add_own">Додайте власні: покладіть зображення в %1$s</string>
+    <string name="wp_current">Поточні</string>
+    <string name="wp_add_image">Додати зображення</string>
+
+    <string name="value_on">Увімк.</string>
+    <string name="value_off">Вимк.</string>
+    <string name="value_never">Ніколи</string>
+    <string name="value_shown">Показано</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="one">%d хв</item>
+        <item quantity="few">%d хв</item>
+        <item quantity="many">%d хв</item>
+        <item quantity="other">%d хв</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="one">+%d хв</item>
+        <item quantity="few">+%d хв</item>
+        <item quantity="many">+%d хв</item>
+        <item quantity="other">+%d хв</item>
+    </plurals>
+
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_default_home">Лаунчер за замовчуванням</string>
+    <string name="settings_next_up_apps">Додатки в «Продовжити перегляд»</string>
+    <string name="settings_about">Про програму</string>
+
+    <string name="header_look">Вигляд</string>
+    <string name="header_layout">Розташування</string>
+    <string name="header_screen_care">Захист екрана</string>
+    <string name="header_next_up">Продовжити перегляд</string>
+    <string name="header_system">Система</string>
+    <string name="header_apps">Додатки</string>
+    <string name="header_from_pc">Або з комп’ютера</string>
+
+    <string name="set_wallpaper">Шпалери</string>
+    <string name="set_colours">Кольори</string>
+    <string name="colours_adaptive">Зі шпалер</string>
+    <string name="palette_ember">Жар</string>
+    <string name="palette_sea">Море</string>
+    <string name="palette_moss">Мох</string>
+    <string name="palette_iris">Ірис</string>
+    <string name="palette_rose">Троянда</string>
+    <string name="palette_mono">Моно</string>
+    <string name="set_brightness">Яскравість шпалер</string>
+    <string name="set_brightness_desc">Нижча яскравість береже OLED-екран на світлих зображеннях</string>
+    <string name="set_rotation">Змінювати шпалери</string>
+    <string name="rotation_daily">Щодня</string>
+    <string name="rotation_on_wake">Після кожного ввімкнення</string>
+    <string name="set_language">Мова</string>
+    <string name="language_system">Мова системи</string>
+
+    <string name="set_card_size">Розмір медіакарток</string>
+    <string name="size_small">Малий</string>
+    <string name="size_medium">Середній</string>
+    <string name="size_large">Великий</string>
+    <string name="set_tools">Інструменти</string>
+    <string name="tools_tray">Панель</string>
+    <string name="tools_hidden">Приховані</string>
+    <string name="set_tools_desc_tray">Невеликий ряд під медіа</string>
+    <string name="set_tools_desc_hidden">Лише за кнопкою «Інструменти»</string>
+    <string name="set_clock">Годинник</string>
+    <string name="set_animations">Анімації</string>
+    <string name="motion_full">Повні</string>
+    <string name="motion_reduced">Зменшені</string>
+    <string name="set_sort_apps">Упорядкувати додатки</string>
+    <plurals name="value_unsorted">
+        <item quantity="one">%d невпорядкований</item>
+        <item quantity="few">%d невпорядковані</item>
+        <item quantity="many">%d невпорядкованих</item>
+        <item quantity="other">%d невпорядкованого</item>
+    </plurals>
+
+    <string name="set_ambient">Лише шпалери через</string>
+    <string name="set_ambient_desc">Ховає годинник і ряди під час бездіяльності</string>
+    <string name="set_black">Чорний екран через</string>
+    <string name="set_black_desc">Справжній чорний, пікселі вимкнено</string>
+    <string name="set_drift">Рух шпалер</string>
+    <string name="set_drift_desc">Дуже повільне панорамування; трохи навантажує GPU</string>
+
+    <string name="set_next_up">Ряд «Продовжити перегляд»</string>
+    <string name="set_next_up_desc">Продовжуйте перегляд у додатках, які це підтримують (Jellyfin підтримує)</string>
+    <string name="value_needs_access">Потрібен доступ</string>
+    <string name="set_next_up_apps">Додатки в «Продовжити перегляд»</string>
+    <string name="value_media_apps">Медіадодатки</string>
+    <plurals name="value_chosen">
+        <item quantity="one">Вибрано %d</item>
+        <item quantity="few">Вибрано %d</item>
+        <item quantity="many">Вибрано %d</item>
+        <item quantity="other">Вибрано %d</item>
+    </plurals>
+    <string name="next_up_use_media">Використовувати мої медіадодатки</string>
+
+    <string name="home_value_stock">Стандартний лаунчер</string>
+    <string name="home_value_not_set">Не вибрано</string>
+    <string name="set_android_settings">Налаштування Android</string>
+
+    <string name="dh_intro">На Shield немає вибору головного екрана. BSfreeTV стає головним екраном, вимикаючи стандартний лаунчер через adb, і може зробити це сам, щойно ввімкнено налагодження через мережу.</string>
+    <string name="status_home_ours">Кнопка «Додому» відкриває BSfreeTV</string>
+    <string name="status_home_stock">Кнопка «Додому» відкриває стандартний лаунчер</string>
+    <string name="status_home_other">Кнопка «Додому» відкриває %1$s</string>
+    <string name="status_home_chooser">Кнопка «Додому» відкриває вибір додатка</string>
+    <string name="status_pkg_enabled">%1$s: увімкнено</string>
+    <string name="status_pkg_disabled">%1$s: вимкнено</string>
+    <string name="status_next_up_granted">Доступ до «Продовжити перегляд» надано</string>
+    <string name="status_next_up_missing">Доступ до «Продовжити перегляд» не надано</string>
+    <string name="status_debug_on">Налагодження ввімкнено</string>
+    <string name="status_debug_off">Налагодження вимкнено (Параметри розробника)</string>
+    <string name="dh_steps">1. Налаштування > Параметри пристрою > Про пристрій > натисніть 7 разів на «Номер збірки».\n2. Параметри розробника > увімкніть «Налагодження через мережу».\n3. Натисніть кнопку нижче й виберіть «Дозволити» (позначте «Завжди дозволяти») у запиті.</string>
+    <string name="btn_make_home">BSfreeTV як головний</string>
+    <string name="btn_test">Перевірити зв’язок</string>
+    <string name="btn_allow_next_up">Дозволити «Продовжити перегляд»</string>
+    <string name="btn_restore">Відновити стандартний</string>
+    <string name="dh_turn_off">Після цього знову вимкніть налагодження через мережу: інакше будь-хто у вашій мережі зможе запросити підключення.</string>
+    <string name="dh_recovery">Скасувати / відновлення:</string>
+    <string name="dh_uninstall_warning">Відновіть стандартний лаунчер, перш ніж видаляти BSfreeTV, інакше кнопка «Додому» нічого не відкриватиме.</string>
+
+    <string name="task_make_home">Зробити BSfreeTV головним екраном</string>
+    <string name="task_restore">Відновити стандартний лаунчер</string>
+    <string name="task_allow_next_up">Дозволити «Продовжити перегляд»</string>
+    <string name="task_test">Перевірка зв’язку</string>
+    <string name="setup_working">%1$s… Якщо телевізор попросить дозволити налагодження, виберіть «Дозволити».</string>
+    <string name="setup_done">%1$s: готово</string>
+    <string name="setup_failed">%1$s: деякі кроки не вдалися</string>
+    <string name="setup_nothing">Нічого змінювати.</string>
+    <string name="step_disable">Вимкнути %1$s</string>
+    <string name="step_enable">Увімкнути %1$s</string>
+    <string name="step_preferred_home">Вибрати головний екран за замовчуванням</string>
+    <string name="step_allow_next_up">Дозволити «Продовжити перегляд»</string>
+    <string name="step_read_version">Прочитати версію Android</string>
+    <string name="adb_err_unreachable">Не вдається підключитися до adb на цьому пристрої. Увімкніть Налаштування > Параметри пристрою > Параметри розробника > Налагодження через мережу й повторіть спробу.</string>
+    <string name="adb_err_timeout">Немає відповіді на запит на телевізорі. Коли він з’явиться, виберіть «Дозволити» (позначте «Завжди дозволяти») і повторіть спробу.</string>
+    <string name="adb_err_refused">Телевізор відхилив підключення. Повторіть спробу й виберіть «Дозволити» в запиті.</string>
+    <string name="adb_err_other">Помилка Self-ADB: %1$s</string>
+
+    <string name="about_desc">Лаунчер без реклами. GPL-3.0.</string>
+    <string name="about_wallpapers">Шпалери</string>
+    <string name="about_wallpapers_credit">З Impasto від Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Кольори добираються так само, як в Impasto.</string>
+    <string name="about_your_wallpapers">Ваші шпалери</string>
+</resources>

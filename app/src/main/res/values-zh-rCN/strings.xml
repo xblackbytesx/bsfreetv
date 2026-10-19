@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">应用</string>
+    <plurals name="home_apps_new">
+        <item quantity="other">应用 · %d 个新应用</item>
+    </plurals>
+    <string name="home_tools">工具</string>
+    <string name="home_settings">设置</string>
+    <string name="home_up_next">继续观看</string>
+    <string name="home_tool">工具</string>
+    <string name="home_move_hint">按左右键移动，按确定键完成</string>
+    <string name="card_move">移动</string>
+    <string name="home_empty_title">选择你的媒体应用</string>
+    <string name="home_empty_body">打开“所有应用”，在应用上长按确定键，然后选择“媒体”。</string>
+
+    <string name="apps_title">所有应用</string>
+    <string name="apps_hint">在应用上长按确定键即可分类</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">已全部分类。</string>
+    <string name="apps_empty_hidden">没有隐藏的应用。</string>
+    <string name="apps_empty">这里还没有应用。</string>
+
+    <string name="section_all">全部</string>
+    <string name="section_unsorted">未分类</string>
+    <string name="section_media">媒体</string>
+    <string name="section_tools">工具</string>
+    <string name="section_hidden">已隐藏</string>
+    <string name="badge_media">媒体</string>
+    <string name="badge_tool">工具</string>
+    <string name="badge_hidden">已隐藏</string>
+
+    <string name="menu_add_media">添加到媒体</string>
+    <string name="menu_move_tools">移到工具</string>
+    <string name="menu_reorder">调整顺序</string>
+    <string name="menu_move_unsorted">移到未分类</string>
+    <string name="menu_hide">隐藏</string>
+    <string name="menu_app_info">应用信息</string>
+    <string name="menu_uninstall">卸载</string>
+
+    <string name="wp_title">壁纸</string>
+    <string name="wp_your_image">你的图片</string>
+    <string name="wp_keep_hint">按确定键保留 · 按返回键取消</string>
+    <string name="wp_add_own">添加自己的图片：放到 %1$s</string>
+    <string name="wp_current">当前</string>
+    <string name="wp_add_image">添加图片</string>
+
+    <string name="value_on">开</string>
+    <string name="value_off">关</string>
+    <string name="value_never">永不</string>
+    <string name="value_shown">显示</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="other">%d 分钟</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="other">再 %d 分钟</item>
+    </plurals>
+
+    <string name="settings_title">设置</string>
+    <string name="settings_default_home">默认启动器</string>
+    <string name="settings_next_up_apps">“继续观看”中的应用</string>
+    <string name="settings_about">关于</string>
+
+    <string name="header_look">外观</string>
+    <string name="header_layout">布局</string>
+    <string name="header_screen_care">屏幕保护</string>
+    <string name="header_next_up">继续观看</string>
+    <string name="header_system">系统</string>
+    <string name="header_apps">应用</string>
+    <string name="header_from_pc">改用电脑操作</string>
+
+    <string name="set_wallpaper">壁纸</string>
+    <string name="set_colours">颜色</string>
+    <string name="colours_adaptive">跟随壁纸</string>
+    <string name="palette_ember">余烬</string>
+    <string name="palette_sea">海洋</string>
+    <string name="palette_moss">苔藓</string>
+    <string name="palette_iris">鸢尾</string>
+    <string name="palette_rose">玫瑰</string>
+    <string name="palette_mono">单色</string>
+    <string name="set_brightness">壁纸亮度</string>
+    <string name="set_brightness_desc">图片较亮时调低亮度，可减轻 OLED 屏幕负担</string>
+    <string name="set_rotation">更换壁纸</string>
+    <string name="rotation_daily">每天</string>
+    <string name="rotation_on_wake">每次唤醒</string>
+    <string name="set_language">语言</string>
+    <string name="language_system">跟随系统</string>
+
+    <string name="set_card_size">媒体卡片大小</string>
+    <string name="size_small">小</string>
+    <string name="size_medium">中</string>
+    <string name="size_large">大</string>
+    <string name="set_tools">工具</string>
+    <string name="tools_tray">托盘</string>
+    <string name="tools_hidden">隐藏</string>
+    <string name="set_tools_desc_tray">在媒体下方显示一小行</string>
+    <string name="set_tools_desc_hidden">仅在“工具”按钮中显示</string>
+    <string name="set_clock">时钟</string>
+    <string name="set_animations">动画</string>
+    <string name="motion_full">完整</string>
+    <string name="motion_reduced">减少</string>
+    <string name="set_sort_apps">整理应用</string>
+    <plurals name="value_unsorted">
+        <item quantity="other">%d 个未分类</item>
+    </plurals>
+
+    <string name="set_ambient">仅显示壁纸的时间</string>
+    <string name="set_ambient_desc">闲置时隐藏时钟和各行</string>
+    <string name="set_black">黑屏的时间</string>
+    <string name="set_black_desc">纯黑，像素熄灭</string>
+    <string name="set_drift">壁纸缓慢移动</string>
+    <string name="set_drift_desc">非常缓慢的平移，会占用少量 GPU</string>
+
+    <string name="set_next_up">“继续观看”行</string>
+    <string name="set_next_up_desc">从支持的应用继续观看（Jellyfin 支持）</string>
+    <string name="value_needs_access">需要权限</string>
+    <string name="set_next_up_apps">“继续观看”中的应用</string>
+    <string name="value_media_apps">媒体应用</string>
+    <plurals name="value_chosen">
+        <item quantity="other">已选 %d 个</item>
+    </plurals>
+    <string name="next_up_use_media">使用我的媒体应用</string>
+
+    <string name="home_value_stock">系统自带启动器</string>
+    <string name="home_value_not_set">未设置</string>
+    <string name="set_android_settings">Android 设置</string>
+
+    <string name="dh_intro">Shield 没有选择主屏幕应用的选项。BSfreeTV 通过 adb 停用系统自带的启动器来成为主屏幕。开启网络调试后，BSfreeTV 可以自己完成这一步。</string>
+    <string name="status_home_ours">主屏幕键打开 BSfreeTV</string>
+    <string name="status_home_stock">主屏幕键打开系统自带启动器</string>
+    <string name="status_home_other">主屏幕键打开 %1$s</string>
+    <string name="status_home_chooser">主屏幕键打开选择器</string>
+    <string name="status_pkg_enabled">%1$s：已启用</string>
+    <string name="status_pkg_disabled">%1$s：已停用</string>
+    <string name="status_next_up_granted">已授予“继续观看”权限</string>
+    <string name="status_next_up_missing">未授予“继续观看”权限</string>
+    <string name="status_debug_on">调试已开启</string>
+    <string name="status_debug_off">调试已关闭（开发者选项）</string>
+    <string name="dh_steps">1. 设置 > 设备偏好设置 > 关于 > 点按“版本号”7 次。\n2. 开发者选项 > 开启“网络调试”。\n3. 按下方按钮，在弹出的提示中选择“允许”（勾选“始终允许”）。</string>
+    <string name="btn_make_home">将 BSfreeTV 设为主屏幕</string>
+    <string name="btn_test">测试连接</string>
+    <string name="btn_allow_next_up">允许“继续观看”</string>
+    <string name="btn_restore">恢复系统自带</string>
+    <string name="dh_turn_off">完成后请关闭“网络调试”：否则同一网络中的任何人都能请求连接。</string>
+    <string name="dh_recovery">撤销 / 恢复：</string>
+    <string name="dh_uninstall_warning">卸载 BSfreeTV 前请先恢复系统自带的启动器，否则主屏幕键将无法打开任何内容。</string>
+
+    <string name="task_make_home">将 BSfreeTV 设为主屏幕应用</string>
+    <string name="task_restore">恢复系统自带启动器</string>
+    <string name="task_allow_next_up">允许“继续观看”</string>
+    <string name="task_test">连接测试</string>
+    <string name="setup_working">%1$s… 如果电视询问是否允许调试，请选择“允许”。</string>
+    <string name="setup_done">%1$s：完成</string>
+    <string name="setup_failed">%1$s：部分步骤失败</string>
+    <string name="setup_nothing">无需更改。</string>
+    <string name="step_disable">停用 %1$s</string>
+    <string name="step_enable">启用 %1$s</string>
+    <string name="step_preferred_home">设置首选主屏幕</string>
+    <string name="step_allow_next_up">允许“继续观看”</string>
+    <string name="step_read_version">读取 Android 版本</string>
+    <string name="adb_err_unreachable">无法连接本设备的 adb。请开启 设置 > 设备偏好设置 > 开发者选项 > 网络调试，然后重试。</string>
+    <string name="adb_err_timeout">电视上的提示没有回应。提示出现时请选择“允许”（勾选“始终允许”），然后重试。</string>
+    <string name="adb_err_refused">电视拒绝了连接。请重试，并在提示中选择“允许”。</string>
+    <string name="adb_err_other">Self-ADB 失败：%1$s</string>
+
+    <string name="about_desc">无广告的启动器。GPL-3.0。</string>
+    <string name="about_wallpapers">壁纸</string>
+    <string name="about_wallpapers_credit">来自 Andreu Massanet 的 Impasto（github.com/andreumassanet/impasto），GPL-3.0。颜色提取方式沿用 Impasto。</string>
+    <string name="about_your_wallpapers">你的壁纸</string>
+</resources>

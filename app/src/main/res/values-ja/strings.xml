@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">アプリ</string>
+    <plurals name="home_apps_new">
+        <item quantity="other">アプリ · 新着 %d</item>
+    </plurals>
+    <string name="home_tools">ツール</string>
+    <string name="home_settings">設定</string>
+    <string name="home_up_next">続きを見る</string>
+    <string name="home_tool">ツール</string>
+    <string name="home_move_hint">左右で移動、OK で完了</string>
+    <string name="card_move">移動</string>
+    <string name="home_empty_title">メディアアプリを選びましょう</string>
+    <string name="home_empty_body">「すべてのアプリ」を開き、アプリで OK を長押しして「メディア」を選んでください。</string>
+
+    <string name="apps_title">すべてのアプリ</string>
+    <string name="apps_hint">アプリで OK を長押しすると分類できます</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">すべて分類済みです。</string>
+    <string name="apps_empty_hidden">非表示のアプリはありません。</string>
+    <string name="apps_empty">まだアプリがありません。</string>
+
+    <string name="section_all">すべて</string>
+    <string name="section_unsorted">未分類</string>
+    <string name="section_media">メディア</string>
+    <string name="section_tools">ツール</string>
+    <string name="section_hidden">非表示</string>
+    <string name="badge_media">メディア</string>
+    <string name="badge_tool">ツール</string>
+    <string name="badge_hidden">非表示</string>
+
+    <string name="menu_add_media">メディアに追加</string>
+    <string name="menu_move_tools">ツールに移動</string>
+    <string name="menu_reorder">並べ替え</string>
+    <string name="menu_move_unsorted">未分類に移動</string>
+    <string name="menu_hide">非表示にする</string>
+    <string name="menu_app_info">アプリ情報</string>
+    <string name="menu_uninstall">アンインストール</string>
+
+    <string name="wp_title">壁紙</string>
+    <string name="wp_your_image">自分の画像</string>
+    <string name="wp_keep_hint">OK で決定 · 戻るでキャンセル</string>
+    <string name="wp_add_own">自分の画像を追加: %1$s に画像を置いてください</string>
+    <string name="wp_current">現在</string>
+    <string name="wp_add_image">画像を追加</string>
+
+    <string name="value_on">オン</string>
+    <string name="value_off">オフ</string>
+    <string name="value_never">しない</string>
+    <string name="value_shown">表示</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="other">%d 分</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="other">+%d 分</item>
+    </plurals>
+
+    <string name="settings_title">設定</string>
+    <string name="settings_default_home">デフォルトのランチャー</string>
+    <string name="settings_next_up_apps">「続きを見る」のアプリ</string>
+    <string name="settings_about">このアプリについて</string>
+
+    <string name="header_look">外観</string>
+    <string name="header_layout">レイアウト</string>
+    <string name="header_screen_care">画面の保護</string>
+    <string name="header_next_up">続きを見る</string>
+    <string name="header_system">システム</string>
+    <string name="header_apps">アプリ</string>
+    <string name="header_from_pc">PC から行う場合</string>
+
+    <string name="set_wallpaper">壁紙</string>
+    <string name="set_colours">カラー</string>
+    <string name="colours_adaptive">壁紙に合わせる</string>
+    <string name="palette_ember">残り火</string>
+    <string name="palette_sea">海</string>
+    <string name="palette_moss">苔</string>
+    <string name="palette_iris">アイリス</string>
+    <string name="palette_rose">ローズ</string>
+    <string name="palette_mono">モノクロ</string>
+    <string name="set_brightness">壁紙の明るさ</string>
+    <string name="set_brightness_desc">明るい画像では低めにすると有機 EL にやさしくなります</string>
+    <string name="set_rotation">壁紙の切り替え</string>
+    <string name="rotation_daily">毎日</string>
+    <string name="rotation_on_wake">起動するたび</string>
+    <string name="set_language">言語</string>
+    <string name="language_system">システムのデフォルト</string>
+
+    <string name="set_card_size">メディアカードのサイズ</string>
+    <string name="size_small">小</string>
+    <string name="size_medium">中</string>
+    <string name="size_large">大</string>
+    <string name="set_tools">ツール</string>
+    <string name="tools_tray">トレイ</string>
+    <string name="tools_hidden">非表示</string>
+    <string name="set_tools_desc_tray">メディアの下に小さな列で表示</string>
+    <string name="set_tools_desc_hidden">「ツール」ボタンからのみ表示</string>
+    <string name="set_clock">時計</string>
+    <string name="set_animations">アニメーション</string>
+    <string name="motion_full">フル</string>
+    <string name="motion_reduced">控えめ</string>
+    <string name="set_sort_apps">アプリを分類</string>
+    <plurals name="value_unsorted">
+        <item quantity="other">未分類 %d 件</item>
+    </plurals>
+
+    <string name="set_ambient">壁紙のみにするまで</string>
+    <string name="set_ambient_desc">操作がないと時計と列を隠します</string>
+    <string name="set_black">画面を黒にするまで</string>
+    <string name="set_black_desc">完全な黒、ピクセルを消灯</string>
+    <string name="set_drift">壁紙のゆるやかな移動</string>
+    <string name="set_drift_desc">とてもゆっくり動きます。GPU を少し使います</string>
+
+    <string name="set_next_up">「続きを見る」の列</string>
+    <string name="set_next_up_desc">対応アプリの続きから再生できます (Jellyfin が対応)</string>
+    <string name="value_needs_access">アクセスが必要</string>
+    <string name="set_next_up_apps">「続きを見る」のアプリ</string>
+    <string name="value_media_apps">メディアアプリ</string>
+    <plurals name="value_chosen">
+        <item quantity="other">%d 件選択</item>
+    </plurals>
+    <string name="next_up_use_media">メディアアプリを使用</string>
+
+    <string name="home_value_stock">標準のランチャー</string>
+    <string name="home_value_not_set">未設定</string>
+    <string name="set_android_settings">Android の設定</string>
+
+    <string name="dh_intro">Shield にはホームアプリを選ぶ画面がありません。BSfreeTV は adb で標準のランチャーを無効にしてホームになります。ネットワーク デバッグをオンにすれば、BSfreeTV が自分でこの操作を行えます。</string>
+    <string name="status_home_ours">ホームボタンで BSfreeTV が開きます</string>
+    <string name="status_home_stock">ホームボタンで標準のランチャーが開きます</string>
+    <string name="status_home_other">ホームボタンで %1$s が開きます</string>
+    <string name="status_home_chooser">ホームボタンで選択画面が開きます</string>
+    <string name="status_pkg_enabled">%1$s: 有効</string>
+    <string name="status_pkg_disabled">%1$s: 無効</string>
+    <string name="status_next_up_granted">「続きを見る」へのアクセスを許可済み</string>
+    <string name="status_next_up_missing">「続きを見る」へのアクセスが未許可</string>
+    <string name="status_debug_on">デバッグはオンです</string>
+    <string name="status_debug_off">デバッグはオフです (開発者向けオプション)</string>
+    <string name="dh_steps">1. 設定 > デバイス設定 > 端末情報 > ビルドを 7 回選択します。\n2. 開発者向けオプション > ネットワーク デバッグをオンにします。\n3. 下のボタンを押し、表示された確認で「許可」を選びます (「常に許可」にチェック)。</string>
+    <string name="btn_make_home">BSfreeTV をホームに</string>
+    <string name="btn_test">接続をテスト</string>
+    <string name="btn_allow_next_up">「続きを見る」を許可</string>
+    <string name="btn_restore">標準に戻す</string>
+    <string name="dh_turn_off">終わったらネットワーク デバッグをオフに戻してください。オンのままだと、同じネットワークの誰でも接続を要求できます。</string>
+    <string name="dh_recovery">元に戻す / 復旧:</string>
+    <string name="dh_uninstall_warning">BSfreeTV をアンインストールする前に標準のランチャーに戻してください。戻さないとホームボタンで何も開きません。</string>
+
+    <string name="task_make_home">BSfreeTV をホームアプリにする</string>
+    <string name="task_restore">標準のランチャーに戻す</string>
+    <string name="task_allow_next_up">「続きを見る」を許可</string>
+    <string name="task_test">接続テスト</string>
+    <string name="setup_working">%1$s… テレビにデバッグの許可を求める画面が出たら「許可」を選んでください。</string>
+    <string name="setup_done">%1$s: 完了</string>
+    <string name="setup_failed">%1$s: 一部の手順が失敗しました</string>
+    <string name="setup_nothing">変更する内容はありません。</string>
+    <string name="step_disable">%1$s を無効にする</string>
+    <string name="step_enable">%1$s を有効にする</string>
+    <string name="step_preferred_home">優先するホームを設定</string>
+    <string name="step_allow_next_up">「続きを見る」を許可</string>
+    <string name="step_read_version">Android のバージョンを取得</string>
+    <string name="adb_err_unreachable">この端末の adb に接続できません。設定 > デバイス設定 > 開発者向けオプション > ネットワーク デバッグをオンにして、もう一度お試しください。</string>
+    <string name="adb_err_timeout">テレビの確認画面から応答がありません。表示されたら「許可」を選び (「常に許可」にチェック)、もう一度お試しください。</string>
+    <string name="adb_err_refused">テレビが接続を拒否しました。もう一度試して、確認画面で「許可」を選んでください。</string>
+    <string name="adb_err_other">Self-ADB に失敗しました: %1$s</string>
+
+    <string name="about_desc">広告のないランチャー。GPL-3.0。</string>
+    <string name="about_wallpapers">壁紙</string>
+    <string name="about_wallpapers_credit">Andreu Massanet による Impasto (github.com/andreumassanet/impasto) より、GPL-3.0。色の選び方も Impasto に基づいています。</string>
+    <string name="about_your_wallpapers">自分の壁紙</string>
+</resources>

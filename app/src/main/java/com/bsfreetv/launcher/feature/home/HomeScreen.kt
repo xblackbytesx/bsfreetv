@@ -80,6 +80,15 @@ import com.bsfreetv.launcher.ui.LocalBsfColors
 import java.time.format.DateTimeFormatter
 import java.time.LocalDateTime
 import kotlinx.coroutines.delay
+import com.bsfreetv.launcher.ui.uiLocale
+import com.bsfreetv.launcher.ui.upper
+import com.bsfreetv.launcher.ui.forScript
+import com.bsfreetv.launcher.R
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.foundation.layout.widthIn
 
 private val Gutter = 48.dp
 
@@ -112,6 +121,8 @@ fun HomeContent(
     val toolsState = rememberLazyListState()
     var lastFocused by remember { mutableStateOf<String?>(null) }
     var hero by remember { mutableStateOf<HeroText?>(null) }
+    val moveHint = stringResource(R.string.home_move_hint)
+    val toolSubtitle = stringResource(R.string.home_tool)
 
     suspend fun focus(key: String?) {
         withFrameNanos { }
@@ -147,14 +158,17 @@ fun HomeContent(
     val shiftX by animateFloatAsState(with(density) { shift.first.dp.toPx() }, tween(2000), label = "shiftX")
     val shiftY by animateFloatAsState(with(density) { shift.second.dp.toPx() }, tween(2000), label = "shiftY")
 
-    // While reordering, Left/Right move the app instead of the focus.
+    // While reordering, Left/Right move the app instead of the focus. In a
+    // right-to-left layout the row runs the other way, so the keys swap.
+    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    val step = if (rtl) -1 else 1
     val moveKeys = Modifier.onPreviewKeyEvent { e ->
         if (moving == null) return@onPreviewKeyEvent false
         val code = e.nativeKeyEvent.keyCode
         if (e.type != KeyEventType.KeyDown) return@onPreviewKeyEvent code in MoveKeys
         when (code) {
-            AndroidKeyEvent.KEYCODE_DPAD_LEFT -> { actions.move(-1); true }
-            AndroidKeyEvent.KEYCODE_DPAD_RIGHT -> { actions.move(1); true }
+            AndroidKeyEvent.KEYCODE_DPAD_LEFT -> { actions.move(-step); true }
+            AndroidKeyEvent.KEYCODE_DPAD_RIGHT -> { actions.move(step); true }
             AndroidKeyEvent.KEYCODE_DPAD_UP, AndroidKeyEvent.KEYCODE_DPAD_DOWN -> true
             else -> false
         }
@@ -185,7 +199,7 @@ fun HomeContent(
                 } else {
                     MediaRow(ui.media, s, mediaState, moving, ::requester, actions) { app ->
                         lastFocused = app.packageName
-                        hero = HeroText(app.label, if (moving == app.packageName) "Left and right to move, OK when done" else null)
+                        hero = HeroText(app.label, if (moving == app.packageName) moveHint else null)
                     }
                 }
                 if (nextUp.isNotEmpty()) {
@@ -195,7 +209,7 @@ fun HomeContent(
                     }
                 }
                 if (s.toolsStyle == ToolsStyle.TRAY && ui.tools.isNotEmpty()) {
-                    ToolsTray(ui.tools, toolsState, moving, ::requester, actions) { app -> lastFocused = app.packageName; hero = HeroText(app.label, "Tool") }
+                    ToolsTray(ui.tools, toolsState, moving, ::requester, actions) { app -> lastFocused = app.packageName; hero = HeroText(app.label, toolSubtitle) }
                 }
             }
         }
@@ -266,7 +280,7 @@ private fun NextUpRow(
     val colors = LocalBsfColors.current
     val icons = remember(apps) { apps.associate { it.packageName to it.icon } }
     Column {
-        Text("UP NEXT", style = BsfType.overlineOnImage, color = colors.textMuted, modifier = Modifier.padding(start = Gutter, top = 4.dp))
+        Text(stringResource(R.string.home_up_next).upper(), style = BsfType.overlineOnImage.forScript(), color = colors.textMuted, modifier = Modifier.padding(start = Gutter, top = 4.dp))
         LazyRow(
             contentPadding = PaddingValues(horizontal = Gutter, vertical = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp),
@@ -318,7 +332,14 @@ private fun ToolsTray(
 ) {
     val colors = LocalBsfColors.current
     Row(verticalAlignment = Alignment.Top, modifier = Modifier.padding(top = 6.dp)) {
-        Text("TOOLS", style = BsfType.overlineOnImage, color = colors.textMuted.copy(alpha = 0.8f), modifier = Modifier.padding(start = Gutter, top = 22.dp).width(56.dp))
+        Text(
+            stringResource(R.string.home_tools).upper(),
+            style = BsfType.overlineOnImage.forScript(),
+            color = colors.textMuted.copy(alpha = 0.8f),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(start = Gutter, top = 22.dp, end = 8.dp).widthIn(min = 48.dp, max = 140.dp),
+        )
         LazyRow(
             state = state,
             contentPadding = PaddingValues(start = 4.dp, end = Gutter, top = 6.dp, bottom = 0.dp),
@@ -354,8 +375,8 @@ private fun EmptyMedia(onClick: () -> Unit) {
             .background(colors.surface.copy(alpha = 0.9f))
             .padding(horizontal = 20.dp, vertical = 14.dp),
     ) {
-        Text("Pick your media apps", style = BsfType.bodyStrong, color = colors.text)
-        Text("Open All apps, hold OK on an app and choose Media.", style = BsfType.body, color = colors.textMuted)
+        Text(stringResource(R.string.home_empty_title), style = BsfType.bodyStrong, color = colors.text)
+        Text(stringResource(R.string.home_empty_body), style = BsfType.body, color = colors.textMuted)
     }
 }
 
@@ -372,11 +393,14 @@ private fun TopBar(
         if (settings.showClock) Clock(clockOverride)
         Spacer(Modifier.weight(1f))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            Pill(if (freshCount > 0) "Apps · $freshCount new" else "Apps", Modifier.focusRequester(appsPill)) {
+            Pill(
+                if (freshCount > 0) pluralStringResource(R.plurals.home_apps_new, freshCount, freshCount) else stringResource(R.string.home_apps),
+                Modifier.focusRequester(appsPill),
+            ) {
                 actions.open(Overlay.AllApps(if (freshCount > 0) AppFilter.UNSORTED else AppFilter.ALL))
             }
-            if (settings.toolsStyle == ToolsStyle.HIDDEN) Pill("Tools") { actions.open(Overlay.AllApps(AppFilter.TOOLS)) }
-            Pill("Settings") { actions.open(Overlay.Settings(SettingsPage.MAIN)) }
+            if (settings.toolsStyle == ToolsStyle.HIDDEN) Pill(stringResource(R.string.home_tools)) { actions.open(Overlay.AllApps(AppFilter.TOOLS)) }
+            Pill(stringResource(R.string.home_settings)) { actions.open(Overlay.Settings(SettingsPage.MAIN)) }
         }
     }
 }
@@ -392,8 +416,13 @@ private fun Clock(override: LocalDateTime?) {
             delay(60_000L - (System.currentTimeMillis() % 60_000L))
         }
     }
-    val time = remember(now) { now.format(DateTimeFormatter.ofPattern(if (DateFormat.is24HourFormat(context)) "HH:mm" else "h:mm")) }
-    val date = remember(now) { now.format(DateTimeFormatter.ofPattern("EEE d MMM")) }
+    // Locale-aware patterns: the best day/month order and 12/24 h form for the UI language.
+    val locale = uiLocale()
+    val is24 = DateFormat.is24HourFormat(context)
+    val timeFormat = remember(locale, is24) { DateTimeFormatter.ofPattern(DateFormat.getBestDateTimePattern(locale, if (is24) "Hm" else "hm"), locale) }
+    val dateFormat = remember(locale) { DateTimeFormatter.ofPattern(DateFormat.getBestDateTimePattern(locale, "EEEdMMM"), locale) }
+    val time = remember(now, timeFormat) { now.format(timeFormat) }
+    val date = remember(now, dateFormat) { now.format(dateFormat) }
     Row(verticalAlignment = Alignment.Bottom) {
         Text(time, style = BsfType.clock, color = colors.text.copy(alpha = 0.82f))
         Text(date, style = BsfType.clockDate, color = colors.text.copy(alpha = 0.6f), modifier = Modifier.padding(start = 10.dp, bottom = 3.dp))

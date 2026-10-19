@@ -27,6 +27,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.bsfreetv.launcher.ui.BsfType
 import com.bsfreetv.launcher.ui.LocalBsfColors
+import com.bsfreetv.launcher.ui.upper
+import com.bsfreetv.launcher.ui.forScript
+import androidx.compose.foundation.layout.widthIn
 
 /**
  * Keeps D-pad focus inside an overlay: nothing behind it can be reached.
@@ -41,7 +44,7 @@ fun Modifier.trapFocus(enabled: Boolean = true): Modifier =
 @Composable
 fun SectionHeader(text: String, modifier: Modifier = Modifier) {
     val colors = LocalBsfColors.current
-    Text(text.uppercase(), style = BsfType.overline, color = colors.accent, modifier = modifier.padding(start = 14.dp, top = 18.dp, bottom = 6.dp))
+    Text(text.upper(), style = BsfType.overline.forScript(), color = colors.accent, modifier = modifier.padding(start = 14.dp, top = 18.dp, bottom = 6.dp))
 }
 
 /**
@@ -77,7 +80,8 @@ fun SettingRow(
             if (description != null) Text(description, style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 2.dp))
         }
         if (swatch != null) Box(Modifier.padding(end = 8.dp).size(12.dp).clip(CircleShape).background(swatch))
-        if (value != null) Text(value, style = BsfType.body, color = if (focused) colors.text else colors.textMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(start = 12.dp))
+        // Capped so a long translated value never squeezes the label into wrapping.
+        if (value != null) Text(value, style = BsfType.body, color = if (focused) colors.text else colors.textMuted, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(start = 12.dp).widthIn(max = 200.dp))
         if (chevron) Text("›", style = BsfType.title, color = colors.textMuted, modifier = Modifier.padding(start = 8.dp))
     }
 }

@@ -36,6 +36,7 @@ import com.bsfreetv.launcher.feature.settings.SettingsActions
 import com.bsfreetv.launcher.feature.settings.SettingsEnv
 import com.bsfreetv.launcher.feature.settings.SettingsPanel
 import com.bsfreetv.launcher.feature.settings.SetupState
+import com.bsfreetv.launcher.feature.settings.SetupTask
 import com.bsfreetv.launcher.feature.wallpaper.WallpaperPickerOverlay
 import com.bsfreetv.launcher.ui.BsfTheme
 import com.bsfreetv.launcher.ui.components.LocalMotion
@@ -195,7 +196,7 @@ class ScreenshotTest {
         val f = wallpaper("red-frame-tree")
         shot("08-default-launcher", f.palette) {
             Home(f, ui(), overlay = true)
-            SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(SetupState.Working("Make BSfreeTV the Home app")), HomeActions.None, SettingsActions.None)
+            SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(SetupState.Working(SetupTask.MAKE_HOME)), HomeActions.None, SettingsActions.None)
         }
     }
 
@@ -209,4 +210,40 @@ class ScreenshotTest {
             WallpaperPickerOverlay(list, "pagoda-fuji-blossom", true, env().userDir, { thumbs[it] }, { f.palette }, {}, {}, {})
         }
     }
+
+    // Translations: the same home + settings in each shipped language and the
+    // two pseudo-locales (en-XA: ~30% longer accented text, ar-XB: right-to-left).
+    private fun localized(tag: String) {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("10-home-$tag", f.palette) { Home(f, ui(fresh = 3)) }
+    }
+
+    private fun localizedSettings(tag: String) {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("11-settings-$tag", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.MAIN, ui(), env(), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    @Test @Config(qualifiers = "+de") fun home_de() = localized("de")
+    @Test @Config(qualifiers = "+de") fun settings_de() = localizedSettings("de")
+    @Test @Config(qualifiers = "+nl") fun settings_nl() = localizedSettings("nl")
+    @Test @Config(qualifiers = "+es") fun home_es() = localized("es")
+    @Test @Config(qualifiers = "+es") fun settings_es() = localizedSettings("es")
+    @Test @Config(qualifiers = "+ja") fun home_ja() = localized("ja")
+    @Test @Config(qualifiers = "+ja") fun settings_ja() = localizedSettings("ja")
+    @Test @Config(qualifiers = "+zh-rCN") fun settings_zh() = localizedSettings("zh-rCN")
+    @Test @Config(qualifiers = "+fr") fun settings_fr() = localizedSettings("fr")
+    @Test @Config(qualifiers = "+it") fun settings_it() = localizedSettings("it")
+    @Test @Config(qualifiers = "+pt") fun settings_pt() = localizedSettings("pt")
+    @Test @Config(qualifiers = "+pt") fun home_pt() = localized("pt")
+    @Test @Config(qualifiers = "+pl") fun settings_pl() = localizedSettings("pl")
+    @Test @Config(qualifiers = "+uk") fun settings_uk() = localizedSettings("uk")
+    @Test @Config(qualifiers = "+uk") fun home_uk() = localized("uk")
+    @Test @Config(qualifiers = "+ko") fun settings_ko() = localizedSettings("ko")
+    @Test @Config(qualifiers = "+ar-ldrtl") fun home_ar() = localized("ar")
+    @Test @Config(qualifiers = "+ar-ldrtl") fun settings_ar() = localizedSettings("ar")
+    @Test @Config(qualifiers = "+en-rXA") fun settings_pseudo_long() = localizedSettings("en-rXA")
+    @Test @Config(qualifiers = "+ar-rXB-ldrtl") fun home_pseudo_rtl() = localized("ar-rXB")
 }

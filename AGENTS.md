@@ -58,6 +58,8 @@ posters only), dadb (self-ADB).
 | `feature/home/` | `HomeViewModel` (implements `HomeActions`), stateless `HomeContent`, `LauncherRoot` |
 | `feature/apps/`, `feature/settings/`, `feature/wallpaper/` | Overlays: All apps + app menu, settings panel, wallpaper strip |
 | `ui/` | `BsfTheme` (animated palette), type scale, `tvClickable`, focus halo, panels |
+| `ui/Labels.kt` | The only place domain values get user-facing names (string resources) |
+| `i18n/Languages.kt` | `SupportedLanguages` (picker order) and `LanguageStore` (in-app override, wraps the activity context) |
 | `tools/import_wallpapers.py` | Impasto JPEG -> 1920x1080 WebP + 384x216 thumbs + `index.json` |
 
 ## Invariants
@@ -91,6 +93,14 @@ posters only), dadb (self-ADB).
 - **Self-ADB never runs unasked** and only the commands in `HomeCommands`.
   `READ_TV_LISTINGS` is not in `Manifest.permission`: use the string.
 - `@Serializable` classes never get a private companion (ART-only decode failure).
+- **No user-facing text in Kotlin.** UI strings come from `res/values*/strings.xml`
+  via `stringResource`/`pluralStringResource`; domain enums carry no labels
+  (names live in `ui/Labels.kt`). `NoHardcodedTextTest` and `TranslationsTest`
+  (keys, placeholders, picker list) enforce it. Never rename a string key.
+  Workflow: `docs/translations.md` (Hosted Weblate).
+- **Language override** is a SharedPreferences value read synchronously in
+  `MainActivity.attachBaseContext`; changing it recreates the activity. Do not
+  move it into the DataStore settings (async).
 
 ## Shield facts (2026-10)
 
@@ -115,3 +125,5 @@ posters only), dadb (self-ADB).
 - DreamService screensaver using the built-in wallpapers.
 - Next Up straight from the Jellyfin API (`/Shows/NextUp`, `/UserItems/Resume`).
 - Layout/settings export and import.
+- F-Droid submission: researched, deferred. Steps, recipe draft and the AI
+  disclosure risk are in `docs/fdroid.md`.

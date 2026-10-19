@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">Apps</string>
+    <plurals name="home_apps_new">
+        <item quantity="one">Apps · %d neu</item>
+        <item quantity="other">Apps · %d neu</item>
+    </plurals>
+    <string name="home_tools">Tools</string>
+    <string name="home_settings">Einstellungen</string>
+    <string name="home_up_next">Weiterschauen</string>
+    <string name="home_tool">Tool</string>
+    <string name="home_move_hint">Links und rechts zum Verschieben, OK zum Beenden</string>
+    <string name="card_move">verschieben</string>
+    <string name="home_empty_title">Wähle deine Medien-Apps</string>
+    <string name="home_empty_body">Öffne Alle Apps, halte OK auf einer App gedrückt und wähle Medien.</string>
+
+    <string name="apps_title">Alle Apps</string>
+    <string name="apps_hint">Halte OK auf einer App gedrückt, um sie einzuordnen</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">Alles ist eingeordnet.</string>
+    <string name="apps_empty_hidden">Nichts ausgeblendet.</string>
+    <string name="apps_empty">Hier sind noch keine Apps.</string>
+
+    <string name="section_all">Alle</string>
+    <string name="section_unsorted">Nicht eingeordnet</string>
+    <string name="section_media">Medien</string>
+    <string name="section_tools">Tools</string>
+    <string name="section_hidden">Ausgeblendet</string>
+    <string name="badge_media">Medien</string>
+    <string name="badge_tool">Tool</string>
+    <string name="badge_hidden">Ausgeblendet</string>
+
+    <string name="menu_add_media">Zu Medien hinzufügen</string>
+    <string name="menu_move_tools">Zu Tools verschieben</string>
+    <string name="menu_reorder">Reihenfolge ändern</string>
+    <string name="menu_move_unsorted">Zu Nicht eingeordnet</string>
+    <string name="menu_hide">Ausblenden</string>
+    <string name="menu_app_info">App-Info</string>
+    <string name="menu_uninstall">Deinstallieren</string>
+
+    <string name="wp_title">Hintergrund</string>
+    <string name="wp_your_image">Dein eigenes Bild</string>
+    <string name="wp_keep_hint">OK zum Übernehmen · Zurück zum Abbrechen</string>
+    <string name="wp_add_own">Eigene hinzufügen: Bilder ablegen in %1$s</string>
+    <string name="wp_current">Aktuell</string>
+    <string name="wp_add_image">Bild hinzufügen</string>
+
+    <string name="value_on">An</string>
+    <string name="value_off">Aus</string>
+    <string name="value_never">Nie</string>
+    <string name="value_shown">Sichtbar</string>
+    <string name="value_percent">%1$d %%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="one">%d Min.</item>
+        <item quantity="other">%d Min.</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="one">+%d Min.</item>
+        <item quantity="other">+%d Min.</item>
+    </plurals>
+
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_default_home">Standard-Launcher</string>
+    <string name="settings_next_up_apps">Apps in Weiterschauen</string>
+    <string name="settings_about">Info</string>
+
+    <string name="header_look">Aussehen</string>
+    <string name="header_layout">Layout</string>
+    <string name="header_screen_care">Bildschirmschutz</string>
+    <string name="header_next_up">Weiterschauen</string>
+    <string name="header_system">System</string>
+    <string name="header_apps">Apps</string>
+    <string name="header_from_pc">Oder vom PC aus</string>
+
+    <string name="set_wallpaper">Hintergrund</string>
+    <string name="set_colours">Farben</string>
+    <string name="colours_adaptive">Aus dem Hintergrund</string>
+    <string name="palette_ember">Glut</string>
+    <string name="palette_sea">Meer</string>
+    <string name="palette_moss">Moos</string>
+    <string name="palette_iris">Iris</string>
+    <string name="palette_rose">Rose</string>
+    <string name="palette_mono">Mono</string>
+    <string name="set_brightness">Hintergrundhelligkeit</string>
+    <string name="set_brightness_desc">Weniger schont ein OLED bei hellen Bildern</string>
+    <string name="set_rotation">Hintergrund wechseln</string>
+    <string name="rotation_daily">Täglich</string>
+    <string name="rotation_on_wake">Bei jedem Aufwachen</string>
+    <string name="set_language">Sprache</string>
+    <string name="language_system">Systemsprache</string>
+
+    <string name="set_card_size">Größe der Medienkarten</string>
+    <string name="size_small">Klein</string>
+    <string name="size_medium">Mittel</string>
+    <string name="size_large">Groß</string>
+    <string name="set_tools">Tools</string>
+    <string name="tools_tray">Leiste</string>
+    <string name="tools_hidden">Ausgeblendet</string>
+    <string name="set_tools_desc_tray">Kleine Reihe unter deinen Medien</string>
+    <string name="set_tools_desc_hidden">Nur hinter der Schaltfläche Tools</string>
+    <string name="set_clock">Uhr</string>
+    <string name="set_animations">Animationen</string>
+    <string name="motion_full">Voll</string>
+    <string name="motion_reduced">Reduziert</string>
+    <string name="set_sort_apps">Apps einordnen</string>
+    <plurals name="value_unsorted">
+        <item quantity="one">%d nicht eingeordnet</item>
+        <item quantity="other">%d nicht eingeordnet</item>
+    </plurals>
+
+    <string name="set_ambient">Nur Hintergrund nach</string>
+    <string name="set_ambient_desc">Blendet Uhr und Reihen bei Inaktivität aus</string>
+    <string name="set_black">Schwarzer Bildschirm nach</string>
+    <string name="set_black_desc">Echtes Schwarz, Pixel aus</string>
+    <string name="set_drift">Bewegter Hintergrund</string>
+    <string name="set_drift_desc">Sehr langsamer Schwenk; kostet etwas GPU</string>
+
+    <string name="set_next_up">Reihe Weiterschauen</string>
+    <string name="set_next_up_desc">Weiterschauen aus Apps, die es anbieten (Jellyfin tut das)</string>
+    <string name="value_needs_access">Zugriff nötig</string>
+    <string name="set_next_up_apps">Apps in Weiterschauen</string>
+    <string name="value_media_apps">Medien-Apps</string>
+    <plurals name="value_chosen">
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
+    </plurals>
+    <string name="next_up_use_media">Meine Medien-Apps verwenden</string>
+
+    <string name="home_value_stock">Standard-Launcher</string>
+    <string name="home_value_not_set">Nicht festgelegt</string>
+    <string name="set_android_settings">Android-Einstellungen</string>
+
+    <string name="dh_intro">Die Shield hat keine Auswahl für die Startbildschirm-App. BSfreeTV wird zum Startbildschirm, indem der Standard-Launcher über adb deaktiviert wird. Das erledigt BSfreeTV selbst, sobald Netzwerk-Debugging aktiviert ist.</string>
+    <string name="status_home_ours">Home-Taste öffnet BSfreeTV</string>
+    <string name="status_home_stock">Home-Taste öffnet den Standard-Launcher</string>
+    <string name="status_home_other">Home-Taste öffnet %1$s</string>
+    <string name="status_home_chooser">Home-Taste öffnet eine Auswahl</string>
+    <string name="status_pkg_enabled">%1$s: aktiviert</string>
+    <string name="status_pkg_disabled">%1$s: deaktiviert</string>
+    <string name="status_next_up_granted">Zugriff für Weiterschauen erteilt</string>
+    <string name="status_next_up_missing">Kein Zugriff für Weiterschauen</string>
+    <string name="status_debug_on">Debugging ist aktiviert</string>
+    <string name="status_debug_off">Debugging ist deaktiviert (Entwickleroptionen)</string>
+    <string name="dh_steps">1. Einstellungen > Geräteeinstellungen > Info > 7-mal auf Build tippen.\n2. Entwickleroptionen > Netzwerk-Debugging aktivieren.\n3. Unten eine Schaltfläche drücken und in der Meldung Zulassen wählen (Immer zulassen ankreuzen).</string>
+    <string name="btn_make_home">BSfreeTV als Startbildschirm</string>
+    <string name="btn_test">Verbindung testen</string>
+    <string name="btn_allow_next_up">Weiterschauen erlauben</string>
+    <string name="btn_restore">Standard wiederherstellen</string>
+    <string name="dh_turn_off">Schalte Netzwerk-Debugging danach wieder aus: Sonst kann jeder in deinem Netzwerk eine Verbindung anfragen.</string>
+    <string name="dh_recovery">Rückgängig / Wiederherstellung:</string>
+    <string name="dh_uninstall_warning">Stelle den Standard-Launcher wieder her, bevor du BSfreeTV deinstallierst, sonst öffnet die Home-Taste nichts.</string>
+
+    <string name="task_make_home">BSfreeTV als Startbildschirm festlegen</string>
+    <string name="task_restore">Standard-Launcher wiederherstellen</string>
+    <string name="task_allow_next_up">Weiterschauen erlauben</string>
+    <string name="task_test">Verbindungstest</string>
+    <string name="setup_working">%1$s… Wenn der Fernseher fragt, ob Debugging erlaubt werden soll, wähle Zulassen.</string>
+    <string name="setup_done">%1$s: fertig</string>
+    <string name="setup_failed">%1$s: einige Schritte sind fehlgeschlagen</string>
+    <string name="setup_nothing">Nichts zu ändern.</string>
+    <string name="step_disable">%1$s deaktivieren</string>
+    <string name="step_enable">%1$s aktivieren</string>
+    <string name="step_preferred_home">Bevorzugten Startbildschirm festlegen</string>
+    <string name="step_allow_next_up">Weiterschauen erlauben</string>
+    <string name="step_read_version">Android-Version auslesen</string>
+    <string name="adb_err_unreachable">adb auf diesem Gerät ist nicht erreichbar. Aktiviere Einstellungen > Geräteeinstellungen > Entwickleroptionen > Netzwerk-Debugging und versuche es erneut.</string>
+    <string name="adb_err_timeout">Keine Antwort auf die Meldung am Fernseher. Wähle Zulassen (Immer zulassen ankreuzen), sobald sie erscheint, und versuche es erneut.</string>
+    <string name="adb_err_refused">Der Fernseher hat die Verbindung abgelehnt. Versuche es erneut und wähle in der Meldung Zulassen.</string>
+    <string name="adb_err_other">Self-ADB fehlgeschlagen: %1$s</string>
+
+    <string name="about_desc">Ein werbefreier Launcher. GPL-3.0.</string>
+    <string name="about_wallpapers">Hintergründe</string>
+    <string name="about_wallpapers_credit">Aus Impasto von Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Die Farben werden wie bei Impasto gewählt.</string>
+    <string name="about_your_wallpapers">Deine Hintergründe</string>
+</resources>
