@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">앱</string>
+    <plurals name="home_apps_new">
+        <item quantity="other">앱 · 새 앱 %d개</item>
+    </plurals>
+    <string name="home_tools">도구</string>
+    <string name="home_settings">설정</string>
+    <string name="home_up_next">이어 보기</string>
+    <string name="home_tool">도구</string>
+    <string name="home_move_hint">좌우로 이동, 완료하면 확인</string>
+    <string name="card_move">이동</string>
+    <string name="home_empty_title">미디어 앱을 선택하세요</string>
+    <string name="home_empty_body">모든 앱을 열고 앱에서 확인 버튼을 길게 누른 뒤 미디어를 선택하세요.</string>
+
+    <string name="apps_title">모든 앱</string>
+    <string name="apps_hint">앱에서 확인 버튼을 길게 누르면 분류할 수 있습니다</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">모두 분류했습니다.</string>
+    <string name="apps_empty_hidden">숨긴 앱이 없습니다.</string>
+    <string name="apps_empty">아직 앱이 없습니다.</string>
+
+    <string name="section_all">전체</string>
+    <string name="section_unsorted">미분류</string>
+    <string name="section_media">미디어</string>
+    <string name="section_tools">도구</string>
+    <string name="section_hidden">숨김</string>
+    <string name="badge_media">미디어</string>
+    <string name="badge_tool">도구</string>
+    <string name="badge_hidden">숨김</string>
+
+    <string name="menu_add_media">미디어에 추가</string>
+    <string name="menu_move_tools">도구로 이동</string>
+    <string name="menu_reorder">순서 변경</string>
+    <string name="menu_move_unsorted">미분류로 이동</string>
+    <string name="menu_hide">숨기기</string>
+    <string name="menu_app_info">앱 정보</string>
+    <string name="menu_uninstall">제거</string>
+
+    <string name="wp_title">배경화면</string>
+    <string name="wp_your_image">내 이미지</string>
+    <string name="wp_keep_hint">확인: 적용 · 뒤로: 취소</string>
+    <string name="wp_add_own">직접 추가: %1$s 폴더에 이미지를 넣으세요</string>
+    <string name="wp_current">현재</string>
+    <string name="wp_add_image">이미지 추가</string>
+
+    <string name="value_on">켜짐</string>
+    <string name="value_off">꺼짐</string>
+    <string name="value_never">안 함</string>
+    <string name="value_shown">표시</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="other">%d분</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="other">+%d분</item>
+    </plurals>
+
+    <string name="settings_title">설정</string>
+    <string name="settings_default_home">기본 런처</string>
+    <string name="settings_next_up_apps">이어 보기 앱</string>
+    <string name="settings_about">정보</string>
+
+    <string name="header_look">모양</string>
+    <string name="header_layout">레이아웃</string>
+    <string name="header_screen_care">화면 보호</string>
+    <string name="header_next_up">이어 보기</string>
+    <string name="header_system">시스템</string>
+    <string name="header_apps">앱</string>
+    <string name="header_from_pc">PC에서 하기</string>
+
+    <string name="set_wallpaper">배경화면</string>
+    <string name="set_colours">색상</string>
+    <string name="colours_adaptive">배경화면에 맞춤</string>
+    <string name="palette_ember">잉걸불</string>
+    <string name="palette_sea">바다</string>
+    <string name="palette_moss">이끼</string>
+    <string name="palette_iris">아이리스</string>
+    <string name="palette_rose">로즈</string>
+    <string name="palette_mono">모노</string>
+    <string name="set_brightness">배경화면 밝기</string>
+    <string name="set_brightness_desc">밝은 이미지에서는 낮출수록 OLED에 좋습니다</string>
+    <string name="set_rotation">배경화면 바꾸기</string>
+    <string name="rotation_daily">매일</string>
+    <string name="rotation_on_wake">켤 때마다</string>
+    <string name="set_language">언어</string>
+    <string name="language_system">시스템 기본값</string>
+
+    <string name="set_card_size">미디어 카드 크기</string>
+    <string name="size_small">작게</string>
+    <string name="size_medium">보통</string>
+    <string name="size_large">크게</string>
+    <string name="set_tools">도구</string>
+    <string name="tools_tray">트레이</string>
+    <string name="tools_hidden">숨김</string>
+    <string name="set_tools_desc_tray">미디어 아래 작은 줄로 표시</string>
+    <string name="set_tools_desc_hidden">도구 버튼에서만 표시</string>
+    <string name="set_clock">시계</string>
+    <string name="set_animations">애니메이션</string>
+    <string name="motion_full">전체</string>
+    <string name="motion_reduced">줄임</string>
+    <string name="set_sort_apps">앱 분류</string>
+    <plurals name="value_unsorted">
+        <item quantity="other">미분류 %d개</item>
+    </plurals>
+
+    <string name="set_ambient">배경화면만 표시까지</string>
+    <string name="set_ambient_desc">조작이 없으면 시계와 줄을 숨깁니다</string>
+    <string name="set_black">검은 화면까지</string>
+    <string name="set_black_desc">완전한 검정, 픽셀 꺼짐</string>
+    <string name="set_drift">배경화면 천천히 움직이기</string>
+    <string name="set_drift_desc">아주 느린 이동, GPU를 조금 사용합니다</string>
+
+    <string name="set_next_up">이어 보기 줄</string>
+    <string name="set_next_up_desc">지원하는 앱에서 이어서 시청 (Jellyfin 지원)</string>
+    <string name="value_needs_access">권한 필요</string>
+    <string name="set_next_up_apps">이어 보기 앱</string>
+    <string name="value_media_apps">미디어 앱</string>
+    <plurals name="value_chosen">
+        <item quantity="other">%d개 선택</item>
+    </plurals>
+    <string name="next_up_use_media">내 미디어 앱 사용</string>
+
+    <string name="home_value_stock">기본 제공 런처</string>
+    <string name="home_value_not_set">설정 안 됨</string>
+    <string name="set_android_settings">Android 설정</string>
+
+    <string name="dh_intro">Shield에는 홈 앱을 고르는 메뉴가 없습니다. BSfreeTV는 adb로 기본 제공 런처를 사용 중지해 홈이 됩니다. 네트워크 디버깅을 켜면 BSfreeTV가 직접 이 작업을 할 수 있습니다.</string>
+    <string name="status_home_ours">홈 버튼이 BSfreeTV를 엽니다</string>
+    <string name="status_home_stock">홈 버튼이 기본 제공 런처를 엽니다</string>
+    <string name="status_home_other">홈 버튼이 %1$s을(를) 엽니다</string>
+    <string name="status_home_chooser">홈 버튼이 선택 화면을 엽니다</string>
+    <string name="status_pkg_enabled">%1$s: 사용 중</string>
+    <string name="status_pkg_disabled">%1$s: 사용 중지됨</string>
+    <string name="status_next_up_granted">이어 보기 권한 허용됨</string>
+    <string name="status_next_up_missing">이어 보기 권한 없음</string>
+    <string name="status_debug_on">디버깅이 켜져 있습니다</string>
+    <string name="status_debug_off">디버깅이 꺼져 있습니다 (개발자 옵션)</string>
+    <string name="dh_steps">1. 설정 > 기기 환경설정 > 정보 > 빌드를 7번 선택합니다.\n2. 개발자 옵션 > 네트워크 디버깅을 켭니다.\n3. 아래 버튼을 누르고 표시되는 창에서 허용을 선택합니다 (항상 허용 선택).</string>
+    <string name="btn_make_home">BSfreeTV를 홈으로</string>
+    <string name="btn_test">연결 테스트</string>
+    <string name="btn_allow_next_up">이어 보기 허용</string>
+    <string name="btn_restore">기본 런처 복원</string>
+    <string name="dh_turn_off">끝나면 네트워크 디버깅을 다시 끄세요. 켜 두면 같은 네트워크의 누구나 연결을 요청할 수 있습니다.</string>
+    <string name="dh_recovery">되돌리기 / 복구:</string>
+    <string name="dh_uninstall_warning">BSfreeTV를 제거하기 전에 기본 제공 런처를 복원하세요. 그러지 않으면 홈 버튼을 눌러도 아무것도 열리지 않습니다.</string>
+
+    <string name="task_make_home">BSfreeTV를 홈 앱으로 설정</string>
+    <string name="task_restore">기본 제공 런처 복원</string>
+    <string name="task_allow_next_up">이어 보기 허용</string>
+    <string name="task_test">연결 테스트</string>
+    <string name="setup_working">%1$s… TV에서 디버깅 허용을 묻는 창이 나오면 허용을 선택하세요.</string>
+    <string name="setup_done">%1$s: 완료</string>
+    <string name="setup_failed">%1$s: 일부 단계가 실패했습니다</string>
+    <string name="setup_nothing">변경할 내용이 없습니다.</string>
+    <string name="step_disable">%1$s 사용 중지</string>
+    <string name="step_enable">%1$s 사용</string>
+    <string name="step_preferred_home">기본 홈 설정</string>
+    <string name="step_allow_next_up">이어 보기 허용</string>
+    <string name="step_read_version">Android 버전 확인</string>
+    <string name="adb_err_unreachable">이 기기의 adb에 연결할 수 없습니다. 설정 > 기기 환경설정 > 개발자 옵션 > 네트워크 디버깅을 켜고 다시 시도하세요.</string>
+    <string name="adb_err_timeout">TV의 확인 창에 응답이 없습니다. 창이 나타나면 허용을 선택하고 (항상 허용 선택) 다시 시도하세요.</string>
+    <string name="adb_err_refused">TV가 연결을 거부했습니다. 다시 시도하고 확인 창에서 허용을 선택하세요.</string>
+    <string name="adb_err_other">Self-ADB 실패: %1$s</string>
+
+    <string name="about_desc">광고 없는 런처. GPL-3.0.</string>
+    <string name="about_wallpapers">배경화면</string>
+    <string name="about_wallpapers_credit">Andreu Massanet의 Impasto(github.com/andreumassanet/impasto)에서 가져왔으며 GPL-3.0입니다. 색상 추출도 Impasto 방식을 따릅니다.</string>
+    <string name="about_your_wallpapers">내 배경화면</string>
+</resources>

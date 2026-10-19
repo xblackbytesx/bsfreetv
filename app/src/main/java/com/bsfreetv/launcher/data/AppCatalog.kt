@@ -30,6 +30,8 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.SupervisorJob
+import kotlin.math.roundToInt
+import com.bsfreetv.launcher.domain.CardSize
 
 /**
  * An installed, launchable app with its artwork already rasterised. Banners and
@@ -50,6 +52,17 @@ data class AppEntry(
 @Singleton
 class AppCatalog @Inject constructor(@ApplicationContext private val context: Context) {
     private val pm = context.packageManager
+
+    /**
+     * Artwork is rasterised at the pixels it is drawn at. The Shield renders at
+     * the output resolution (about 4x density on a 4K TV), so a fixed 320x180
+     * banner would be upscaled 2x and look soft. Sized for the largest card at
+     * its focused scale; smaller cards downsample, which stays sharp.
+     */
+    private val density = context.resources.displayMetrics.density
+    private val bannerW = bannerWidthFor(density)
+    private val bannerH = bannerW * 9 / 16
+    private val iconPx = iconSizeFor(density)
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val reloads = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
     private val _apps = MutableStateFlow<List<AppEntry>?>(null)
@@ -102,8 +115,8 @@ class AppCatalog @Inject constructor(@ApplicationContext private val context: Co
             val bannerDrawable: Drawable? = runCatching { ai.loadBanner(pm) ?: ai.applicationInfo.loadBanner(pm) }.getOrNull()
             val entry = AppEntry(
                 info = AppInfo(pkg, label, hasBanner = bannerDrawable != null),
-                banner = bannerDrawable?.let { runCatching { it.toBitmap(BANNER_W, BANNER_H).asImageBitmap() }.getOrNull() },
-                icon = ri.loadIcon(pm).toBitmap(ICON_PX, ICON_PX).asImageBitmap(),
+                banner = bannerDrawable?.let { runCatching { it.toBitmap(bannerW, bannerH).asImageBitmap() }.getOrNull() },
+                icon = ri.loadIcon(pm).toBitmap(iconPx, iconPx).asImageBitmap(),
                 versionCode = version,
             )
             artCache[pkg] = entry
@@ -137,12 +150,21 @@ class AppCatalog @Inject constructor(@ApplicationContext private val context: Co
         false
     }
 
-    private companion object {
-        const val TAG = "AppCatalog"
-        // android:banner is 320x180 px at xhdpi, the Shield's density.
-        const val BANNER_W = 320
-        const val BANNER_H = 180
-        const val ICON_PX = 128
+    companion object {
+        private const val TAG = "AppCatalog"
+        /** Card focus scale in Cards.kt focusHalo (1.08). */
+        const val FOCUS_SCALE = 1.08f
+        /** Largest icon on screen: the tool chip at its focused scale (26 dp) and All apps (36 dp); 64 dp leaves headroom. */
+        const val ICON_DP = 64
+        // Floors so a low-density test device still gets usable artwork.
+        const val MIN_BANNER_W = 320
+        const val MIN_ICON_PX = 96
+
+        /** Banner bitmap width for a display density (height is 16:9 of it). */
+        fun bannerWidthFor(density: Float): Int =
+            (CardSize.LARGE.widthDp * FOCUS_SCALE * density).roundToInt().coerceAtLeast(MIN_BANNER_W)
+
+        fun iconSizeFor(density: Float): Int = (ICON_DP * density).roundToInt().coerceAtLeast(MIN_ICON_PX)
     }
 }
 

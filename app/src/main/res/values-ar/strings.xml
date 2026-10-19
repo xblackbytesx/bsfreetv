@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">التطبيقات</string>
+    <plurals name="home_apps_new">
+        <item quantity="zero">التطبيقات · %d جديدة</item>
+        <item quantity="one">التطبيقات · %d جديد</item>
+        <item quantity="two">التطبيقات · %d جديدان</item>
+        <item quantity="few">التطبيقات · %d جديدة</item>
+        <item quantity="many">التطبيقات · %d جديدًا</item>
+        <item quantity="other">التطبيقات · %d جديد</item>
+    </plurals>
+    <string name="home_tools">الأدوات</string>
+    <string name="home_settings">الإعدادات</string>
+    <string name="home_up_next">متابعة المشاهدة</string>
+    <string name="home_tool">أداة</string>
+    <string name="home_move_hint">يمين ويسار للنقل، ثم موافق للإنهاء</string>
+    <string name="card_move">نقل</string>
+    <string name="home_empty_title">اختر تطبيقات الوسائط</string>
+    <string name="home_empty_body">افتح كل التطبيقات، واضغط مطولًا على موافق فوق أحد التطبيقات، ثم اختر الوسائط.</string>
+
+    <string name="apps_title">كل التطبيقات</string>
+    <string name="apps_hint">اضغط مطولًا على موافق فوق تطبيق لتصنيفه</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">كل شيء مصنّف.</string>
+    <string name="apps_empty_hidden">لا يوجد شيء مخفي.</string>
+    <string name="apps_empty">لا توجد تطبيقات هنا بعد.</string>
+
+    <string name="section_all">الكل</string>
+    <string name="section_unsorted">غير مصنّفة</string>
+    <string name="section_media">الوسائط</string>
+    <string name="section_tools">الأدوات</string>
+    <string name="section_hidden">مخفية</string>
+    <string name="badge_media">وسائط</string>
+    <string name="badge_tool">أداة</string>
+    <string name="badge_hidden">مخفي</string>
+
+    <string name="menu_add_media">إضافة إلى الوسائط</string>
+    <string name="menu_move_tools">نقل إلى الأدوات</string>
+    <string name="menu_reorder">إعادة الترتيب</string>
+    <string name="menu_move_unsorted">نقل إلى غير المصنّفة</string>
+    <string name="menu_hide">إخفاء</string>
+    <string name="menu_app_info">معلومات التطبيق</string>
+    <string name="menu_uninstall">إلغاء التثبيت</string>
+
+    <string name="wp_title">الخلفية</string>
+    <string name="wp_your_image">صورتك</string>
+    <string name="wp_keep_hint">موافق للإبقاء · رجوع للإلغاء</string>
+    <string name="wp_add_own">أضف صورك: ضعها في %1$s</string>
+    <string name="wp_current">الحالية</string>
+    <string name="wp_add_image">إضافة صورة</string>
+
+    <string name="value_on">تشغيل</string>
+    <string name="value_off">إيقاف</string>
+    <string name="value_never">أبدًا</string>
+    <string name="value_shown">ظاهر</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="zero">%d دقيقة</item>
+        <item quantity="one">%d دقيقة</item>
+        <item quantity="two">%d دقيقتان</item>
+        <item quantity="few">%d دقائق</item>
+        <item quantity="many">%d دقيقة</item>
+        <item quantity="other">%d دقيقة</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="zero">+%d دقيقة</item>
+        <item quantity="one">+%d دقيقة</item>
+        <item quantity="two">+%d دقيقتان</item>
+        <item quantity="few">+%d دقائق</item>
+        <item quantity="many">+%d دقيقة</item>
+        <item quantity="other">+%d دقيقة</item>
+    </plurals>
+
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_default_home">المشغّل الافتراضي</string>
+    <string name="settings_next_up_apps">تطبيقات متابعة المشاهدة</string>
+    <string name="settings_about">حول</string>
+
+    <string name="header_look">المظهر</string>
+    <string name="header_layout">التخطيط</string>
+    <string name="header_screen_care">حماية الشاشة</string>
+    <string name="header_next_up">متابعة المشاهدة</string>
+    <string name="header_system">النظام</string>
+    <string name="header_apps">التطبيقات</string>
+    <string name="header_from_pc">من جهاز كمبيوتر بدلًا من ذلك</string>
+
+    <string name="set_wallpaper">الخلفية</string>
+    <string name="set_colours">الألوان</string>
+    <string name="colours_adaptive">من الخلفية</string>
+    <string name="palette_ember">جمر</string>
+    <string name="palette_sea">بحر</string>
+    <string name="palette_moss">طحلب</string>
+    <string name="palette_iris">سوسن</string>
+    <string name="palette_rose">وردي</string>
+    <string name="palette_mono">أحادي</string>
+    <string name="set_brightness">سطوع الخلفية</string>
+    <string name="set_brightness_desc">التخفيض أرفق بشاشات OLED مع الصور الساطعة</string>
+    <string name="set_rotation">تغيير الخلفية</string>
+    <string name="rotation_daily">يوميًا</string>
+    <string name="rotation_on_wake">عند كل تشغيل</string>
+    <string name="set_language">اللغة</string>
+    <string name="language_system">لغة النظام</string>
+
+    <string name="set_card_size">حجم بطاقات الوسائط</string>
+    <string name="size_small">صغير</string>
+    <string name="size_medium">متوسط</string>
+    <string name="size_large">كبير</string>
+    <string name="set_tools">الأدوات</string>
+    <string name="tools_tray">شريط</string>
+    <string name="tools_hidden">مخفية</string>
+    <string name="set_tools_desc_tray">صف صغير أسفل الوسائط</string>
+    <string name="set_tools_desc_hidden">خلف زر الأدوات فقط</string>
+    <string name="set_clock">الساعة</string>
+    <string name="set_animations">الرسوم المتحركة</string>
+    <string name="motion_full">كاملة</string>
+    <string name="motion_reduced">مخفّضة</string>
+    <string name="set_sort_apps">تصنيف التطبيقات</string>
+    <plurals name="value_unsorted">
+        <item quantity="zero">%d غير مصنّف</item>
+        <item quantity="one">%d غير مصنّف</item>
+        <item quantity="two">%d غير مصنّفين</item>
+        <item quantity="few">%d غير مصنّفة</item>
+        <item quantity="many">%d غير مصنّف</item>
+        <item quantity="other">%d غير مصنّف</item>
+    </plurals>
+
+    <string name="set_ambient">الخلفية فقط بعد</string>
+    <string name="set_ambient_desc">يخفي الساعة والصفوف عند عدم الاستخدام</string>
+    <string name="set_black">شاشة سوداء بعد</string>
+    <string name="set_black_desc">أسود تام، البكسلات مطفأة</string>
+    <string name="set_drift">تحريك الخلفية</string>
+    <string name="set_drift_desc">حركة بطيئة جدًا؛ تستهلك قليلًا من المعالج الرسومي</string>
+
+    <string name="set_next_up">صف متابعة المشاهدة</string>
+    <string name="set_next_up_desc">تابع المشاهدة من التطبيقات التي تدعم ذلك (Jellyfin يدعمه)</string>
+    <string name="value_needs_access">يحتاج إلى إذن</string>
+    <string name="set_next_up_apps">تطبيقات متابعة المشاهدة</string>
+    <string name="value_media_apps">تطبيقات الوسائط</string>
+    <plurals name="value_chosen">
+        <item quantity="zero">تم اختيار %d</item>
+        <item quantity="one">تم اختيار %d</item>
+        <item quantity="two">تم اختيار %d</item>
+        <item quantity="few">تم اختيار %d</item>
+        <item quantity="many">تم اختيار %d</item>
+        <item quantity="other">تم اختيار %d</item>
+    </plurals>
+    <string name="next_up_use_media">استخدام تطبيقات الوسائط الخاصة بي</string>
+
+    <string name="home_value_stock">المشغّل الأصلي</string>
+    <string name="home_value_not_set">غير محدد</string>
+    <string name="set_android_settings">إعدادات Android</string>
+
+    <string name="dh_intro">لا يتيح جهاز Shield اختيار تطبيق الشاشة الرئيسية. يصبح BSfreeTV الشاشة الرئيسية بتعطيل المشغّل الأصلي عبر adb، ويمكنه فعل ذلك بنفسه بمجرد تفعيل تصحيح الأخطاء عبر الشبكة.</string>
+    <string name="status_home_ours">زر الصفحة الرئيسية يفتح BSfreeTV</string>
+    <string name="status_home_stock">زر الصفحة الرئيسية يفتح المشغّل الأصلي</string>
+    <string name="status_home_other">زر الصفحة الرئيسية يفتح %1$s</string>
+    <string name="status_home_chooser">زر الصفحة الرئيسية يفتح قائمة اختيار</string>
+    <string name="status_pkg_enabled">%1$s: مفعّل</string>
+    <string name="status_pkg_disabled">%1$s: معطّل</string>
+    <string name="status_next_up_granted">تم منح إذن متابعة المشاهدة</string>
+    <string name="status_next_up_missing">لم يُمنح إذن متابعة المشاهدة</string>
+    <string name="status_debug_on">تصحيح الأخطاء مفعّل</string>
+    <string name="status_debug_off">تصحيح الأخطاء معطّل (خيارات المطوّرين)</string>
+    <string name="dh_steps">1. الإعدادات > إعدادات الجهاز المفضّلة > حول > اضغط على رقم الإصدار 7 مرات.\n2. خيارات المطوّرين > فعّل تصحيح الأخطاء عبر الشبكة.\n3. اضغط أحد الأزرار أدناه واختر السماح (مع تحديد السماح دائمًا) في الرسالة.</string>
+    <string name="btn_make_home">BSfreeTV كشاشة رئيسية</string>
+    <string name="btn_test">اختبار الاتصال</string>
+    <string name="btn_allow_next_up">السماح بمتابعة المشاهدة</string>
+    <string name="btn_restore">استعادة الأصلي</string>
+    <string name="dh_turn_off">بعد ذلك أوقف تصحيح الأخطاء عبر الشبكة، وإلا فبإمكان أي شخص على شبكتك طلب الاتصال.</string>
+    <string name="dh_recovery">تراجع / استعادة:</string>
+    <string name="dh_uninstall_warning">استعِد المشغّل الأصلي قبل إلغاء تثبيت BSfreeTV، وإلا فلن يفتح زر الصفحة الرئيسية أي شيء.</string>
+
+    <string name="task_make_home">تعيين BSfreeTV تطبيقًا للشاشة الرئيسية</string>
+    <string name="task_restore">استعادة المشغّل الأصلي</string>
+    <string name="task_allow_next_up">السماح بمتابعة المشاهدة</string>
+    <string name="task_test">اختبار الاتصال</string>
+    <string name="setup_working">%1$s… إذا طلب التلفزيون السماح بتصحيح الأخطاء، فاختر السماح.</string>
+    <string name="setup_done">%1$s: تم</string>
+    <string name="setup_failed">%1$s: فشلت بعض الخطوات</string>
+    <string name="setup_nothing">لا يوجد ما يلزم تغييره.</string>
+    <string name="step_disable">تعطيل %1$s</string>
+    <string name="step_enable">تفعيل %1$s</string>
+    <string name="step_preferred_home">تعيين الشاشة الرئيسية المفضّلة</string>
+    <string name="step_allow_next_up">السماح بمتابعة المشاهدة</string>
+    <string name="step_read_version">قراءة إصدار Android</string>
+    <string name="adb_err_unreachable">تعذّر الوصول إلى adb على هذا الجهاز. فعّل الإعدادات > إعدادات الجهاز المفضّلة > خيارات المطوّرين > تصحيح الأخطاء عبر الشبكة، ثم أعد المحاولة.</string>
+    <string name="adb_err_timeout">لا ردّ على الرسالة في التلفزيون. اختر السماح (مع تحديد السماح دائمًا) عند ظهورها، ثم أعد المحاولة.</string>
+    <string name="adb_err_refused">رفض التلفزيون الاتصال. أعد المحاولة واختر السماح في الرسالة.</string>
+    <string name="adb_err_other">فشل Self-ADB: %1$s</string>
+
+    <string name="about_desc">مشغّل بلا إعلانات. GPL-3.0.</string>
+    <string name="about_wallpapers">الخلفيات</string>
+    <string name="about_wallpapers_credit">من Impasto لـ Andreu Massanet (github.com/andreumassanet/impasto)، بترخيص GPL-3.0. يُستخرج اللون بطريقة Impasto نفسها.</string>
+    <string name="about_your_wallpapers">خلفياتك</string>
+</resources>

@@ -1,4 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Source strings (English). Translations live in values-xx/ and are managed
+    on Weblate; see docs/translations.md. Keep keys stable: renaming one throws
+    away every translation of it. Placeholders (%1$s, %d) must survive
+    translation unchanged; TranslationsTest checks that.
+-->
 <resources>
-    <string name="app_name">BSfreeTV</string>
+    <string name="app_name" translatable="false">BSfreeTV</string>
+
+    <!-- Home screen -->
+    <string name="home_apps">Apps</string>
+    <plurals name="home_apps_new">
+        <item quantity="one">Apps · %d new</item>
+        <item quantity="other">Apps · %d new</item>
+    </plurals>
+    <string name="home_tools">Tools</string>
+    <string name="home_settings">Settings</string>
+    <!-- Row heading above the Watch Next cards; shown in capitals. -->
+    <string name="home_up_next">Up next</string>
+    <!-- Subtitle under the name of a focused tool app. -->
+    <string name="home_tool">Tool</string>
+    <string name="home_move_hint">Left and right to move, OK when done</string>
+    <!-- Shown on a card while it is being reordered. -->
+    <string name="card_move">move</string>
+    <string name="home_empty_title">Pick your media apps</string>
+    <string name="home_empty_body">Open All apps, hold OK on an app and choose Media.</string>
+
+    <!-- All apps -->
+    <string name="apps_title">All apps</string>
+    <string name="apps_hint">Hold OK on an app to sort it</string>
+    <!-- Filter tab: section name and number of apps in it, e.g. "Media 5". -->
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">Everything is sorted.</string>
+    <string name="apps_empty_hidden">Nothing hidden.</string>
+    <string name="apps_empty">No apps here yet.</string>
+
+    <!-- App sections -->
+    <string name="section_all">All</string>
+    <string name="section_unsorted">Unsorted</string>
+    <string name="section_media">Media</string>
+    <string name="section_tools">Tools</string>
+    <string name="section_hidden">Hidden</string>
+    <!-- Small badge on a card in All apps; shown in capitals. -->
+    <string name="badge_media">Media</string>
+    <string name="badge_tool">Tool</string>
+    <string name="badge_hidden">Hidden</string>
+
+    <!-- App menu (hold OK on an app) -->
+    <string name="menu_add_media">Add to Media</string>
+    <string name="menu_move_tools">Move to Tools</string>
+    <string name="menu_reorder">Reorder</string>
+    <string name="menu_move_unsorted">Move to Unsorted</string>
+    <string name="menu_hide">Hide</string>
+    <string name="menu_app_info">App info</string>
+    <string name="menu_uninstall">Uninstall</string>
+
+    <!-- Wallpaper picker -->
+    <string name="wp_title">Wallpaper</string>
+    <string name="wp_your_image">Your image</string>
+    <string name="wp_keep_hint">OK to keep · Back to cancel</string>
+    <string name="wp_add_own">Add your own: put images in %1$s</string>
+    <string name="wp_current">Current</string>
+    <string name="wp_add_image">Add image</string>
+
+    <!-- Common values -->
+    <string name="value_on">On</string>
+    <string name="value_off">Off</string>
+    <string name="value_never">Never</string>
+    <string name="value_shown">Shown</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <!-- Extra minutes on top of the previous stage, e.g. "+10 min". -->
+    <plurals name="value_plus_minutes">
+        <item quantity="one">+%d min</item>
+        <item quantity="other">+%d min</item>
+    </plurals>
+
+    <!-- Settings pages -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_default_home">Default launcher</string>
+    <string name="settings_next_up_apps">Next Up apps</string>
+    <string name="settings_about">About</string>
+
+    <!-- Settings section headings; shown in capitals. -->
+    <string name="header_look">Look</string>
+    <string name="header_layout">Layout</string>
+    <string name="header_screen_care">Screen care</string>
+    <string name="header_next_up">Next Up</string>
+    <string name="header_system">System</string>
+    <string name="header_apps">Apps</string>
+    <string name="header_from_pc">From a PC instead</string>
+
+    <!-- Settings: Look -->
+    <string name="set_wallpaper">Wallpaper</string>
+    <string name="set_colours">Colours</string>
+    <string name="colours_adaptive">From wallpaper</string>
+    <string name="palette_ember">Ember</string>
+    <string name="palette_sea">Sea</string>
+    <string name="palette_moss">Moss</string>
+    <string name="palette_iris">Iris</string>
+    <string name="palette_rose">Rose</string>
+    <string name="palette_mono">Mono</string>
+    <string name="set_brightness">Wallpaper brightness</string>
+    <string name="set_brightness_desc">Lower is kinder to an OLED on bright images</string>
+    <string name="set_rotation">Change wallpaper</string>
+    <string name="rotation_daily">Daily</string>
+    <string name="rotation_on_wake">Every wake</string>
+    <string name="set_language">Language</string>
+    <string name="language_system">System default</string>
+
+    <!-- Settings: Layout -->
+    <string name="set_card_size">Media card size</string>
+    <string name="size_small">Small</string>
+    <string name="size_medium">Medium</string>
+    <string name="size_large">Large</string>
+    <string name="set_tools">Tools</string>
+    <string name="tools_tray">Tray</string>
+    <string name="tools_hidden">Hidden</string>
+    <string name="set_tools_desc_tray">Small row under your media</string>
+    <string name="set_tools_desc_hidden">Behind the Tools button only</string>
+    <string name="set_clock">Clock</string>
+    <string name="set_animations">Animations</string>
+    <string name="motion_full">Full</string>
+    <string name="motion_reduced">Reduced</string>
+    <string name="set_sort_apps">Sort apps</string>
+    <plurals name="value_unsorted">
+        <item quantity="one">%d unsorted</item>
+        <item quantity="other">%d unsorted</item>
+    </plurals>
+
+    <!-- Settings: Screen care -->
+    <string name="set_ambient">Wallpaper only after</string>
+    <string name="set_ambient_desc">Hides clock and rows when idle</string>
+    <string name="set_black">Black screen after</string>
+    <string name="set_black_desc">True black, pixels off</string>
+    <string name="set_drift">Wallpaper drift</string>
+    <string name="set_drift_desc">Very slow pan; costs a little GPU</string>
+
+    <!-- Settings: Next Up -->
+    <string name="set_next_up">Next Up row</string>
+    <string name="set_next_up_desc">Continue watching from apps that publish it (Jellyfin does)</string>
+    <string name="value_needs_access">Needs access</string>
+    <string name="set_next_up_apps">Apps in Next Up</string>
+    <string name="value_media_apps">Media apps</string>
+    <plurals name="value_chosen">
+        <item quantity="one">%d chosen</item>
+        <item quantity="other">%d chosen</item>
+    </plurals>
+    <string name="next_up_use_media">Use my Media apps</string>
+
+    <!-- Settings: System -->
+    <string name="home_value_stock">Stock launcher</string>
+    <string name="home_value_not_set">Not set</string>
+    <string name="set_android_settings">Android settings</string>
+
+    <!-- Default launcher page -->
+    <string name="dh_intro">The Shield has no Home picker. BSfreeTV becomes Home by disabling the stock launcher through adb, which it can do itself once Network debugging is on.</string>
+    <string name="status_home_ours">Home button opens BSfreeTV</string>
+    <string name="status_home_stock">Home button opens the stock launcher</string>
+    <string name="status_home_other">Home button opens %1$s</string>
+    <string name="status_home_chooser">Home button opens a chooser</string>
+    <!-- %1$s is a package name such as "tvlauncher". -->
+    <string name="status_pkg_enabled">%1$s: enabled</string>
+    <string name="status_pkg_disabled">%1$s: disabled</string>
+    <string name="status_next_up_granted">Next Up access granted</string>
+    <string name="status_next_up_missing">Next Up access not granted</string>
+    <string name="status_debug_on">Debugging is on</string>
+    <string name="status_debug_off">Debugging is off (Developer options)</string>
+    <string name="dh_steps">1. Settings > Device Preferences > About > tap Build 7 times.\n2. Developer options > turn on Network debugging.\n3. Press a button below and choose Allow (tick Always allow) on the prompt.</string>
+    <string name="btn_make_home">Make BSfreeTV Home</string>
+    <string name="btn_test">Test connection</string>
+    <string name="btn_allow_next_up">Allow Next Up</string>
+    <string name="btn_restore">Restore stock</string>
+    <string name="dh_turn_off">Then turn Network debugging off again: anyone on your network could otherwise ask to connect.</string>
+    <string name="dh_recovery">Undo / recovery:</string>
+    <string name="dh_uninstall_warning">Restore the stock launcher before uninstalling BSfreeTV, or the Home button has nothing to open.</string>
+
+    <!-- Self-ADB tasks and progress -->
+    <string name="task_make_home">Make BSfreeTV the Home app</string>
+    <string name="task_restore">Restore the stock launcher</string>
+    <string name="task_allow_next_up">Allow Next Up</string>
+    <string name="task_test">Connection test</string>
+    <string name="setup_working">%1$s… If the TV asks to allow debugging, choose Allow.</string>
+    <string name="setup_done">%1$s: done</string>
+    <string name="setup_failed">%1$s: some steps failed</string>
+    <string name="setup_nothing">Nothing to change.</string>
+    <string name="step_disable">Disable %1$s</string>
+    <string name="step_enable">Enable %1$s</string>
+    <string name="step_preferred_home">Set preferred Home</string>
+    <string name="step_allow_next_up">Allow Next Up</string>
+    <string name="step_read_version">Read Android version</string>
+    <string name="adb_err_unreachable">Could not reach adb on this device. Turn on Settings > Device Preferences > Developer options > Network debugging, then try again.</string>
+    <string name="adb_err_timeout">No answer from the TV prompt. Choose Allow (tick Always allow) when it appears, then try again.</string>
+    <string name="adb_err_refused">The TV refused the connection. Try again and choose Allow on the prompt.</string>
+    <string name="adb_err_other">Self-ADB failed: %1$s</string>
+
+    <!-- About page -->
+    <string name="about_desc">An ad-free launcher. GPL-3.0.</string>
+    <string name="about_wallpapers">Wallpapers</string>
+    <string name="about_wallpapers_credit">From Impasto by Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Colour extraction follows Impasto\'s accent picker.</string>
+    <string name="about_your_wallpapers">Your wallpapers</string>
 </resources>

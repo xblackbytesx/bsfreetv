@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.bsfreetv.launcher.feature.home.HomeViewModel
 import com.bsfreetv.launcher.feature.home.LauncherRoot
+import com.bsfreetv.launcher.i18n.LanguageStore
 import dagger.hilt.android.AndroidEntryPoint
 
 /** The Home activity. singleTask: a Home press while showing arrives as onNewIntent. */
@@ -19,6 +20,11 @@ class MainActivity : ComponentActivity() {
 
     private val screenOff = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) = vm.onScreenOff()
+    }
+
+    /** Applies the in-app language override (Android 11 has no per-app language). */
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguageStore.wrap(newBase))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

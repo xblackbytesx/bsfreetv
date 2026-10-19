@@ -43,6 +43,9 @@ import androidx.compose.ui.unit.Dp
 import com.bsfreetv.launcher.data.AppEntry
 import com.bsfreetv.launcher.ui.BsfType
 import com.bsfreetv.launcher.ui.LocalBsfColors
+import com.bsfreetv.launcher.ui.forScript
+import com.bsfreetv.launcher.R
+import androidx.compose.ui.res.stringResource
 
 private val CardShape = RoundedCornerShape(10.dp)
 
@@ -141,7 +144,7 @@ fun AppBannerCard(
         if (badge != null) {
             Text(
                 badge,
-                style = BsfType.overline,
+                style = BsfType.overline.forScript(),
                 color = colors.onAccent,
                 modifier = Modifier.align(Alignment.TopEnd).padding(6.dp).clip(RoundedCornerShape(4.dp)).background(colors.accent).padding(horizontal = 5.dp, vertical = 1.dp),
             )
@@ -153,7 +156,7 @@ fun AppBannerCard(
 private fun MoveArrows() {
     val colors = LocalBsfColors.current
     Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.55f))) {
-        Text("‹  move  ›", style = BsfType.bodyStrong, color = colors.text, modifier = Modifier.align(Alignment.Center))
+        Text("‹  ${stringResource(R.string.card_move)}  ›", style = BsfType.bodyStrong, color = colors.text, modifier = Modifier.align(Alignment.Center))
     }
 }
 

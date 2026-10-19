@@ -26,18 +26,18 @@ data class LauncherPalette(
 }
 
 /** A fixed palette offered next to Adaptive. */
-data class FixedPalette(val id: String, val label: String, val accent: Rgb)
+data class FixedPalette(val id: String, val accent: Rgb)
 
 object PaletteBuilder {
     const val ADAPTIVE = "adaptive"
 
     val fixed = listOf(
-        FixedPalette("ember", "Ember", Rgb.hex("#F5A97F")),
-        FixedPalette("sea", "Sea", Rgb.hex("#7DC4E4")),
-        FixedPalette("moss", "Moss", Rgb.hex("#A6DA95")),
-        FixedPalette("iris", "Iris", Rgb.hex("#C6A0F6")),
-        FixedPalette("rose", "Rose", Rgb.hex("#F38BA8")),
-        FixedPalette("mono", "Mono", Rgb.hex("#D8DEE9")),
+        FixedPalette("ember", Rgb.hex("#F5A97F")),
+        FixedPalette("sea", Rgb.hex("#7DC4E4")),
+        FixedPalette("moss", Rgb.hex("#A6DA95")),
+        FixedPalette("iris", Rgb.hex("#C6A0F6")),
+        FixedPalette("rose", Rgb.hex("#F38BA8")),
+        FixedPalette("mono", Rgb.hex("#D8DEE9")),
     )
 
     /** Impasto `pick_accent`: vibrant mid-luminance colours win, else the most saturated, else neutral. */

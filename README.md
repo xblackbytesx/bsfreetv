@@ -83,6 +83,17 @@ Restore the stock launcher before uninstalling BSfreeTV.
   `/sdcard/Android/data/com.bsfreetv.launcher/files/wallpapers/`
   (`adb push`), or use Add image when the device has a file picker.
 
+## Translations
+
+The interface is currently available in English, Dutch, German, Spanish,
+French, Italian, Portuguese, Polish, Ukrainian, Arabic, Japanese, Korean and
+Simplified Chinese. BSfreeTV uses your TV's language automatically; to choose
+a different one, go to **Settings > Language**.
+
+Translations are welcome on
+[Hosted Weblate](https://hosted.weblate.org/projects/bsfreetv/). No coding
+needed, and Weblate opens the pull request for you.
+
 ## License
 
 Copyright (C) 2026 xblackbytesx. BSfreeTV is free software, released under the

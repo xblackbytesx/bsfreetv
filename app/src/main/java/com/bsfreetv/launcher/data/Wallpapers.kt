@@ -31,7 +31,7 @@ internal data class WallpaperIndex(val wallpapers: List<Entry>) {
 }
 
 /**
- * Built-in wallpapers (assets/wallpapers, 1920x1080 WebP from tools/import_wallpapers.py)
+ * Built-in wallpapers (assets/wallpapers, 2752x1548 WebP from tools/import_wallpapers.py)
  * plus the user's own in `Android/data/<pkg>/files/wallpapers/`: anything put
  * there (adb push, or the in-app import) shows up in the picker.
  */
@@ -66,11 +66,24 @@ class Wallpapers @Inject constructor(@ApplicationContext private val context: Co
     }.getOrNull()
 
     /**
+     * The size a full wallpaper is decoded at: the display's own pixels (the
+     * Shield renders at its output resolution, 3840x2160 on a 4K TV), capped
+     * at 4K. Never larger than the image itself; see [decodeCropped].
+     */
+    val screenSize: Pair<Int, Int>
+        get() {
+            val m = context.resources.displayMetrics
+            val w = maxOf(m.widthPixels, m.heightPixels).coerceIn(MIN_SCREEN_W, MAX_SCREEN_W)
+            return w to w * 9 / 16
+        }
+
+    /**
      * Screen-sized bitmap, centre-cropped to 16:9. [hardware] keeps it in GPU
      * memory only (no per-frame upload, no Java heap); off for tests.
      */
     suspend fun loadFull(id: String, hardware: Boolean = true): Bitmap? = withContext(Dispatchers.IO) {
-        runCatching { decodeCropped(id, thumb = false, SCREEN_W, SCREEN_H)?.let { if (hardware) it.toHardware() else it } }
+        val (w, h) = screenSize
+        runCatching { decodeCropped(id, thumb = false, w, h)?.let { if (hardware) it.toHardware() else it } }
             .onFailure { Log.w(TAG, "cannot load $id", it) }.getOrNull()
     }
 
@@ -90,11 +103,12 @@ class Wallpapers @Inject constructor(@ApplicationContext private val context: Co
         palette.also { palettes[id] = it }
     }
 
-    /** Copy an image the user picked into the wallpaper folder as a 1920x1080 WebP. Returns its id. */
+    /** Copy an image the user picked into the wallpaper folder as a screen-sized WebP. Returns its id. */
     suspend fun import(uri: Uri): String? = withContext(Dispatchers.IO) {
         runCatching {
             val dir = userDir ?: return@runCatching null
-            val bmp = decodeCropped({ context.contentResolver.openInputStream(uri) }, SCREEN_W, SCREEN_H) ?: return@runCatching null
+            val (w, h) = screenSize
+            val bmp = decodeCropped({ context.contentResolver.openInputStream(uri) }, w, h) ?: return@runCatching null
             val name = "imported-${System.currentTimeMillis()}.webp"
             dir.resolve(name).outputStream().use { bmp.compress(Bitmap.CompressFormat.WEBP_LOSSY, 88, it) }
             bmp.recycle()
@@ -105,11 +119,20 @@ class Wallpapers @Inject constructor(@ApplicationContext private val context: Co
     private fun decodeCropped(id: String, thumb: Boolean, w: Int, h: Int): Bitmap? =
         decodeCropped({ open(id, thumb) }, w, h)
 
-    private fun decodeCropped(source: () -> InputStream?, w: Int, h: Int): Bitmap? {
+    /**
+     * Centre-crop to the aspect of [maxW] x [maxH] and scale down to that size.
+     * Never scales up: an image smaller than the target comes out at its own
+     * (cropped) size and the GPU stretches it at draw time, which costs no memory.
+     */
+    private fun decodeCropped(source: () -> InputStream?, maxW: Int, maxH: Int): Bitmap? {
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
         // A bounds-only decode always returns null; success is the filled-in size.
         (source() ?: return null).use { BitmapFactory.decodeStream(it, null, bounds) }
         if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return null
+        val aspect = maxW.toFloat() / maxH
+        val cropW = minOf(bounds.outWidth, (bounds.outHeight * aspect).toInt())
+        val w = minOf(maxW, cropW)
+        val h = (w / aspect).toInt()
         var sample = 1
         while (bounds.outWidth / (sample * 2) >= w && bounds.outHeight / (sample * 2) >= h) sample *= 2
         val decoded = source()?.use {
@@ -143,9 +166,8 @@ class Wallpapers @Inject constructor(@ApplicationContext private val context: Co
         private const val ASSET_DIR = "wallpapers"
         private const val USER_DIR = "wallpapers"
         private val IMAGE_EXT = setOf("jpg", "jpeg", "png", "webp")
-        // The Shield composes its UI at 1080p even on a 4K output.
-        const val SCREEN_W = 1920
-        const val SCREEN_H = 1080
+        private const val MIN_SCREEN_W = 1280
+        private const val MAX_SCREEN_W = 3840
         const val THUMB_W = 384
         const val THUMB_H = 216
         private const val SAMPLE_W = 120

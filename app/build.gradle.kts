@@ -60,6 +60,8 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            // en-XA (long accented text) and ar-XB (right-to-left) for layout checks.
+            isPseudoLocalesEnabled = true
             isDebuggable = true
             signingConfig = signingConfigs.getByName("debug")
         }
@@ -79,6 +81,17 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+
+    lint {
+        // Weblate translations arrive partially; a missing string falls back to English.
+        warning += "MissingTranslation"
+    }
+
+    bundle {
+        // The in-app language override needs every translation on the device;
+        // language splits would drop the ones Play thinks you do not use.
+        language { enableSplit = false }
     }
 
     androidResources {

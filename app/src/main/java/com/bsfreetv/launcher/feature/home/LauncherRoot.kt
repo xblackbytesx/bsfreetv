@@ -28,6 +28,8 @@ import com.bsfreetv.launcher.feature.settings.SettingsPanel
 import com.bsfreetv.launcher.feature.wallpaper.WallpaperPickerOverlay
 import com.bsfreetv.launcher.ui.BsfTheme
 import com.bsfreetv.launcher.ui.components.LocalMotion
+import com.bsfreetv.launcher.i18n.LanguageStore
+import android.app.Activity
 
 /** Wires the ViewModels to the stateless screens. */
 @Composable
@@ -49,6 +51,7 @@ fun LauncherRoot(vm: HomeViewModel) {
     val setupState by setupVm.state.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
+    val languageTag = remember { LanguageStore.get(context) }
     val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         setupVm.refresh()
         vm.refreshNextUpSoon()
@@ -90,6 +93,7 @@ fun LauncherRoot(vm: HomeViewModel) {
                             setupState = setupState,
                             pcCommands = setupVm.pcCommands(),
                             userDir = vm.userWallpaperDir,
+                            languageTag = languageTag,
                         ),
                         actions = vm,
                         setup = object : SettingsActions {
@@ -99,6 +103,11 @@ fun LauncherRoot(vm: HomeViewModel) {
                             override fun restoreStock() = setupVm.restoreStock()
                             override fun grantNextUp() = setupVm.grantNextUp()
                             override fun refreshStatus() = setupVm.refresh()
+                            override fun setLanguage(tag: String?) {
+                                LanguageStore.set(context, tag)
+                                // The panel stays open: overlay state lives in the ViewModel.
+                                (context as? Activity)?.recreate()
+                            }
                         },
                     )
                     Overlay.WallpaperPicker -> WallpaperPickerOverlay(

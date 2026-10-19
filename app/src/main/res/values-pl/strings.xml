@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">Aplikacje</string>
+    <plurals name="home_apps_new">
+        <item quantity="one">Aplikacje · %d nowa</item>
+        <item quantity="few">Aplikacje · %d nowe</item>
+        <item quantity="many">Aplikacje · %d nowych</item>
+        <item quantity="other">Aplikacje · %d nowej</item>
+    </plurals>
+    <string name="home_tools">Narzędzia</string>
+    <string name="home_settings">Ustawienia</string>
+    <string name="home_up_next">Oglądaj dalej</string>
+    <string name="home_tool">Narzędzie</string>
+    <string name="home_move_hint">W lewo i w prawo, by przesunąć, OK, by zakończyć</string>
+    <string name="card_move">przesuń</string>
+    <string name="home_empty_title">Wybierz aplikacje multimedialne</string>
+    <string name="home_empty_body">Otwórz Wszystkie aplikacje, przytrzymaj OK na aplikacji i wybierz Multimedia.</string>
+
+    <string name="apps_title">Wszystkie aplikacje</string>
+    <string name="apps_hint">Przytrzymaj OK na aplikacji, aby ją przypisać</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">Wszystko jest przypisane.</string>
+    <string name="apps_empty_hidden">Nic nie jest ukryte.</string>
+    <string name="apps_empty">Nie ma tu jeszcze aplikacji.</string>
+
+    <string name="section_all">Wszystkie</string>
+    <string name="section_unsorted">Nieprzypisane</string>
+    <string name="section_media">Multimedia</string>
+    <string name="section_tools">Narzędzia</string>
+    <string name="section_hidden">Ukryte</string>
+    <string name="badge_media">Multimedia</string>
+    <string name="badge_tool">Narzędzie</string>
+    <string name="badge_hidden">Ukryta</string>
+
+    <string name="menu_add_media">Dodaj do Multimediów</string>
+    <string name="menu_move_tools">Przenieś do Narzędzi</string>
+    <string name="menu_reorder">Zmień kolejność</string>
+    <string name="menu_move_unsorted">Przenieś do Nieprzypisanych</string>
+    <string name="menu_hide">Ukryj</string>
+    <string name="menu_app_info">Informacje o aplikacji</string>
+    <string name="menu_uninstall">Odinstaluj</string>
+
+    <string name="wp_title">Tapeta</string>
+    <string name="wp_your_image">Twój obraz</string>
+    <string name="wp_keep_hint">OK, by zachować · Wstecz, by anulować</string>
+    <string name="wp_add_own">Dodaj własne: umieść obrazy w %1$s</string>
+    <string name="wp_current">Obecna</string>
+    <string name="wp_add_image">Dodaj obraz</string>
+
+    <string name="value_on">Wł.</string>
+    <string name="value_off">Wył.</string>
+    <string name="value_never">Nigdy</string>
+    <string name="value_shown">Widoczna</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="few">%d min</item>
+        <item quantity="many">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="one">+%d min</item>
+        <item quantity="few">+%d min</item>
+        <item quantity="many">+%d min</item>
+        <item quantity="other">+%d min</item>
+    </plurals>
+
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_default_home">Domyślny launcher</string>
+    <string name="settings_next_up_apps">Aplikacje w Oglądaj dalej</string>
+    <string name="settings_about">Informacje</string>
+
+    <string name="header_look">Wygląd</string>
+    <string name="header_layout">Układ</string>
+    <string name="header_screen_care">Ochrona ekranu</string>
+    <string name="header_next_up">Oglądaj dalej</string>
+    <string name="header_system">System</string>
+    <string name="header_apps">Aplikacje</string>
+    <string name="header_from_pc">Albo z komputera</string>
+
+    <string name="set_wallpaper">Tapeta</string>
+    <string name="set_colours">Kolory</string>
+    <string name="colours_adaptive">Z tapety</string>
+    <string name="palette_ember">Żar</string>
+    <string name="palette_sea">Morze</string>
+    <string name="palette_moss">Mech</string>
+    <string name="palette_iris">Irys</string>
+    <string name="palette_rose">Róża</string>
+    <string name="palette_mono">Mono</string>
+    <string name="set_brightness">Jasność tapety</string>
+    <string name="set_brightness_desc">Niższa oszczędza ekran OLED przy jasnych obrazach</string>
+    <string name="set_rotation">Zmieniaj tapetę</string>
+    <string name="rotation_daily">Codziennie</string>
+    <string name="rotation_on_wake">Przy każdym wybudzeniu</string>
+    <string name="set_language">Język</string>
+    <string name="language_system">Język systemu</string>
+
+    <string name="set_card_size">Rozmiar kart multimediów</string>
+    <string name="size_small">Mały</string>
+    <string name="size_medium">Średni</string>
+    <string name="size_large">Duży</string>
+    <string name="set_tools">Narzędzia</string>
+    <string name="tools_tray">Pasek</string>
+    <string name="tools_hidden">Ukryte</string>
+    <string name="set_tools_desc_tray">Mały rząd pod multimediami</string>
+    <string name="set_tools_desc_hidden">Tylko pod przyciskiem Narzędzia</string>
+    <string name="set_clock">Zegar</string>
+    <string name="set_animations">Animacje</string>
+    <string name="motion_full">Pełne</string>
+    <string name="motion_reduced">Ograniczone</string>
+    <string name="set_sort_apps">Przypisz aplikacje</string>
+    <plurals name="value_unsorted">
+        <item quantity="one">%d nieprzypisana</item>
+        <item quantity="few">%d nieprzypisane</item>
+        <item quantity="many">%d nieprzypisanych</item>
+        <item quantity="other">%d nieprzypisanej</item>
+    </plurals>
+
+    <string name="set_ambient">Tylko tapeta po</string>
+    <string name="set_ambient_desc">Ukrywa zegar i rzędy podczas bezczynności</string>
+    <string name="set_black">Czarny ekran po</string>
+    <string name="set_black_desc">Prawdziwa czerń, piksele wyłączone</string>
+    <string name="set_drift">Ruch tapety</string>
+    <string name="set_drift_desc">Bardzo powolne przesuwanie; trochę obciąża GPU</string>
+
+    <string name="set_next_up">Rząd Oglądaj dalej</string>
+    <string name="set_next_up_desc">Oglądaj dalej w aplikacjach, które to obsługują (Jellyfin obsługuje)</string>
+    <string name="value_needs_access">Wymaga dostępu</string>
+    <string name="set_next_up_apps">Aplikacje w Oglądaj dalej</string>
+    <string name="value_media_apps">Aplikacje multimedialne</string>
+    <plurals name="value_chosen">
+        <item quantity="one">Wybrano %d</item>
+        <item quantity="few">Wybrano %d</item>
+        <item quantity="many">Wybrano %d</item>
+        <item quantity="other">Wybrano %d</item>
+    </plurals>
+    <string name="next_up_use_media">Użyj moich aplikacji multimedialnych</string>
+
+    <string name="home_value_stock">Fabryczny launcher</string>
+    <string name="home_value_not_set">Nie ustawiono</string>
+    <string name="set_android_settings">Ustawienia Androida</string>
+
+    <string name="dh_intro">Shield nie pozwala wybrać aplikacji ekranu głównego. BSfreeTV staje się ekranem głównym, wyłączając fabryczny launcher przez adb, i zrobi to samodzielnie, gdy włączysz debugowanie sieciowe.</string>
+    <string name="status_home_ours">Przycisk Home otwiera BSfreeTV</string>
+    <string name="status_home_stock">Przycisk Home otwiera fabryczny launcher</string>
+    <string name="status_home_other">Przycisk Home otwiera %1$s</string>
+    <string name="status_home_chooser">Przycisk Home otwiera okno wyboru</string>
+    <string name="status_pkg_enabled">%1$s: włączony</string>
+    <string name="status_pkg_disabled">%1$s: wyłączony</string>
+    <string name="status_next_up_granted">Przyznano dostęp do Oglądaj dalej</string>
+    <string name="status_next_up_missing">Brak dostępu do Oglądaj dalej</string>
+    <string name="status_debug_on">Debugowanie jest włączone</string>
+    <string name="status_debug_off">Debugowanie jest wyłączone (Opcje programisty)</string>
+    <string name="dh_steps">1. Ustawienia > Ustawienia urządzenia > Informacje > kliknij 7 razy Numer kompilacji.\n2. Opcje programisty > włącz Debugowanie sieciowe.\n3. Naciśnij przycisk poniżej i w komunikacie wybierz Zezwól (zaznacz Zawsze zezwalaj).</string>
+    <string name="btn_make_home">BSfreeTV jako główny</string>
+    <string name="btn_test">Testuj połączenie</string>
+    <string name="btn_allow_next_up">Zezwól na Oglądaj dalej</string>
+    <string name="btn_restore">Przywróć fabryczny</string>
+    <string name="dh_turn_off">Potem wyłącz debugowanie sieciowe: w przeciwnym razie każdy w Twojej sieci może poprosić o połączenie.</string>
+    <string name="dh_recovery">Cofnij / przywracanie:</string>
+    <string name="dh_uninstall_warning">Przywróć fabryczny launcher przed odinstalowaniem BSfreeTV, inaczej przycisk Home niczego nie otworzy.</string>
+
+    <string name="task_make_home">Ustaw BSfreeTV jako ekran główny</string>
+    <string name="task_restore">Przywróć fabryczny launcher</string>
+    <string name="task_allow_next_up">Zezwól na Oglądaj dalej</string>
+    <string name="task_test">Test połączenia</string>
+    <string name="setup_working">%1$s… Jeśli telewizor zapyta o zezwolenie na debugowanie, wybierz Zezwól.</string>
+    <string name="setup_done">%1$s: gotowe</string>
+    <string name="setup_failed">%1$s: niektóre kroki się nie powiodły</string>
+    <string name="setup_nothing">Nie ma nic do zmiany.</string>
+    <string name="step_disable">Wyłącz %1$s</string>
+    <string name="step_enable">Włącz %1$s</string>
+    <string name="step_preferred_home">Ustaw preferowany ekran główny</string>
+    <string name="step_allow_next_up">Zezwól na Oglądaj dalej</string>
+    <string name="step_read_version">Odczytaj wersję Androida</string>
+    <string name="adb_err_unreachable">Nie można połączyć się z adb na tym urządzeniu. Włącz Ustawienia > Ustawienia urządzenia > Opcje programisty > Debugowanie sieciowe i spróbuj ponownie.</string>
+    <string name="adb_err_timeout">Brak odpowiedzi na komunikat na telewizorze. Gdy się pojawi, wybierz Zezwól (zaznacz Zawsze zezwalaj) i spróbuj ponownie.</string>
+    <string name="adb_err_refused">Telewizor odrzucił połączenie. Spróbuj ponownie i wybierz Zezwól w komunikacie.</string>
+    <string name="adb_err_other">Self-ADB nie powiodło się: %1$s</string>
+
+    <string name="about_desc">Launcher bez reklam. GPL-3.0.</string>
+    <string name="about_wallpapers">Tapety</string>
+    <string name="about_wallpapers_credit">Z Impasto autorstwa Andreu Massaneta (github.com/andreumassanet/impasto), GPL-3.0. Kolory są dobierane tak jak w Impasto.</string>
+    <string name="about_your_wallpapers">Twoje tapety</string>
+</resources>

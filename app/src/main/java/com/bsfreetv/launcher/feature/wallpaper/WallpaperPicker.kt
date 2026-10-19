@@ -45,6 +45,9 @@ import com.bsfreetv.launcher.ui.components.trapFocus
 import com.bsfreetv.launcher.ui.components.tvClickable
 import com.bsfreetv.launcher.ui.LocalBsfColors
 import com.bsfreetv.launcher.ui.toColors
+import com.bsfreetv.launcher.ui.forScript
+import com.bsfreetv.launcher.R
+import androidx.compose.ui.res.stringResource
 
 /**
  * Bottom strip of thumbnails over the live wallpaper. Focusing one previews it
@@ -86,15 +89,15 @@ fun WallpaperPickerOverlay(
         ) {
             Row(Modifier.padding(horizontal = 48.dp), verticalAlignment = Alignment.Bottom) {
                 Column(Modifier.weight(1f)) {
-                    Text("Wallpaper", style = BsfType.overline, color = colors.accent)
+                    Text(stringResource(R.string.wp_title), style = BsfType.overline.forScript(), color = colors.accent)
                     Text(focused?.title ?: "", style = BsfType.title, color = colors.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     Text(
-                        focused?.credit ?: if (focused?.isUser == true) "Your image" else "",
+                        focused?.credit ?: if (focused?.isUser == true) stringResource(R.string.wp_your_image) else "",
                         style = BsfType.label,
                         color = colors.textMuted,
                     )
                 }
-                Text("OK to keep · Back to cancel", style = BsfType.label, color = colors.textMuted)
+                Text(stringResource(R.string.wp_keep_hint), style = BsfType.label, color = colors.textMuted)
             }
             LazyRow(
                 state = listState,
@@ -117,7 +120,7 @@ fun WallpaperPickerOverlay(
             }
             userDir?.let {
                 Text(
-                    "Add your own: put images in $it",
+                    stringResource(R.string.wp_add_own, it),
                     style = BsfType.label,
                     color = colors.textMuted.copy(alpha = 0.8f),
                     modifier = Modifier.padding(horizontal = 48.dp),
@@ -152,7 +155,7 @@ private fun WallpaperTile(
         Thumb(image, Modifier.fillMaxSize())
         Row(Modifier.align(Alignment.BottomStart).padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
             accent?.let { Box(Modifier.size(10.dp).clip(CircleShape).background(it)) }
-            if (selected) Text("Current", style = BsfType.overline, color = colors.text, modifier = Modifier.padding(start = 6.dp).clip(RoundedCornerShape(4.dp)).background(Color.Black.copy(alpha = 0.6f)).padding(horizontal = 4.dp))
+            if (selected) Text(stringResource(R.string.wp_current), style = BsfType.overline.forScript(), color = colors.text, modifier = Modifier.padding(start = 6.dp).clip(RoundedCornerShape(4.dp)).background(Color.Black.copy(alpha = 0.6f)).padding(horizontal = 4.dp))
         }
     }
 }
@@ -173,7 +176,7 @@ private fun ImportTile(onClick: () -> Unit) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text("+", style = BsfType.hero, color = colors.accent)
-            Text("Add image", style = BsfType.label, color = colors.text)
+            Text(stringResource(R.string.wp_add_image), style = BsfType.label, color = colors.text)
         }
     }
 }

@@ -4,10 +4,12 @@
 
 Usage: python3 tools/import_wallpapers.py <impasto-wallpapers-dir> [app/src/main/assets/wallpapers]
 
-Impasto ships 2752x1536 JPEGs (about 1.79:1, 178 MB). The Shield composes its
-UI at 1920x1080, so each image is centre-cropped to 16:9, scaled to 1920x1080
-and stored as WebP, plus a 384x216 thumbnail for the picker. The output and
-index.json are committed; rerun only when the source set changes. Needs Pillow.
+Impasto ships 2752x1536 JPEGs (about 1.79:1, 178 MB). Each image is
+centre-cropped to 16:9 at the full source width (2752x1548, the sharpest the
+paintings get; a 4K Shield renders at 3840x2160 and the app never upscales on
+decode) and stored as WebP, plus a 384x216 thumbnail for the picker. On a
+1080p TV the app scales them down at decode time. The output and index.json
+are committed; rerun only when the source set changes. Needs Pillow.
 """
 import json
 import sys
@@ -15,7 +17,7 @@ from pathlib import Path
 
 from PIL import Image
 
-FULL = (1920, 1080)
+FULL = (2752, 1548)
 THUMB = (384, 216)
 CREDIT = "Andreu Massanet, Impasto (github.com/andreumassanet/impasto)"
 LICENSE = "GPL-3.0"
@@ -49,7 +51,7 @@ def main() -> None:
     entries = []
     for path in sources:
         img = crop_16_9(Image.open(path).convert("RGB"))
-        img.resize(FULL, Image.LANCZOS).save(out / f"{path.stem}.webp", "WEBP", quality=86, method=6)
+        img.resize(FULL, Image.LANCZOS).save(out / f"{path.stem}.webp", "WEBP", quality=82, method=6)
         img.resize(THUMB, Image.LANCZOS).save(out / "thumbs" / f"{path.stem}.webp", "WEBP", quality=80, method=6)
         entries.append({"id": path.stem, "title": title(path.stem), "credit": CREDIT, "license": LICENSE})
         print(path.stem)

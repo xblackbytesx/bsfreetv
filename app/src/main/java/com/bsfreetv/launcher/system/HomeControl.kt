@@ -11,6 +11,7 @@ import com.bsfreetv.launcher.domain.home.HomeCommands
 import com.bsfreetv.launcher.domain.home.HomeStatus
 import com.bsfreetv.launcher.domain.home.StockLauncher
 import com.bsfreetv.launcher.domain.home.StockLaunchers
+import com.bsfreetv.launcher.domain.home.StepKind
 import com.bsfreetv.launcher.MainActivity
 import dadb.AdbKeyPair
 import dadb.Dadb
@@ -23,6 +24,9 @@ import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/** Why self-ADB failed; the UI words it (ui/Labels.kt). */
+enum class AdbError { UNREACHABLE, PROMPT_TIMEOUT, REFUSED, OTHER }
+
 /** Outcome of one step sent over self-ADB. */
 data class StepResult(val step: AdbStep, val ok: Boolean, val output: String)
 
@@ -30,7 +34,7 @@ sealed interface AdbOutcome {
     data class Done(val results: List<StepResult>) : AdbOutcome {
         val ok get() = results.all { it.ok || it.step.optional }
     }
-    data class Failed(val reason: String) : AdbOutcome
+    data class Failed(val error: AdbError, val detail: String? = null) : AdbOutcome
 }
 
 /**
@@ -74,23 +78,20 @@ class HomeControl @Inject constructor(@ApplicationContext private val context: C
             }
         } catch (e: Exception) {
             Log.w(TAG, "self-adb failed", e)
-            AdbOutcome.Failed(explain(e))
+            AdbOutcome.Failed(classify(e), e.message ?: e.javaClass.simpleName)
         }
     }
 
     /** Proves the connection works without changing anything: reads the Android version. */
-    suspend fun probe(): AdbOutcome = run(listOf(AdbStep("Read Android version", "getprop ro.build.version.release")))
+    suspend fun probe(): AdbOutcome = run(listOf(AdbStep(StepKind.READ_VERSION, "getprop ro.build.version.release")))
 
-    private fun explain(e: Throwable): String {
+    private fun classify(e: Throwable): AdbError {
         val chain = generateSequence(e) { it.cause }.toList()
         return when {
-            chain.any { it is ConnectException } ->
-                "Could not reach adb on this device. Turn on Settings > Device Preferences > Developer options > Network debugging, then try again."
-            chain.any { it is SocketTimeoutException } ->
-                "No answer from the TV prompt. Choose Allow (tick Always allow) when it appears, then try again."
-            chain.any { it is dadb.AdbAuthException } ->
-                "The TV refused the connection. Try again and choose Allow on the prompt."
-            else -> "Self-ADB failed: ${e.message ?: e.javaClass.simpleName}"
+            chain.any { it is ConnectException } -> AdbError.UNREACHABLE
+            chain.any { it is SocketTimeoutException } -> AdbError.PROMPT_TIMEOUT
+            chain.any { it is dadb.AdbAuthException } -> AdbError.REFUSED
+            else -> AdbError.OTHER
         }
     }
 

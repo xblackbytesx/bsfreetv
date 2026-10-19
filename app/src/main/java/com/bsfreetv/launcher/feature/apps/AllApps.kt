@@ -46,6 +46,10 @@ import com.bsfreetv.launcher.ui.components.focusHalo
 import com.bsfreetv.launcher.ui.components.trapFocus
 import com.bsfreetv.launcher.ui.components.tvClickable
 import com.bsfreetv.launcher.ui.LocalBsfColors
+import com.bsfreetv.launcher.ui.label
+import com.bsfreetv.launcher.ui.badge
+import com.bsfreetv.launcher.R
+import androidx.compose.ui.res.stringResource
 
 fun HomeUi.filtered(filter: AppFilter): List<AppEntry> = when (filter) {
     AppFilter.ALL -> all
@@ -53,13 +57,6 @@ fun HomeUi.filtered(filter: AppFilter): List<AppEntry> = when (filter) {
     AppFilter.MEDIA -> media
     AppFilter.TOOLS -> tools
     AppFilter.HIDDEN -> hidden
-}
-
-private fun Section?.tag(): String? = when (this) {
-    Section.MEDIA -> "MEDIA"
-    Section.TOOLS -> "TOOL"
-    Section.HIDDEN -> "HIDDEN"
-    null -> null
 }
 
 /** Every app, filterable by section. Hold OK (or Menu) on one to sort it. */
@@ -82,9 +79,9 @@ fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions, menuOpen
     Box(Modifier.fillMaxSize().background(BsfColors.Black.copy(alpha = 0.93f)).trapFocus(enabled = !menuOpen)) {
         Column(Modifier.fillMaxSize().padding(horizontal = 48.dp, vertical = 28.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(if (filter == AppFilter.TOOLS) "Tools" else "All apps", style = BsfType.title, color = colors.text)
+                Text(stringResource(if (filter == AppFilter.TOOLS) R.string.section_tools else R.string.apps_title), style = BsfType.title, color = colors.text)
                 Text(
-                    "Hold OK on an app to sort it",
+                    stringResource(R.string.apps_hint),
                     style = BsfType.label,
                     color = colors.textMuted,
                     modifier = Modifier.padding(start = 16.dp, top = 4.dp),
@@ -94,7 +91,7 @@ fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions, menuOpen
                 AppFilter.entries.forEach { f ->
                     val count = ui.filtered(f).size
                     FilterTab(
-                        "${f.label} $count",
+                        stringResource(R.string.apps_filter_count, f.label(), count),
                         selected = f == filter,
                         modifier = if (f == filter) Modifier.focusRequester(tabFocus) else Modifier,
                     ) { actions.open(Overlay.AllApps(f)) }
@@ -102,11 +99,13 @@ fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions, menuOpen
             }
             if (apps.isEmpty()) {
                 Text(
-                    when (filter) {
-                        AppFilter.UNSORTED -> "Everything is sorted."
-                        AppFilter.HIDDEN -> "Nothing hidden."
-                        else -> "No apps here yet."
-                    },
+                    stringResource(
+                        when (filter) {
+                            AppFilter.UNSORTED -> R.string.apps_empty_unsorted
+                            AppFilter.HIDDEN -> R.string.apps_empty_hidden
+                            else -> R.string.apps_empty
+                        },
+                    ),
                     style = BsfType.body,
                     color = colors.textMuted,
                     modifier = Modifier.padding(top = 24.dp),
@@ -125,7 +124,7 @@ fun AllAppsOverlay(ui: HomeUi, filter: AppFilter, actions: HomeActions, menuOpen
                         AppBannerCard(
                             app = app,
                             width = 152.dp,
-                            badge = if (filter == AppFilter.ALL) ui.sections[app.packageName].tag() else null,
+                            badge = if (filter == AppFilter.ALL) ui.sections[app.packageName].badge() else null,
                             modifier = m,
                             onFocus = { if (it) lastFocused = app.packageName },
                             onLongClick = { actions.openMenu(app.packageName) },
@@ -182,21 +181,21 @@ fun AppMenu(app: AppEntry, section: Section?, actions: HomeActions) {
                 Image(app.icon, null, Modifier.size(36.dp), filterQuality = FilterQuality.Medium)
                 Column(Modifier.padding(start = 12.dp)) {
                     Text(app.label, style = BsfType.bodyStrong, color = colors.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text(section?.let { it.name.lowercase().replaceFirstChar(Char::uppercase) } ?: "Unsorted", style = BsfType.label, color = colors.textMuted)
+                    Text(section.label(), style = BsfType.label, color = colors.textMuted)
                 }
             }
             Column(Modifier.padding(top = 14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                val items = buildList<Pair<String, () -> Unit>> {
-                    if (section != Section.MEDIA) add("Add to Media" to { actions.assign(app.packageName, Section.MEDIA) })
-                    if (section != Section.TOOLS) add("Move to Tools" to { actions.assign(app.packageName, Section.TOOLS) })
-                    if (section == Section.MEDIA || section == Section.TOOLS) add("Reorder" to { actions.startMove(app.packageName) })
-                    if (section != null) add("Move to Unsorted" to { actions.assign(app.packageName, null) })
-                    if (section != Section.HIDDEN) add("Hide" to { actions.assign(app.packageName, Section.HIDDEN) })
-                    add("App info" to { actions.appInfo(app.packageName) })
-                    add("Uninstall" to { actions.uninstall(app.packageName) })
+                val items = buildList<Pair<Int, () -> Unit>> {
+                    if (section != Section.MEDIA) add(R.string.menu_add_media to { actions.assign(app.packageName, Section.MEDIA) })
+                    if (section != Section.TOOLS) add(R.string.menu_move_tools to { actions.assign(app.packageName, Section.TOOLS) })
+                    if (section == Section.MEDIA || section == Section.TOOLS) add(R.string.menu_reorder to { actions.startMove(app.packageName) })
+                    if (section != null) add(R.string.menu_move_unsorted to { actions.assign(app.packageName, null) })
+                    if (section != Section.HIDDEN) add(R.string.menu_hide to { actions.assign(app.packageName, Section.HIDDEN) })
+                    add(R.string.menu_app_info to { actions.appInfo(app.packageName) })
+                    add(R.string.menu_uninstall to { actions.uninstall(app.packageName) })
                 }
                 items.forEachIndexed { i, (label, action) ->
-                    MenuItem(label, if (i == 0) Modifier.focusRequester(first) else Modifier, action)
+                    MenuItem(stringResource(label), if (i == 0) Modifier.focusRequester(first) else Modifier, action)
                 }
             }
         }

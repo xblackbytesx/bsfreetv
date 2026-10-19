@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_apps">Apps</string>
+    <plurals name="home_apps_new">
+        <item quantity="one">Apps · %d nieuw</item>
+        <item quantity="other">Apps · %d nieuw</item>
+    </plurals>
+    <string name="home_tools">Tools</string>
+    <string name="home_settings">Instellingen</string>
+    <string name="home_up_next">Verder kijken</string>
+    <string name="home_tool">Tool</string>
+    <string name="home_move_hint">Links en rechts om te verplaatsen, OK als je klaar bent</string>
+    <string name="card_move">verplaats</string>
+    <string name="home_empty_title">Kies je media-apps</string>
+    <string name="home_empty_body">Open Alle apps, houd OK ingedrukt op een app en kies Media.</string>
+
+    <string name="apps_title">Alle apps</string>
+    <string name="apps_hint">Houd OK ingedrukt op een app om hem in te delen</string>
+    <string name="apps_filter_count">%1$s %2$d</string>
+    <string name="apps_empty_unsorted">Alles is ingedeeld.</string>
+    <string name="apps_empty_hidden">Niets verborgen.</string>
+    <string name="apps_empty">Hier staan nog geen apps.</string>
+
+    <string name="section_all">Alle</string>
+    <string name="section_unsorted">Niet ingedeeld</string>
+    <string name="section_media">Media</string>
+    <string name="section_tools">Tools</string>
+    <string name="section_hidden">Verborgen</string>
+    <string name="badge_media">Media</string>
+    <string name="badge_tool">Tool</string>
+    <string name="badge_hidden">Verborgen</string>
+
+    <string name="menu_add_media">Toevoegen aan Media</string>
+    <string name="menu_move_tools">Naar Tools</string>
+    <string name="menu_reorder">Volgorde wijzigen</string>
+    <string name="menu_move_unsorted">Naar Niet ingedeeld</string>
+    <string name="menu_hide">Verbergen</string>
+    <string name="menu_app_info">App-info</string>
+    <string name="menu_uninstall">Verwijderen</string>
+
+    <string name="wp_title">Achtergrond</string>
+    <string name="wp_your_image">Je eigen afbeelding</string>
+    <string name="wp_keep_hint">OK om te bewaren · Terug om te annuleren</string>
+    <string name="wp_add_own">Zelf toevoegen: zet afbeeldingen in %1$s</string>
+    <string name="wp_current">Huidig</string>
+    <string name="wp_add_image">Afbeelding toevoegen</string>
+
+    <string name="value_on">Aan</string>
+    <string name="value_off">Uit</string>
+    <string name="value_never">Nooit</string>
+    <string name="value_shown">Zichtbaar</string>
+    <string name="value_percent">%1$d%%</string>
+    <string name="value_version">v%1$s</string>
+    <plurals name="value_minutes">
+        <item quantity="one">%d min</item>
+        <item quantity="other">%d min</item>
+    </plurals>
+    <plurals name="value_plus_minutes">
+        <item quantity="one">+%d min</item>
+        <item quantity="other">+%d min</item>
+    </plurals>
+
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_default_home">Standaard launcher</string>
+    <string name="settings_next_up_apps">Apps in Verder kijken</string>
+    <string name="settings_about">Over</string>
+
+    <string name="header_look">Uiterlijk</string>
+    <string name="header_layout">Indeling</string>
+    <string name="header_screen_care">Schermzorg</string>
+    <string name="header_next_up">Verder kijken</string>
+    <string name="header_system">Systeem</string>
+    <string name="header_apps">Apps</string>
+    <string name="header_from_pc">Of vanaf een pc</string>
+
+    <string name="set_wallpaper">Achtergrond</string>
+    <string name="set_colours">Kleuren</string>
+    <string name="colours_adaptive">Uit de achtergrond</string>
+    <string name="palette_ember">Gloed</string>
+    <string name="palette_sea">Zee</string>
+    <string name="palette_moss">Mos</string>
+    <string name="palette_iris">Iris</string>
+    <string name="palette_rose">Roos</string>
+    <string name="palette_mono">Mono</string>
+    <string name="set_brightness">Helderheid achtergrond</string>
+    <string name="set_brightness_desc">Lager spaart een OLED-scherm bij felle afbeeldingen</string>
+    <string name="set_rotation">Achtergrond wisselen</string>
+    <string name="rotation_daily">Dagelijks</string>
+    <string name="rotation_on_wake">Bij elk ontwaken</string>
+    <string name="set_language">Taal</string>
+    <string name="language_system">Systeemtaal</string>
+
+    <string name="set_card_size">Grootte mediakaarten</string>
+    <string name="size_small">Klein</string>
+    <string name="size_medium">Middel</string>
+    <string name="size_large">Groot</string>
+    <string name="set_tools">Tools</string>
+    <string name="tools_tray">Balk</string>
+    <string name="tools_hidden">Verborgen</string>
+    <string name="set_tools_desc_tray">Kleine rij onder je media</string>
+    <string name="set_tools_desc_hidden">Alleen achter de knop Tools</string>
+    <string name="set_clock">Klok</string>
+    <string name="set_animations">Animaties</string>
+    <string name="motion_full">Volledig</string>
+    <string name="motion_reduced">Beperkt</string>
+    <string name="set_sort_apps">Apps indelen</string>
+    <plurals name="value_unsorted">
+        <item quantity="one">%d niet ingedeeld</item>
+        <item quantity="other">%d niet ingedeeld</item>
+    </plurals>
+
+    <string name="set_ambient">Alleen achtergrond na</string>
+    <string name="set_ambient_desc">Verbergt klok en rijen als je niets doet</string>
+    <string name="set_black">Zwart scherm na</string>
+    <string name="set_black_desc">Echt zwart, pixels uit</string>
+    <string name="set_drift">Bewegende achtergrond</string>
+    <string name="set_drift_desc">Heel trage beweging; kost wat GPU</string>
+
+    <string name="set_next_up">Rij Verder kijken</string>
+    <string name="set_next_up_desc">Verder kijken in apps die dat aanbieden (Jellyfin doet dat)</string>
+    <string name="value_needs_access">Toegang nodig</string>
+    <string name="set_next_up_apps">Apps in Verder kijken</string>
+    <string name="value_media_apps">Media-apps</string>
+    <plurals name="value_chosen">
+        <item quantity="one">%d gekozen</item>
+        <item quantity="other">%d gekozen</item>
+    </plurals>
+    <string name="next_up_use_media">Mijn media-apps gebruiken</string>
+
+    <string name="home_value_stock">Standaard launcher</string>
+    <string name="home_value_not_set">Niet ingesteld</string>
+    <string name="set_android_settings">Android-instellingen</string>
+
+    <string name="dh_intro">De Shield heeft geen keuzemenu voor de startscherm-app. BSfreeTV wordt het startscherm door via adb de standaard launcher uit te schakelen. Dat kan BSfreeTV zelf, zodra Netwerkfoutopsporing aan staat.</string>
+    <string name="status_home_ours">Thuisknop opent BSfreeTV</string>
+    <string name="status_home_stock">Thuisknop opent de standaard launcher</string>
+    <string name="status_home_other">Thuisknop opent %1$s</string>
+    <string name="status_home_chooser">Thuisknop opent een keuzemenu</string>
+    <string name="status_pkg_enabled">%1$s: ingeschakeld</string>
+    <string name="status_pkg_disabled">%1$s: uitgeschakeld</string>
+    <string name="status_next_up_granted">Toegang voor Verder kijken verleend</string>
+    <string name="status_next_up_missing">Geen toegang voor Verder kijken</string>
+    <string name="status_debug_on">Foutopsporing staat aan</string>
+    <string name="status_debug_off">Foutopsporing staat uit (Ontwikkelaarsopties)</string>
+    <string name="dh_steps">1. Instellingen > Apparaatvoorkeuren > Over > tik 7 keer op Build.\n2. Ontwikkelaarsopties > zet Netwerkfoutopsporing aan.\n3. Druk hieronder op een knop en kies Toestaan (vink Altijd toestaan aan) in de melding.</string>
+    <string name="btn_make_home">BSfreeTV als startscherm</string>
+    <string name="btn_test">Verbinding testen</string>
+    <string name="btn_allow_next_up">Verder kijken toestaan</string>
+    <string name="btn_restore">Standaard herstellen</string>
+    <string name="dh_turn_off">Zet Netwerkfoutopsporing daarna weer uit: anders kan iedereen op je netwerk vragen om verbinding.</string>
+    <string name="dh_recovery">Ongedaan maken / herstel:</string>
+    <string name="dh_uninstall_warning">Herstel de standaard launcher voordat je BSfreeTV verwijdert, anders opent de thuisknop niets.</string>
+
+    <string name="task_make_home">BSfreeTV als startscherm instellen</string>
+    <string name="task_restore">Standaard launcher herstellen</string>
+    <string name="task_allow_next_up">Verder kijken toestaan</string>
+    <string name="task_test">Verbindingstest</string>
+    <string name="setup_working">%1$s… Vraagt de tv om foutopsporing toe te staan? Kies dan Toestaan.</string>
+    <string name="setup_done">%1$s: klaar</string>
+    <string name="setup_failed">%1$s: sommige stappen zijn mislukt</string>
+    <string name="setup_nothing">Niets te wijzigen.</string>
+    <string name="step_disable">%1$s uitschakelen</string>
+    <string name="step_enable">%1$s inschakelen</string>
+    <string name="step_preferred_home">Voorkeursstartscherm instellen</string>
+    <string name="step_allow_next_up">Verder kijken toestaan</string>
+    <string name="step_read_version">Android-versie uitlezen</string>
+    <string name="adb_err_unreachable">Kan adb op dit apparaat niet bereiken. Zet Instellingen > Apparaatvoorkeuren > Ontwikkelaarsopties > Netwerkfoutopsporing aan en probeer het opnieuw.</string>
+    <string name="adb_err_timeout">Geen antwoord op de melding op de tv. Kies Toestaan (vink Altijd toestaan aan) als die verschijnt en probeer het opnieuw.</string>
+    <string name="adb_err_refused">De tv weigerde de verbinding. Probeer het opnieuw en kies Toestaan in de melding.</string>
+    <string name="adb_err_other">Self-ADB mislukt: %1$s</string>
+
+    <string name="about_desc">Een launcher zonder reclame. GPL-3.0.</string>
+    <string name="about_wallpapers">Achtergronden</string>
+    <string name="about_wallpapers_credit">Van Impasto door Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. De kleuren worden gekozen zoals Impasto dat doet.</string>
+    <string name="about_your_wallpapers">Je eigen achtergronden</string>
+</resources>

@@ -36,6 +36,7 @@ import com.bsfreetv.launcher.feature.settings.SettingsActions
 import com.bsfreetv.launcher.feature.settings.SettingsEnv
 import com.bsfreetv.launcher.feature.settings.SettingsPanel
 import com.bsfreetv.launcher.feature.settings.SetupState
+import com.bsfreetv.launcher.feature.settings.SetupTask
 import com.bsfreetv.launcher.feature.wallpaper.WallpaperPickerOverlay
 import com.bsfreetv.launcher.ui.BsfTheme
 import com.bsfreetv.launcher.ui.components.LocalMotion
@@ -70,13 +71,18 @@ class ScreenshotTest {
         return WallpaperFrame(id, bmp.asImageBitmap(), PaletteBuilder.fromPixels(px))
     }
 
-    /** A stand-in banner: brand colour and wordmark, like a real android:banner. */
+    /**
+     * A stand-in banner: brand colour and wordmark, like a real android:banner,
+     * rasterised at the size AppCatalog uses for this display's density.
+     */
     private fun banner(label: String, bg: Int, fg: Int = 0xFFFFFFFF.toInt()): ImageBitmap {
-        val b = Bitmap.createBitmap(320, 180, Bitmap.Config.ARGB_8888)
+        val w = com.bsfreetv.launcher.data.AppCatalog.bannerWidthFor(org.robolectric.RuntimeEnvironment.getApplication().resources.displayMetrics.density)
+        val h = w * 9 / 16
+        val b = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val c = Canvas(b)
         c.drawColor(bg)
-        val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = fg; textSize = 40f; typeface = Typeface.DEFAULT_BOLD; textAlign = Paint.Align.CENTER }
-        c.drawText(label, 160f, 104f, p)
+        val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = fg; textSize = w / 8f; typeface = Typeface.DEFAULT_BOLD; textAlign = Paint.Align.CENTER }
+        c.drawText(label, w / 2f, h / 2f + w / 24f, p)
         return b.asImageBitmap()
     }
 
@@ -174,7 +180,8 @@ class ScreenshotTest {
         }
     }
 
-    private fun env(state: SetupState = SetupState.Idle) = SettingsEnv(
+    private fun env(state: SetupState = SetupState.Idle, language: String? = null) = SettingsEnv(
+        languageTag = language,
         wallpaperTitle = "Japanese Castle Full Moon",
         nextUpPermission = false,
         homeStatus = HomeStatus(listOf(StockLauncher("com.google.android.tvlauncher", true)), "com.google.android.tvlauncher", "com.bsfreetv.launcher", false, false),
@@ -195,7 +202,7 @@ class ScreenshotTest {
         val f = wallpaper("red-frame-tree")
         shot("08-default-launcher", f.palette) {
             Home(f, ui(), overlay = true)
-            SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(SetupState.Working("Make BSfreeTV the Home app")), HomeActions.None, SettingsActions.None)
+            SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(SetupState.Working(SetupTask.MAKE_HOME)), HomeActions.None, SettingsActions.None)
         }
     }
 
@@ -209,4 +216,64 @@ class ScreenshotTest {
             WallpaperPickerOverlay(list, "pagoda-fuji-blossom", true, env().userDir, { thumbs[it] }, { f.palette }, {}, {}, {})
         }
     }
+
+    // Translations: the same home + settings in each shipped language and the
+    // two pseudo-locales (en-XA: ~30% longer accented text, ar-XB: right-to-left).
+    private fun localized(tag: String) {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("10-home-$tag", f.palette) { Home(f, ui(fresh = 3)) }
+    }
+
+    private fun localizedSettings(tag: String) {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("11-settings-$tag", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.MAIN, ui(), env(), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    /** The Shield on a 4K TV renders at 3840x2160 (4x); artwork must stay sharp. */
+    @Test @Config(qualifiers = "w960dp-h540dp-land-television-xxxhdpi")
+    fun home_4k() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("12-home-4k", f.palette) { Home(f, ui()) }
+    }
+
+    @Test fun language_picker() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("13-language", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.LANGUAGE, ui(), env(), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    /** Stuck in Arabic: every option is still readable in its own script. */
+    @Test @Config(qualifiers = "+ar-ldrtl") fun language_picker_ar() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("13-language-ar", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.LANGUAGE, ui(), env(language = "ar"), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    @Test @Config(qualifiers = "+de") fun home_de() = localized("de")
+    @Test @Config(qualifiers = "+de") fun settings_de() = localizedSettings("de")
+    @Test @Config(qualifiers = "+nl") fun settings_nl() = localizedSettings("nl")
+    @Test @Config(qualifiers = "+es") fun home_es() = localized("es")
+    @Test @Config(qualifiers = "+es") fun settings_es() = localizedSettings("es")
+    @Test @Config(qualifiers = "+ja") fun home_ja() = localized("ja")
+    @Test @Config(qualifiers = "+ja") fun settings_ja() = localizedSettings("ja")
+    @Test @Config(qualifiers = "+zh-rCN") fun settings_zh() = localizedSettings("zh-rCN")
+    @Test @Config(qualifiers = "+fr") fun settings_fr() = localizedSettings("fr")
+    @Test @Config(qualifiers = "+it") fun settings_it() = localizedSettings("it")
+    @Test @Config(qualifiers = "+pt") fun settings_pt() = localizedSettings("pt")
+    @Test @Config(qualifiers = "+pt") fun home_pt() = localized("pt")
+    @Test @Config(qualifiers = "+pl") fun settings_pl() = localizedSettings("pl")
+    @Test @Config(qualifiers = "+uk") fun settings_uk() = localizedSettings("uk")
+    @Test @Config(qualifiers = "+uk") fun home_uk() = localized("uk")
+    @Test @Config(qualifiers = "+ko") fun settings_ko() = localizedSettings("ko")
+    @Test @Config(qualifiers = "+ar-ldrtl") fun home_ar() = localized("ar")
+    @Test @Config(qualifiers = "+ar-ldrtl") fun settings_ar() = localizedSettings("ar")
+    @Test @Config(qualifiers = "+en-rXA") fun settings_pseudo_long() = localizedSettings("en-rXA")
+    @Test @Config(qualifiers = "+ar-rXB-ldrtl") fun home_pseudo_rtl() = localized("ar-rXB")
 }
