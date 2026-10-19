@@ -61,6 +61,7 @@ import com.bsfreetv.launcher.ui.components.StatusLine
 import com.bsfreetv.launcher.ui.components.trapFocus
 import com.bsfreetv.launcher.ui.LocalBsfColors
 import com.bsfreetv.launcher.ui.toColors
+import com.bsfreetv.launcher.domain.home.DeviceKind
 
 /** Cycle to the next value of a list, wrapping. */
 fun <T> List<T>.after(current: T): T = this[(indexOf(current) + 1).mod(size)]
@@ -227,6 +228,7 @@ private fun MainPage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: 
         when {
             home == null -> ""
             home.weAreHome -> stringResource(R.string.app_name)
+            !home.canSwitchHome -> stringResource(R.string.home_value_unsupported)
             home.stockEnabled -> stringResource(R.string.home_value_stock)
             else -> stringResource(R.string.home_value_not_set)
         },
@@ -266,16 +268,26 @@ private fun LanguagePage(env: SettingsEnv, setup: SettingsActions, current: Focu
 private fun DefaultHomePage(env: SettingsEnv, setup: SettingsActions, first: FocusRequester) {
     val colors = LocalBsfColors.current
     val st = env.homeStatus
+    // The switch disables the stock launcher, which is only safe on classic
+    // Android TV (the Shield). On Google TV it boot-loops the device (v0.2.0).
+    val supported = st?.canSwitchHome == true
     Column(Modifier.padding(horizontal = 14.dp)) {
         Text(
-            stringResource(R.string.dh_intro),
+            stringResource(
+                when {
+                    supported -> R.string.dh_intro
+                    st?.deviceKind == DeviceKind.GOOGLE_TV -> R.string.dh_unsupported_google_tv
+                    else -> R.string.dh_unsupported_other
+                },
+            ),
             style = BsfType.body,
-            color = colors.textMuted,
+            color = if (supported) colors.textMuted else colors.text,
             modifier = Modifier.padding(top = 6.dp, bottom = 12.dp),
         )
         if (st != null) {
+            // Where the switch is unsupported, the healthy state is the stock one.
             StatusLine(
-                st.weAreHome,
+                if (supported) st.weAreHome else st.currentHome in StockLaunchers,
                 when {
                     st.weAreHome -> stringResource(R.string.status_home_ours)
                     st.currentHome in StockLaunchers -> stringResource(R.string.status_home_stock)
@@ -285,27 +297,37 @@ private fun DefaultHomePage(env: SettingsEnv, setup: SettingsActions, first: Foc
             )
             st.stock.forEach {
                 val name = it.packageName.substringAfterLast('.')
-                StatusLine(!it.enabled, stringResource(if (it.enabled) R.string.status_pkg_enabled else R.string.status_pkg_disabled, name))
+                StatusLine(if (supported) !it.enabled else it.enabled, stringResource(if (it.enabled) R.string.status_pkg_enabled else R.string.status_pkg_disabled, name))
             }
             StatusLine(st.tvListingsGranted, stringResource(if (st.tvListingsGranted) R.string.status_next_up_granted else R.string.status_next_up_missing))
             StatusLine(st.adbEnabled, stringResource(if (st.adbEnabled) R.string.status_debug_on else R.string.status_debug_off))
         }
         Text(stringResource(R.string.dh_steps), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 12.dp))
-        Row(Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PanelButton(stringResource(R.string.btn_make_home), primary = true, modifier = Modifier.focusRequester(first)) { setup.makeDefault() }
-            PanelButton(stringResource(R.string.btn_test)) { setup.probe() }
-        }
-        Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            PanelButton(stringResource(R.string.btn_allow_next_up)) { setup.grantNextUp() }
-            PanelButton(stringResource(R.string.btn_restore)) { setup.restoreStock() }
+        if (supported) {
+            Row(Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PanelButton(stringResource(R.string.btn_make_home), primary = true, modifier = Modifier.focusRequester(first)) { setup.makeDefault() }
+                PanelButton(stringResource(R.string.btn_test)) { setup.probe() }
+            }
+            Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PanelButton(stringResource(R.string.btn_allow_next_up)) { setup.grantNextUp() }
+                PanelButton(stringResource(R.string.btn_restore)) { setup.restoreStock() }
+            }
+        } else {
+            // Still offered everywhere: Next Up access is harmless, and Restore
+            // repairs a device an older version already changed.
+            Row(Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PanelButton(stringResource(R.string.btn_restore), modifier = Modifier.focusRequester(first)) { setup.restoreStock() }
+                PanelButton(stringResource(R.string.btn_allow_next_up)) { setup.grantNextUp() }
+            }
         }
         SetupResult(env.setupState)
         Text(stringResource(R.string.dh_turn_off), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 12.dp))
         SectionHeader(stringResource(R.string.header_from_pc), Modifier.padding(start = 0.dp))
         Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(8.dp)).background(Color.Black.copy(alpha = 0.5f)).padding(10.dp)) {
-            (listOf(PC_CONNECT) + env.pcCommands).forEach { Text(it, style = BsfType.mono, color = colors.text) }
+            Text(PC_CONNECT, style = BsfType.mono, color = colors.text)
+            if (supported) env.pcCommands.forEach { Text(it, style = BsfType.mono, color = colors.text) }
             Text(stringResource(R.string.dh_recovery), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 8.dp))
-            Text(HomeCommands.RECOVERY, style = BsfType.mono, color = colors.text)
+            HomeCommands.RECOVERY.forEach { Text(it, style = BsfType.mono, color = colors.text) }
         }
         Text(stringResource(R.string.dh_uninstall_warning), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 10.dp))
     }
@@ -331,6 +353,7 @@ private fun SetupResult(state: SetupState) {
                 is AdbOutcome.Done -> {
                     val title = state.task.label()
                     StatusLine(o.ok, stringResource(if (o.ok) R.string.setup_done else R.string.setup_failed, title))
+                    if (o.stopped) Text(stringResource(R.string.setup_stopped), style = BsfType.label, color = colors.text)
                     if (o.results.isEmpty()) Text(stringResource(R.string.setup_nothing), style = BsfType.label, color = colors.textMuted)
                     o.results.forEach { r ->
                         val mark = if (r.ok) "✓" else if (r.step.optional) "–" else "✗"

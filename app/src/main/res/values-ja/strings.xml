@@ -168,4 +168,11 @@
     <string name="about_wallpapers">壁紙</string>
     <string name="about_wallpapers_credit">Andreu Massanet による Impasto (github.com/andreumassanet/impasto) より、GPL-3.0。色の選び方も Impasto に基づいています。</string>
     <string name="about_your_wallpapers">自分の壁紙</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">この端末は Google TV のようです。ここでは BSfreeTV をホームアプリにできません。Google TV はホームボタンを押すと自社のランチャーを直接開くため、それを無効にすると端末が再起動を繰り返すおそれがあります。BSfreeTV はアプリ一覧から引き続き開けます。以前のバージョンでこの端末が変更された場合は、下の「標準に戻す」を使ってください。</string>
+    <string name="dh_unsupported_other">BSfreeTV をホームアプリにできるのは、NVIDIA Shield などの従来の Android TV 端末だけです。アプリ一覧からは引き続き開けます。</string>
+    <string name="home_value_unsupported">非対応</string>
+    <string name="step_restore_home">ホームを %1$s に戻す</string>
+    <string name="setup_stopped">ここで停止しました。残りの手順は実行されず、ほかには何も変更されていません。</string>
 </resources>

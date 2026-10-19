@@ -183,4 +183,11 @@
     <string name="about_wallpapers">Шпалери</string>
     <string name="about_wallpapers_credit">З Impasto від Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Кольори добираються так само, як в Impasto.</string>
     <string name="about_your_wallpapers">Ваші шпалери</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">Схоже, це Google TV. Зробити BSfreeTV головним екраном тут не можна: Google TV після натискання «Додому» одразу відкриває власний лаунчер, а його вимкнення може змусити пристрій безкінечно перезавантажуватися. Ви й далі можете відкривати BSfreeTV зі списку додатків. Якщо стара версія вже змінила цей пристрій, скористайтеся кнопкою «Відновити стандартний» нижче.</string>
+    <string name="dh_unsupported_other">BSfreeTV може стати головним екраном лише на класичних пристроях Android TV, як-от NVIDIA Shield. Ви й далі можете відкривати його зі списку додатків.</string>
+    <string name="home_value_unsupported">Не підтримується</string>
+    <string name="step_restore_home">Повернути %1$s як головний екран</string>
+    <string name="setup_stopped">Зупинено тут: решту кроків не виконано, більше нічого не змінено.</string>
 </resources>

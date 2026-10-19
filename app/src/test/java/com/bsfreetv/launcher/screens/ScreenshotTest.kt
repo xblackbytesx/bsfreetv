@@ -180,11 +180,13 @@ class ScreenshotTest {
         }
     }
 
-    private fun env(state: SetupState = SetupState.Idle, language: String? = null) = SettingsEnv(
+    private val shieldStatus = HomeStatus(listOf(StockLauncher("com.google.android.tvlauncher", true)), "com.google.android.tvlauncher", "com.bsfreetv.launcher", false, false)
+
+    private fun env(state: SetupState = SetupState.Idle, language: String? = null, home: HomeStatus = shieldStatus) = SettingsEnv(
         languageTag = language,
         wallpaperTitle = "Japanese Castle Full Moon",
         nextUpPermission = false,
-        homeStatus = HomeStatus(listOf(StockLauncher("com.google.android.tvlauncher", true)), "com.google.android.tvlauncher", "com.bsfreetv.launcher", false, false),
+        homeStatus = home,
         setupState = state,
         pcCommands = listOf("adb shell pm disable-user --user 0 com.google.android.tvlauncher", "adb shell pm grant com.bsfreetv.launcher android.permission.READ_TV_LISTINGS"),
         userDir = "/storage/emulated/0/Android/data/com.bsfreetv.launcher/files/wallpapers",
@@ -203,6 +205,19 @@ class ScreenshotTest {
         shot("08-default-launcher", f.palette) {
             Home(f, ui(), overlay = true)
             SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(SetupState.Working(SetupTask.MAKE_HOME)), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    /** Google TV: no Home switch (it boot-looped devices in v0.2.0), only Restore and recovery. */
+    @Test fun settings_default_home_google_tv() {
+        val f = wallpaper("red-frame-tree")
+        val googleTv = HomeStatus(
+            listOf(StockLauncher("com.google.android.apps.tv.launcherx", true), StockLauncher("com.google.android.tvlauncher", true)),
+            "com.google.android.apps.tv.launcherx", "com.bsfreetv.launcher", false, true,
+        )
+        shot("08-default-launcher-google-tv", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(home = googleTv), HomeActions.None, SettingsActions.None)
         }
     }
 

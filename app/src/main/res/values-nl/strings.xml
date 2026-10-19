@@ -173,4 +173,11 @@
     <string name="about_wallpapers">Achtergronden</string>
     <string name="about_wallpapers_credit">Van Impasto door Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. De kleuren worden gekozen zoals Impasto dat doet.</string>
     <string name="about_your_wallpapers">Je eigen achtergronden</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">Dit lijkt Google TV te zijn. BSfreeTV als startscherm instellen wordt hier niet ondersteund: Google TV opent bij de thuisknop direct zijn eigen launcher, en die uitschakelen kan het apparaat blijven laten herstarten. Je kunt BSfreeTV nog steeds openen vanuit je apps. Heeft een oudere versie dit apparaat aangepast? Gebruik dan Standaard herstellen hieronder.</string>
+    <string name="dh_unsupported_other">BSfreeTV kan alleen het startscherm worden op klassieke Android TV-apparaten zoals de NVIDIA Shield. Je kunt het nog steeds openen vanuit je apps.</string>
+    <string name="home_value_unsupported">Niet ondersteund</string>
+    <string name="step_restore_home">Startscherm terugzetten naar %1$s</string>
+    <string name="setup_stopped">Hier gestopt: de overige stappen zijn niet uitgevoerd, er is verder niets gewijzigd.</string>
 </resources>

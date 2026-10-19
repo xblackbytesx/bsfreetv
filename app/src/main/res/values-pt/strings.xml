@@ -179,4 +179,11 @@
     <string name="about_wallpapers">Planos de fundo</string>
     <string name="about_wallpapers_credit">Do Impasto, de Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. As cores são escolhidas como no Impasto.</string>
     <string name="about_your_wallpapers">Seus planos de fundo</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">Parece ser um Google TV. Definir o BSfreeTV como tela inicial não é compatível aqui: o Google TV abre o próprio launcher diretamente quando você aperta Início, e desativá-lo pode deixar o aparelho reiniciando sem parar. Você ainda pode abrir o BSfreeTV pelos seus apps. Se uma versão anterior alterou este aparelho, use Restaurar original abaixo.</string>
+    <string name="dh_unsupported_other">O BSfreeTV só pode virar a tela inicial em aparelhos Android TV clássicos como a NVIDIA Shield. Você ainda pode abri-lo pelos seus apps.</string>
+    <string name="home_value_unsupported">Não compatível</string>
+    <string name="step_restore_home">Voltar a tela inicial para %1$s</string>
+    <string name="setup_stopped">Parou aqui: as etapas restantes não foram executadas e nada mais foi alterado.</string>
 </resources>

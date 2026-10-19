@@ -37,7 +37,8 @@ NVIDIA SHIELD TV Pro, made to run on any TV box with Android 11 or newer.
 | Device | Status |
 |---|---|
 | NVIDIA SHIELD TV / TV Pro (2019) | Tested daily. Everything, including the in-app Home switch |
-| Other Android TV / Google TV, Android 11+ | Should work, not yet tested. If the in-app Home switch can't connect, use the PC commands below |
+| Other classic Android TV, Android 11+ | Should work, not yet tested. If the in-app Home switch can't connect, use the PC commands below |
+| Google TV (Chromecast with Google TV, Google TV Streamer, Google TV TVs) | Runs as an app. **The Home switch is not supported** and is disabled in the app |
 | Android 10 and older | Not supported |
 
 Tested it on another box? Open an issue with the device and what worked.
@@ -54,6 +55,12 @@ Open BSfreeTV from the app list, then **Settings > Default launcher**.
 
 ## Make it the Home app
 
+> [!WARNING]
+> **Classic Android TV only (such as the NVIDIA Shield). Never on Google TV.**
+> Google TV opens its own launcher directly when you press Home. Disabling it
+> makes the device restart in a loop. Version 0.2.0 did this on Google TV;
+> 0.2.1 and later refuse. If your Google TV is affected, see Recovery below.
+
 1. Shield: Settings > Device Preferences > About, press Build 7 times.
 2. Developer options: turn on **Network debugging**.
 3. BSfreeTV: Settings > Default launcher > **Test connection**, choose Allow
@@ -67,11 +74,20 @@ adb shell pm disable-user --user 0 com.google.android.tvlauncher
 adb shell pm grant com.bsfreetv.launcher android.permission.READ_TV_LISTINGS
 ```
 
-Undo (also the recovery if Home ever stops working):
+### Recovery
+
+Undo, and the recovery if Home ever stops working. This covers both classic
+Android TV and Google TV:
 
 ```
 adb shell pm enable com.google.android.tvlauncher
+adb shell pm enable com.google.android.apps.tv.launcherx
+adb shell cmd package set-home-activity com.google.android.apps.tv.launcherx
 ```
+
+On a Shield the last two lines report an unknown package; that is harmless.
+These commands need a working adb connection. A device already stuck in a
+reboot loop may need a factory reset from its recovery menu.
 
 Restore the stock launcher before uninstalling BSfreeTV.
 

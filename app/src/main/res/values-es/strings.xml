@@ -178,4 +178,11 @@
     <string name="about_wallpapers">Fondos</string>
     <string name="about_wallpapers_credit">De Impasto, por Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Los colores se eligen como en Impasto.</string>
     <string name="about_your_wallpapers">Tus fondos</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">Parece que es Google TV. Aquí no se puede poner BSfreeTV como app de inicio: Google TV abre su propio launcher directamente al pulsar Inicio, y desactivarlo puede dejar el dispositivo reiniciándose sin parar. Puedes seguir abriendo BSfreeTV desde tus apps. Si una versión anterior modificó este dispositivo, usa Restaurar el de serie abajo.</string>
+    <string name="dh_unsupported_other">BSfreeTV solo puede ser la app de inicio en dispositivos Android TV clásicos como la NVIDIA Shield. Puedes seguir abriéndola desde tus apps.</string>
+    <string name="home_value_unsupported">No compatible</string>
+    <string name="step_restore_home">Volver a poner %1$s como inicio</string>
+    <string name="setup_stopped">Detenido aquí: los pasos restantes no se ejecutaron y no se cambió nada más.</string>
 </resources>

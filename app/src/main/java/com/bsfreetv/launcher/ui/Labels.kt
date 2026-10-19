@@ -111,6 +111,7 @@ import java.util.Locale
         StepKind.DISABLE -> stringResource(R.string.step_disable, pkg)
         StepKind.ENABLE -> stringResource(R.string.step_enable, pkg)
         StepKind.PREFERRED_HOME -> stringResource(R.string.step_preferred_home)
+        StepKind.RESTORE_HOME -> stringResource(R.string.step_restore_home, pkg)
         StepKind.ALLOW_NEXT_UP -> stringResource(R.string.step_allow_next_up)
         StepKind.READ_VERSION -> stringResource(R.string.step_read_version)
     }

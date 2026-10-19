@@ -204,4 +204,11 @@
     <string name="about_wallpapers">Wallpapers</string>
     <string name="about_wallpapers_credit">From Impasto by Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Colour extraction follows Impasto\'s accent picker.</string>
     <string name="about_your_wallpapers">Your wallpapers</string>
+
+    <!-- Home switch safety (v0.2.1) -->
+    <string name="dh_unsupported_google_tv">This looks like Google TV. Making BSfreeTV the Home app is not supported here: Google TV opens its own launcher directly when you press Home, and disabling that launcher can leave the device stuck restarting. You can still open BSfreeTV from your apps. If an older version changed this device, use Restore below.</string>
+    <string name="dh_unsupported_other">BSfreeTV can only become the Home app on classic Android TV devices such as the NVIDIA Shield. You can still open it from your apps.</string>
+    <string name="home_value_unsupported">Not supported</string>
+    <string name="step_restore_home">Set Home back to %1$s</string>
+    <string name="setup_stopped">Stopped here: the remaining steps were not run, nothing else was changed.</string>
 </resources>
