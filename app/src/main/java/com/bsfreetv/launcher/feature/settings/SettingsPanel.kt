@@ -84,8 +84,8 @@ interface SettingsActions {
     fun restoreStock()
     fun grantNextUp()
     fun refreshStatus()
-    /** Step to the next language and restart the activity in it. */
-    fun cycleLanguage()
+    /** Switch to [tag] (null = system) and restart the activity in it. */
+    fun setLanguage(tag: String?)
 
     object None : SettingsActions {
         override fun requestNextUpPermission() = Unit
@@ -94,7 +94,7 @@ interface SettingsActions {
         override fun restoreStock() = Unit
         override fun grantNextUp() = Unit
         override fun refreshStatus() = Unit
-        override fun cycleLanguage() = Unit
+        override fun setLanguage(tag: String?) = Unit
     }
 }
 
@@ -125,6 +125,7 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
                 stringResource(
                     when (page) {
                         SettingsPage.MAIN -> R.string.settings_title
+                        SettingsPage.LANGUAGE -> R.string.set_language
                         SettingsPage.DEFAULT_HOME -> R.string.settings_default_home
                         SettingsPage.NEXT_UP_APPS -> R.string.settings_next_up_apps
                         SettingsPage.ABOUT -> R.string.settings_about
@@ -136,6 +137,7 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
             )
             when (page) {
                 SettingsPage.MAIN -> MainPage(ui, env, actions, setup, first)
+                SettingsPage.LANGUAGE -> LanguagePage(env, setup, first)
                 SettingsPage.DEFAULT_HOME -> DefaultHomePage(env, setup, first)
                 SettingsPage.NEXT_UP_APPS -> NextUpAppsPage(ui, actions, first)
                 SettingsPage.ABOUT -> AboutPage(env, first)
@@ -163,7 +165,9 @@ private fun MainPage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: 
         set { it.copy(wallpaperBrightness = LauncherSettings.BrightnessSteps.after(LauncherSettings.BrightnessSteps.minBy { b -> kotlin.math.abs(b - it.wallpaperBrightness) })) }
     }
     SettingRow(stringResource(R.string.set_rotation), s.rotation.label()) { set { it.copy(rotation = Rotation.entries.after(it.rotation)) } }
-    SettingRow(stringResource(R.string.set_language), SupportedLanguages.nameOf(env.languageTag) ?: stringResource(R.string.language_system)) { setup.cycleLanguage() }
+    SettingRow(stringResource(R.string.set_language), SupportedLanguages.nameOf(env.languageTag) ?: stringResource(R.string.language_system), chevron = true) {
+        actions.open(Overlay.Settings(SettingsPage.LANGUAGE))
+    }
 
     SectionHeader(stringResource(R.string.header_layout))
     SettingRow(stringResource(R.string.set_card_size), s.cardSize.label()) { set { it.copy(cardSize = CardSize.entries.after(it.cardSize)) } }
@@ -234,6 +238,27 @@ private fun MainPage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: 
     SettingRow(stringResource(R.string.set_android_settings), chevron = true) { actions.openSystemSettings() }
     SettingRow(stringResource(R.string.settings_about), stringResource(R.string.value_version, BuildConfig.VERSION_NAME), chevron = true) {
         actions.open(Overlay.Settings(SettingsPage.ABOUT))
+    }
+}
+
+/**
+ * Pick, don't cycle: every language is listed in its own name and script, so
+ * anyone can find theirs whatever language (or direction) the UI is in now.
+ * Focus starts on the current choice; picking restarts the activity and the
+ * panel reopens here, so switching back is one press away.
+ */
+@Composable
+private fun LanguagePage(env: SettingsEnv, setup: SettingsActions, current: FocusRequester) {
+    val options = listOf<Pair<String?, String>>(null to stringResource(R.string.language_system)) +
+        SupportedLanguages.all.map { it.tag to it.nativeName }
+    options.forEach { (tag, name) ->
+        val selected = tag == env.languageTag
+        SettingRow(
+            label = name,
+            value = if (selected) "✓" else null,
+            description = if (tag == null) SupportedLanguages.systemLanguageName() else null,
+            modifier = if (selected) Modifier.focusRequester(current) else Modifier,
+        ) { if (!selected) setup.setLanguage(tag) }
     }
 }
 

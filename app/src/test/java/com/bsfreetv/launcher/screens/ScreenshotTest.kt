@@ -71,13 +71,18 @@ class ScreenshotTest {
         return WallpaperFrame(id, bmp.asImageBitmap(), PaletteBuilder.fromPixels(px))
     }
 
-    /** A stand-in banner: brand colour and wordmark, like a real android:banner. */
+    /**
+     * A stand-in banner: brand colour and wordmark, like a real android:banner,
+     * rasterised at the size AppCatalog uses for this display's density.
+     */
     private fun banner(label: String, bg: Int, fg: Int = 0xFFFFFFFF.toInt()): ImageBitmap {
-        val b = Bitmap.createBitmap(320, 180, Bitmap.Config.ARGB_8888)
+        val w = com.bsfreetv.launcher.data.AppCatalog.bannerWidthFor(org.robolectric.RuntimeEnvironment.getApplication().resources.displayMetrics.density)
+        val h = w * 9 / 16
+        val b = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val c = Canvas(b)
         c.drawColor(bg)
-        val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = fg; textSize = 40f; typeface = Typeface.DEFAULT_BOLD; textAlign = Paint.Align.CENTER }
-        c.drawText(label, 160f, 104f, p)
+        val p = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = fg; textSize = w / 8f; typeface = Typeface.DEFAULT_BOLD; textAlign = Paint.Align.CENTER }
+        c.drawText(label, w / 2f, h / 2f + w / 24f, p)
         return b.asImageBitmap()
     }
 
@@ -175,7 +180,8 @@ class ScreenshotTest {
         }
     }
 
-    private fun env(state: SetupState = SetupState.Idle) = SettingsEnv(
+    private fun env(state: SetupState = SetupState.Idle, language: String? = null) = SettingsEnv(
+        languageTag = language,
         wallpaperTitle = "Japanese Castle Full Moon",
         nextUpPermission = false,
         homeStatus = HomeStatus(listOf(StockLauncher("com.google.android.tvlauncher", true)), "com.google.android.tvlauncher", "com.bsfreetv.launcher", false, false),
@@ -223,6 +229,30 @@ class ScreenshotTest {
         shot("11-settings-$tag", f.palette) {
             Home(f, ui(), overlay = true)
             SettingsPanel(SettingsPage.MAIN, ui(), env(), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    /** The Shield on a 4K TV renders at 3840x2160 (4x); artwork must stay sharp. */
+    @Test @Config(qualifiers = "w960dp-h540dp-land-television-xxxhdpi")
+    fun home_4k() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("12-home-4k", f.palette) { Home(f, ui()) }
+    }
+
+    @Test fun language_picker() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("13-language", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.LANGUAGE, ui(), env(), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    /** Stuck in Arabic: every option is still readable in its own script. */
+    @Test @Config(qualifiers = "+ar-ldrtl") fun language_picker_ar() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("13-language-ar", f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(SettingsPage.LANGUAGE, ui(), env(language = "ar"), HomeActions.None, SettingsActions.None)
         }
     }
 

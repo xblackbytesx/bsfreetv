@@ -14,7 +14,7 @@ make test          # JVM unit tests + Robolectric screenshots
 make build         # debug APK -> build-output/bsfreetv-debug.apk
 make release       # R8-shrunk release APK (signed when keystore.properties / RELEASE_* exist)
 make lint
-make screenshots   # every screen at 1920x1080 -> build-output/screenshots/
+make screenshots   # every screen at 1920x1080 (+ one 4K home) -> build-output/screenshots/
 make install       # adb install the debug APK on SHIELD=host:5555
 make keystore      # once: release key + GitHub secrets
 ```
@@ -60,7 +60,7 @@ posters only), dadb (self-ADB).
 | `ui/` | `BsfTheme` (animated palette), type scale, `tvClickable`, focus halo, panels |
 | `ui/Labels.kt` | The only place domain values get user-facing names (string resources) |
 | `i18n/Languages.kt` | `SupportedLanguages` (picker order) and `LanguageStore` (in-app override, wraps the activity context) |
-| `tools/import_wallpapers.py` | Impasto JPEG -> 1920x1080 WebP + 384x216 thumbs + `index.json` |
+| `tools/import_wallpapers.py` | Impasto JPEG -> 2752x1548 WebP (q82, full source width) + 384x216 thumbs + `index.json` |
 
 ## Invariants
 
@@ -78,7 +78,8 @@ posters only), dadb (self-ADB).
 - **Artwork is prerasterised.** Rows draw `ImageBitmap`s from `AppCatalog`;
   never load a Drawable or touch PackageManager while composing.
 - **Wallpaper decode is screen-sized and HARDWARE.** At most two bitmaps alive
-  (during the cross-fade).
+  (during the cross-fade). Screen size comes from the display, capped at 4K and
+  at the image's own size.
   `WallpapersTest` runs the real asset decode path; screenshot tests bypass it.
 - **Seeds apply once per package** (`known`). A user's move always sticks.
   Uninstalled apps keep their slot so reinstalls return to place.
@@ -99,7 +100,10 @@ posters only), dadb (self-ADB).
   (keys, placeholders, picker list) enforce it. Never rename a string key.
   Workflow: `docs/translations.md` (Hosted Weblate).
 - **Language override** is a SharedPreferences value read synchronously in
-  `MainActivity.attachBaseContext`; changing it recreates the activity. Do not
+  `MainActivity.attachBaseContext`; changing it recreates the activity. It is
+  picked from a list (Settings > Language), never cycled: options are shown in
+  their own names and script so nobody gets stranded in an unfamiliar
+  language or RTL (`LanguagePickerTest`). Do not
   move it into the DataStore settings (async).
 
 ## Shield facts (2026-10)
@@ -110,7 +114,10 @@ posters only), dadb (self-ADB).
   factory reset can re-enable it: the Default launcher page shows the state.
 - `READ_TV_LISTINGS` (dangerous) lets TvProvider return other apps' searchable
   Watch Next rows. Custom selections throw; filter in code. Jellyfin publishes.
-- UI composes at 1920x1080 (960x540 dp, xhdpi) even on a 4K output.
+- The UI renders at the output resolution: 960x540 dp at 2x on a 1080p TV,
+  4x (3840x2160 px) on a 4K TV (the user's setup). Size artwork from
+  `displayMetrics`, never assume 1080p: `AppCatalog.bannerWidthFor`/`iconSizeFor`,
+  `Wallpapers.screenSize` (decodes never upscale past the asset).
 
 ## Unverified on hardware (check before building on it)
 

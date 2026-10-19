@@ -28,13 +28,13 @@ object SupportedLanguages {
         Language("zh-CN", "简体中文"),
     )
 
-    /** Next value for the Settings row: System default (null), then each language. */
-    fun next(current: String?): String? {
-        val tags = listOf<String?>(null) + all.map { it.tag }
-        return tags[(tags.indexOf(current).coerceAtLeast(0) + 1) % tags.size]
-    }
-
     fun nameOf(tag: String?): String? = all.firstOrNull { it.tag == tag }?.nativeName
+
+    /** The device's own language, named in itself (shown under "System default"). */
+    fun systemLanguageName(): String {
+        val locale = android.content.res.Resources.getSystem().configuration.locales[0] ?: Locale.getDefault()
+        return locale.getDisplayLanguage(locale).replaceFirstChar { it.titlecase(locale) }
+    }
 }
 
 /**

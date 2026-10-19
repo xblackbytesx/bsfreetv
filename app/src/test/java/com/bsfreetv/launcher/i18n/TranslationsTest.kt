@@ -81,14 +81,12 @@ class TranslationsTest {
         assertEquals(folders, offered)
     }
 
-    @Test fun `language picker cycles system then each language`() {
-        var tag: String? = null
-        val seen = mutableListOf<String?>()
-        repeat(SupportedLanguages.all.size + 1) {
-            tag = SupportedLanguages.next(tag)
-            seen += tag
-        }
-        assertEquals(SupportedLanguages.all.map { it.tag } + listOf(null), seen)
-        assertEquals("en", SupportedLanguages.next("gone"))
+    @Test fun `every language has a unique native name and tag`() {
+        val all = SupportedLanguages.all
+        assertEquals(all.size, all.map { it.tag }.toSet().size)
+        assertEquals(all.size, all.map { it.nativeName }.toSet().size)
+        assertEquals("Deutsch", SupportedLanguages.nameOf("de"))
+        assertEquals(null, SupportedLanguages.nameOf(null))
+        assertEquals(null, SupportedLanguages.nameOf("gone"))
     }
 }

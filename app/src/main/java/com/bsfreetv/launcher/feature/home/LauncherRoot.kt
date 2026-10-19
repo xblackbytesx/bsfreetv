@@ -28,7 +28,6 @@ import com.bsfreetv.launcher.feature.settings.SettingsPanel
 import com.bsfreetv.launcher.feature.wallpaper.WallpaperPickerOverlay
 import com.bsfreetv.launcher.ui.BsfTheme
 import com.bsfreetv.launcher.ui.components.LocalMotion
-import com.bsfreetv.launcher.i18n.SupportedLanguages
 import com.bsfreetv.launcher.i18n.LanguageStore
 import android.app.Activity
 
@@ -104,8 +103,8 @@ fun LauncherRoot(vm: HomeViewModel) {
                             override fun restoreStock() = setupVm.restoreStock()
                             override fun grantNextUp() = setupVm.grantNextUp()
                             override fun refreshStatus() = setupVm.refresh()
-                            override fun cycleLanguage() {
-                                LanguageStore.set(context, SupportedLanguages.next(languageTag))
+                            override fun setLanguage(tag: String?) {
+                                LanguageStore.set(context, tag)
                                 // The panel stays open: overlay state lives in the ViewModel.
                                 (context as? Activity)?.recreate()
                             }

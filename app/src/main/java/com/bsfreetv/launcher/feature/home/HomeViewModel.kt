@@ -43,7 +43,7 @@ import kotlinx.coroutines.launch
 /** What the All apps screen lists. */
 enum class AppFilter { ALL, UNSORTED, MEDIA, TOOLS, HIDDEN }
 
-enum class SettingsPage { MAIN, DEFAULT_HOME, NEXT_UP_APPS, ABOUT }
+enum class SettingsPage { MAIN, LANGUAGE, DEFAULT_HOME, NEXT_UP_APPS, ABOUT }
 
 sealed interface Overlay {
     data object None : Overlay
