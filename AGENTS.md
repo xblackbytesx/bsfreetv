@@ -90,6 +90,10 @@ posters only), dadb (self-ADB).
   (`trapFocus(enabled = !menuOpen)`): the trap also cancels `requestFocus()`
   from outside (`AppMenuFocusTest`). `tvClickable` also takes pointer taps and
   holds (air mice).
+- **No unreachable information.** TV panels scroll only by moving focus, so
+  every block of text on a settings page is focusable: rows, buttons or
+  `InfoBlock`. Long material goes on a sub-page (`SettingsPage.parent` makes
+  Back walk up one level). `DefaultHomePageTest` walks each page end to end.
 - **First key after idle only wakes.** Root `onPreviewKeyEvent` in `LauncherRoot`.
 - **The Home switch never bricks a device.** It only acts on
   `DeviceKind.CLASSIC_ANDROID_TV` (tvlauncher present, no Google TV launcher).

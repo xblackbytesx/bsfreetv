@@ -133,17 +133,11 @@
     <string name="status_home_chooser">ホームボタンで選択画面が開きます</string>
     <string name="status_pkg_enabled">%1$s: 有効</string>
     <string name="status_pkg_disabled">%1$s: 無効</string>
-    <string name="status_next_up_granted">「続きを見る」へのアクセスを許可済み</string>
-    <string name="status_next_up_missing">「続きを見る」へのアクセスが未許可</string>
-    <string name="status_debug_on">デバッグはオンです</string>
-    <string name="status_debug_off">デバッグはオフです (開発者向けオプション)</string>
-    <string name="dh_steps">1. 設定 > デバイス設定 > 端末情報 > ビルドを 7 回選択します。\n2. 開発者向けオプション > ネットワーク デバッグをオンにします。\n3. 下のボタンを押し、表示された確認で「許可」を選びます (「常に許可」にチェック)。</string>
+    <string name="dh_steps">1. 設定 > デバイス設定 > 端末情報 > ビルドを 7 回選択します。\n2. 開発者向けオプション > ネットワーク デバッグをオンにします。\n3. 戻って「BSfreeTV をホームに」を押し、表示された確認で「許可」を選びます (「常に許可」にチェック)。</string>
     <string name="btn_make_home">BSfreeTV をホームに</string>
     <string name="btn_test">接続をテスト</string>
-    <string name="btn_allow_next_up">「続きを見る」を許可</string>
     <string name="btn_restore">標準に戻す</string>
     <string name="dh_turn_off">終わったらネットワーク デバッグをオフに戻してください。オンのままだと、同じネットワークの誰でも接続を要求できます。</string>
-    <string name="dh_recovery">元に戻す / 復旧:</string>
     <string name="dh_uninstall_warning">BSfreeTV をアンインストールする前に標準のランチャーに戻してください。戻さないとホームボタンで何も開きません。</string>
 
     <string name="task_make_home">BSfreeTV をホームアプリにする</string>
@@ -175,4 +169,13 @@
     <string name="home_value_unsupported">非対応</string>
     <string name="step_restore_home">ホームを %1$s に戻す</string>
     <string name="setup_stopped">ここで停止しました。残りの手順は実行されず、ほかには何も変更されていません。</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">「続きを見る」へのアクセス</string>
+    <string name="value_allowed">許可済み</string>
+    <string name="value_allow">許可する</string>
+    <string name="dh_row_debugging">ネットワーク デバッグ</string>
+    <string name="dh_row_debugging_desc">ホームを切り替えるときに一度だけ必要です</string>
+    <string name="dh_row_recovery">元に戻す / 復旧</string>
+    <string name="dh_pc_intro">同じネットワーク上の adb が使える PC からテレビに接続し、次を実行します:</string>
 </resources>

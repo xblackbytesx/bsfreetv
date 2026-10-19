@@ -143,17 +143,11 @@
     <string name="status_home_chooser">El botón Inicio abre un selector</string>
     <string name="status_pkg_enabled">%1$s: activado</string>
     <string name="status_pkg_disabled">%1$s: desactivado</string>
-    <string name="status_next_up_granted">Acceso a Seguir viendo concedido</string>
-    <string name="status_next_up_missing">Sin acceso a Seguir viendo</string>
-    <string name="status_debug_on">La depuración está activada</string>
-    <string name="status_debug_off">La depuración está desactivada (Opciones para desarrolladores)</string>
-    <string name="dh_steps">1. Ajustes > Preferencias del dispositivo > Información > pulsa 7 veces en Compilación.\n2. Opciones para desarrolladores > activa Depuración por red.\n3. Pulsa un botón de abajo y elige Permitir (marca Permitir siempre) en el aviso.</string>
+    <string name="dh_steps">1. Ajustes > Preferencias del dispositivo > Información > pulsa 7 veces en Compilación.\n2. Opciones para desarrolladores > activa Depuración por red.\n3. Vuelve atrás, pulsa BSfreeTV como inicio y elige Permitir (marca Permitir siempre) en el aviso.</string>
     <string name="btn_make_home">BSfreeTV como inicio</string>
     <string name="btn_test">Probar conexión</string>
-    <string name="btn_allow_next_up">Permitir Seguir viendo</string>
     <string name="btn_restore">Restaurar el de serie</string>
     <string name="dh_turn_off">Después, vuelve a desactivar la depuración por red: si no, cualquiera en tu red podría pedir conectarse.</string>
-    <string name="dh_recovery">Deshacer / recuperar:</string>
     <string name="dh_uninstall_warning">Restaura el launcher de serie antes de desinstalar BSfreeTV, o el botón Inicio no abrirá nada.</string>
 
     <string name="task_make_home">Poner BSfreeTV como app de inicio</string>
@@ -185,4 +179,13 @@
     <string name="home_value_unsupported">No compatible</string>
     <string name="step_restore_home">Volver a poner %1$s como inicio</string>
     <string name="setup_stopped">Detenido aquí: los pasos restantes no se ejecutaron y no se cambió nada más.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Acceso a Seguir viendo</string>
+    <string name="value_allowed">Permitido</string>
+    <string name="value_allow">Permitir</string>
+    <string name="dh_row_debugging">Depuración por red</string>
+    <string name="dh_row_debugging_desc">Necesaria una vez, para cambiar el inicio</string>
+    <string name="dh_row_recovery">Deshacer y recuperar</string>
+    <string name="dh_pc_intro">En un ordenador con adb en la misma red, conéctate a la tele y ejecuta:</string>
 </resources>

@@ -138,17 +138,11 @@
     <string name="status_home_chooser">Thuisknop opent een keuzemenu</string>
     <string name="status_pkg_enabled">%1$s: ingeschakeld</string>
     <string name="status_pkg_disabled">%1$s: uitgeschakeld</string>
-    <string name="status_next_up_granted">Toegang voor Verder kijken verleend</string>
-    <string name="status_next_up_missing">Geen toegang voor Verder kijken</string>
-    <string name="status_debug_on">Foutopsporing staat aan</string>
-    <string name="status_debug_off">Foutopsporing staat uit (Ontwikkelaarsopties)</string>
-    <string name="dh_steps">1. Instellingen > Apparaatvoorkeuren > Over > tik 7 keer op Build.\n2. Ontwikkelaarsopties > zet Netwerkfoutopsporing aan.\n3. Druk hieronder op een knop en kies Toestaan (vink Altijd toestaan aan) in de melding.</string>
+    <string name="dh_steps">1. Instellingen > Apparaatvoorkeuren > Over > tik 7 keer op Build.\n2. Ontwikkelaarsopties > zet Netwerkfoutopsporing aan.\n3. Ga terug, druk op BSfreeTV als startscherm en kies Toestaan (vink Altijd toestaan aan) in de melding.</string>
     <string name="btn_make_home">BSfreeTV als startscherm</string>
     <string name="btn_test">Verbinding testen</string>
-    <string name="btn_allow_next_up">Verder kijken toestaan</string>
     <string name="btn_restore">Standaard herstellen</string>
     <string name="dh_turn_off">Zet Netwerkfoutopsporing daarna weer uit: anders kan iedereen op je netwerk vragen om verbinding.</string>
-    <string name="dh_recovery">Ongedaan maken / herstel:</string>
     <string name="dh_uninstall_warning">Herstel de standaard launcher voordat je BSfreeTV verwijdert, anders opent de thuisknop niets.</string>
 
     <string name="task_make_home">BSfreeTV als startscherm instellen</string>
@@ -180,4 +174,13 @@
     <string name="home_value_unsupported">Niet ondersteund</string>
     <string name="step_restore_home">Startscherm terugzetten naar %1$s</string>
     <string name="setup_stopped">Hier gestopt: de overige stappen zijn niet uitgevoerd, er is verder niets gewijzigd.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Toegang voor Verder kijken</string>
+    <string name="value_allowed">Toegestaan</string>
+    <string name="value_allow">Toestaan</string>
+    <string name="dh_row_debugging">Netwerkfoutopsporing</string>
+    <string name="dh_row_debugging_desc">Eenmalig nodig om het startscherm te wisselen</string>
+    <string name="dh_row_recovery">Ongedaan maken en herstel</string>
+    <string name="dh_pc_intro">Maak op een computer met adb in hetzelfde netwerk verbinding met de tv en voer uit:</string>
 </resources>

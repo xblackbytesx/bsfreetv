@@ -167,17 +167,11 @@
     <!-- %1$s is a package name such as "tvlauncher". -->
     <string name="status_pkg_enabled">%1$s: enabled</string>
     <string name="status_pkg_disabled">%1$s: disabled</string>
-    <string name="status_next_up_granted">Next Up access granted</string>
-    <string name="status_next_up_missing">Next Up access not granted</string>
-    <string name="status_debug_on">Debugging is on</string>
-    <string name="status_debug_off">Debugging is off (Developer options)</string>
-    <string name="dh_steps">1. Settings > Device Preferences > About > tap Build 7 times.\n2. Developer options > turn on Network debugging.\n3. Press a button below and choose Allow (tick Always allow) on the prompt.</string>
+    <string name="dh_steps">1. Settings > Device Preferences > About > tap Build 7 times.\n2. Developer options > turn on Network debugging.\n3. Go back, press Make BSfreeTV Home and choose Allow (tick Always allow) on the prompt.</string>
     <string name="btn_make_home">Make BSfreeTV Home</string>
     <string name="btn_test">Test connection</string>
-    <string name="btn_allow_next_up">Allow Next Up</string>
     <string name="btn_restore">Restore stock</string>
     <string name="dh_turn_off">Then turn Network debugging off again: anyone on your network could otherwise ask to connect.</string>
-    <string name="dh_recovery">Undo / recovery:</string>
     <string name="dh_uninstall_warning">Restore the stock launcher before uninstalling BSfreeTV, or the Home button has nothing to open.</string>
 
     <!-- Self-ADB tasks and progress -->
@@ -211,4 +205,13 @@
     <string name="home_value_unsupported">Not supported</string>
     <string name="step_restore_home">Set Home back to %1$s</string>
     <string name="setup_stopped">Stopped here: the remaining steps were not run, nothing else was changed.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Next Up access</string>
+    <string name="value_allowed">Allowed</string>
+    <string name="value_allow">Allow</string>
+    <string name="dh_row_debugging">Network debugging</string>
+    <string name="dh_row_debugging_desc">Needed once, to switch Home</string>
+    <string name="dh_row_recovery">Undo and recovery</string>
+    <string name="dh_pc_intro">On a computer with adb on the same network, connect to the TV and run:</string>
 </resources>

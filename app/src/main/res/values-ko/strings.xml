@@ -133,17 +133,11 @@
     <string name="status_home_chooser">홈 버튼이 선택 화면을 엽니다</string>
     <string name="status_pkg_enabled">%1$s: 사용 중</string>
     <string name="status_pkg_disabled">%1$s: 사용 중지됨</string>
-    <string name="status_next_up_granted">이어 보기 권한 허용됨</string>
-    <string name="status_next_up_missing">이어 보기 권한 없음</string>
-    <string name="status_debug_on">디버깅이 켜져 있습니다</string>
-    <string name="status_debug_off">디버깅이 꺼져 있습니다 (개발자 옵션)</string>
-    <string name="dh_steps">1. 설정 > 기기 환경설정 > 정보 > 빌드를 7번 선택합니다.\n2. 개발자 옵션 > 네트워크 디버깅을 켭니다.\n3. 아래 버튼을 누르고 표시되는 창에서 허용을 선택합니다 (항상 허용 선택).</string>
+    <string name="dh_steps">1. 설정 > 기기 환경설정 > 정보 > 빌드를 7번 선택합니다.\n2. 개발자 옵션 > 네트워크 디버깅을 켭니다.\n3. 뒤로 가서 BSfreeTV를 홈으로를 누르고 표시되는 창에서 허용을 선택합니다 (항상 허용 선택).</string>
     <string name="btn_make_home">BSfreeTV를 홈으로</string>
     <string name="btn_test">연결 테스트</string>
-    <string name="btn_allow_next_up">이어 보기 허용</string>
     <string name="btn_restore">기본 런처 복원</string>
     <string name="dh_turn_off">끝나면 네트워크 디버깅을 다시 끄세요. 켜 두면 같은 네트워크의 누구나 연결을 요청할 수 있습니다.</string>
-    <string name="dh_recovery">되돌리기 / 복구:</string>
     <string name="dh_uninstall_warning">BSfreeTV를 제거하기 전에 기본 제공 런처를 복원하세요. 그러지 않으면 홈 버튼을 눌러도 아무것도 열리지 않습니다.</string>
 
     <string name="task_make_home">BSfreeTV를 홈 앱으로 설정</string>
@@ -175,4 +169,13 @@
     <string name="home_value_unsupported">지원 안 됨</string>
     <string name="step_restore_home">홈을 %1$s(으)로 되돌리기</string>
     <string name="setup_stopped">여기서 중지됨: 남은 단계는 실행되지 않았으며 다른 것은 변경되지 않았습니다.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">이어 보기 권한</string>
+    <string name="value_allowed">허용됨</string>
+    <string name="value_allow">허용</string>
+    <string name="dh_row_debugging">네트워크 디버깅</string>
+    <string name="dh_row_debugging_desc">홈을 바꿀 때 한 번만 필요합니다</string>
+    <string name="dh_row_recovery">되돌리기 및 복구</string>
+    <string name="dh_pc_intro">같은 네트워크의 adb가 설치된 PC에서 TV에 연결한 뒤 실행하세요:</string>
 </resources>

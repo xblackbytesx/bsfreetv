@@ -158,17 +158,11 @@
     <string name="status_home_chooser">زر الصفحة الرئيسية يفتح قائمة اختيار</string>
     <string name="status_pkg_enabled">%1$s: مفعّل</string>
     <string name="status_pkg_disabled">%1$s: معطّل</string>
-    <string name="status_next_up_granted">تم منح إذن متابعة المشاهدة</string>
-    <string name="status_next_up_missing">لم يُمنح إذن متابعة المشاهدة</string>
-    <string name="status_debug_on">تصحيح الأخطاء مفعّل</string>
-    <string name="status_debug_off">تصحيح الأخطاء معطّل (خيارات المطوّرين)</string>
-    <string name="dh_steps">1. الإعدادات > إعدادات الجهاز المفضّلة > حول > اضغط على رقم الإصدار 7 مرات.\n2. خيارات المطوّرين > فعّل تصحيح الأخطاء عبر الشبكة.\n3. اضغط أحد الأزرار أدناه واختر السماح (مع تحديد السماح دائمًا) في الرسالة.</string>
+    <string name="dh_steps">1. الإعدادات > إعدادات الجهاز المفضّلة > حول > اضغط على رقم الإصدار 7 مرات.\n2. خيارات المطوّرين > فعّل تصحيح الأخطاء عبر الشبكة.\n3. ارجع، واضغط BSfreeTV كشاشة رئيسية، واختر السماح (مع تحديد السماح دائمًا) في الرسالة.</string>
     <string name="btn_make_home">BSfreeTV كشاشة رئيسية</string>
     <string name="btn_test">اختبار الاتصال</string>
-    <string name="btn_allow_next_up">السماح بمتابعة المشاهدة</string>
     <string name="btn_restore">استعادة الأصلي</string>
     <string name="dh_turn_off">بعد ذلك أوقف تصحيح الأخطاء عبر الشبكة، وإلا فبإمكان أي شخص على شبكتك طلب الاتصال.</string>
-    <string name="dh_recovery">تراجع / استعادة:</string>
     <string name="dh_uninstall_warning">استعِد المشغّل الأصلي قبل إلغاء تثبيت BSfreeTV، وإلا فلن يفتح زر الصفحة الرئيسية أي شيء.</string>
 
     <string name="task_make_home">تعيين BSfreeTV تطبيقًا للشاشة الرئيسية</string>
@@ -200,4 +194,13 @@
     <string name="home_value_unsupported">غير مدعوم</string>
     <string name="step_restore_home">إعادة %1$s كشاشة رئيسية</string>
     <string name="setup_stopped">توقف هنا: لم تُنفَّذ الخطوات المتبقية، ولم يتغيّر أي شيء آخر.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">إذن متابعة المشاهدة</string>
+    <string name="value_allowed">مسموح</string>
+    <string name="value_allow">السماح</string>
+    <string name="dh_row_debugging">تصحيح الأخطاء عبر الشبكة</string>
+    <string name="dh_row_debugging_desc">مطلوب مرة واحدة لتغيير الشاشة الرئيسية</string>
+    <string name="dh_row_recovery">التراجع والاستعادة</string>
+    <string name="dh_pc_intro">على كمبيوتر مثبت عليه adb وعلى الشبكة نفسها، اتصل بالتلفزيون ونفّذ:</string>
 </resources>

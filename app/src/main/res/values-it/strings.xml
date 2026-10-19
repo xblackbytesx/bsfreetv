@@ -143,17 +143,11 @@
     <string name="status_home_chooser">Il tasto Home apre un menu di scelta</string>
     <string name="status_pkg_enabled">%1$s: attivo</string>
     <string name="status_pkg_disabled">%1$s: disattivato</string>
-    <string name="status_next_up_granted">Accesso a Continua a guardare concesso</string>
-    <string name="status_next_up_missing">Accesso a Continua a guardare non concesso</string>
-    <string name="status_debug_on">Il debug è attivo</string>
-    <string name="status_debug_off">Il debug è disattivato (Opzioni sviluppatore)</string>
-    <string name="dh_steps">1. Impostazioni > Preferenze dispositivo > Informazioni > premi 7 volte su Build.\n2. Opzioni sviluppatore > attiva Debug di rete.\n3. Premi un pulsante qui sotto e scegli Consenti (spunta Consenti sempre) nel messaggio.</string>
+    <string name="dh_steps">1. Impostazioni > Preferenze dispositivo > Informazioni > premi 7 volte su Build.\n2. Opzioni sviluppatore > attiva Debug di rete.\n3. Torna indietro, premi BSfreeTV come Home e scegli Consenti (spunta Consenti sempre) nel messaggio.</string>
     <string name="btn_make_home">BSfreeTV come Home</string>
     <string name="btn_test">Prova la connessione</string>
-    <string name="btn_allow_next_up">Consenti Continua a guardare</string>
     <string name="btn_restore">Ripristina l\'originale</string>
     <string name="dh_turn_off">Poi disattiva di nuovo il debug di rete: altrimenti chiunque sulla tua rete potrebbe chiedere di collegarsi.</string>
-    <string name="dh_recovery">Annulla / ripristino:</string>
     <string name="dh_uninstall_warning">Ripristina il launcher originale prima di disinstallare BSfreeTV, altrimenti il tasto Home non aprirà nulla.</string>
 
     <string name="task_make_home">Imposta BSfreeTV come app Home</string>
@@ -185,4 +179,13 @@
     <string name="home_value_unsupported">Non supportato</string>
     <string name="step_restore_home">Reimposta %1$s come Home</string>
     <string name="setup_stopped">Interrotto qui: i passaggi successivi non sono stati eseguiti, nient\'altro è stato modificato.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Accesso a Continua a guardare</string>
+    <string name="value_allowed">Consentito</string>
+    <string name="value_allow">Consenti</string>
+    <string name="dh_row_debugging">Debug di rete</string>
+    <string name="dh_row_debugging_desc">Serve una volta, per cambiare la Home</string>
+    <string name="dh_row_recovery">Annulla e ripristino</string>
+    <string name="dh_pc_intro">Su un computer con adb nella stessa rete, collegati alla TV ed esegui:</string>
 </resources>

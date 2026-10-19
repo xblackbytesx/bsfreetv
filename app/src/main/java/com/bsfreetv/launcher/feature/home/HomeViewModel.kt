@@ -43,7 +43,16 @@ import kotlinx.coroutines.launch
 /** What the All apps screen lists. */
 enum class AppFilter { ALL, UNSORTED, MEDIA, TOOLS, HIDDEN }
 
-enum class SettingsPage { MAIN, LANGUAGE, DEFAULT_HOME, NEXT_UP_APPS, ABOUT }
+enum class SettingsPage(val parent: SettingsPage? = null) {
+    MAIN,
+    LANGUAGE(MAIN),
+    DEFAULT_HOME(MAIN),
+    HOME_DEBUGGING(DEFAULT_HOME),
+    HOME_PC(DEFAULT_HOME),
+    HOME_RECOVERY(DEFAULT_HOME),
+    NEXT_UP_APPS(MAIN),
+    ABOUT(MAIN),
+}
 
 sealed interface Overlay {
     data object None : Overlay
@@ -244,8 +253,9 @@ class HomeViewModel @Inject constructor(
         when {
             _menuFor.value != null -> _menuFor.value = null
             _moving.value != null -> _moving.value = null
-            _overlay.value is Overlay.Settings && (_overlay.value as Overlay.Settings).page != SettingsPage.MAIN ->
-                _overlay.value = Overlay.Settings(SettingsPage.MAIN)
+            // Back walks up one page: a Default launcher sub-page returns to it, not to the top.
+            _overlay.value is Overlay.Settings && (_overlay.value as Overlay.Settings).page.parent != null ->
+                _overlay.value = Overlay.Settings((_overlay.value as Overlay.Settings).page.parent!!)
             _overlay.value == Overlay.WallpaperPicker -> {
                 _preview.value = null
                 _overlay.value = Overlay.Settings(SettingsPage.MAIN)

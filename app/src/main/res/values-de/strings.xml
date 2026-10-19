@@ -138,17 +138,11 @@
     <string name="status_home_chooser">Home-Taste öffnet eine Auswahl</string>
     <string name="status_pkg_enabled">%1$s: aktiviert</string>
     <string name="status_pkg_disabled">%1$s: deaktiviert</string>
-    <string name="status_next_up_granted">Zugriff für Weiterschauen erteilt</string>
-    <string name="status_next_up_missing">Kein Zugriff für Weiterschauen</string>
-    <string name="status_debug_on">Debugging ist aktiviert</string>
-    <string name="status_debug_off">Debugging ist deaktiviert (Entwickleroptionen)</string>
-    <string name="dh_steps">1. Einstellungen > Geräteeinstellungen > Info > 7-mal auf Build tippen.\n2. Entwickleroptionen > Netzwerk-Debugging aktivieren.\n3. Unten eine Schaltfläche drücken und in der Meldung Zulassen wählen (Immer zulassen ankreuzen).</string>
+    <string name="dh_steps">1. Einstellungen > Geräteeinstellungen > Info > 7-mal auf Build tippen.\n2. Entwickleroptionen > Netzwerk-Debugging aktivieren.\n3. Geh zurück, drücke BSfreeTV als Startbildschirm und wähle in der Meldung Zulassen (Immer zulassen ankreuzen).</string>
     <string name="btn_make_home">BSfreeTV als Startbildschirm</string>
     <string name="btn_test">Verbindung testen</string>
-    <string name="btn_allow_next_up">Weiterschauen erlauben</string>
     <string name="btn_restore">Standard wiederherstellen</string>
     <string name="dh_turn_off">Schalte Netzwerk-Debugging danach wieder aus: Sonst kann jeder in deinem Netzwerk eine Verbindung anfragen.</string>
-    <string name="dh_recovery">Rückgängig / Wiederherstellung:</string>
     <string name="dh_uninstall_warning">Stelle den Standard-Launcher wieder her, bevor du BSfreeTV deinstallierst, sonst öffnet die Home-Taste nichts.</string>
 
     <string name="task_make_home">BSfreeTV als Startbildschirm festlegen</string>
@@ -180,4 +174,13 @@
     <string name="home_value_unsupported">Nicht unterstützt</string>
     <string name="step_restore_home">Startbildschirm auf %1$s zurücksetzen</string>
     <string name="setup_stopped">Hier angehalten: Die restlichen Schritte wurden nicht ausgeführt, sonst wurde nichts geändert.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Zugriff für Weiterschauen</string>
+    <string name="value_allowed">Erlaubt</string>
+    <string name="value_allow">Erlauben</string>
+    <string name="dh_row_debugging">Netzwerk-Debugging</string>
+    <string name="dh_row_debugging_desc">Einmalig nötig, um den Startbildschirm zu wechseln</string>
+    <string name="dh_row_recovery">Rückgängig und Wiederherstellung</string>
+    <string name="dh_pc_intro">Verbinde dich auf einem Computer mit adb im selben Netzwerk mit dem Fernseher und führe aus:</string>
 </resources>

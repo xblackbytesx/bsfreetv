@@ -148,17 +148,11 @@
     <string name="status_home_chooser">Przycisk Home otwiera okno wyboru</string>
     <string name="status_pkg_enabled">%1$s: włączony</string>
     <string name="status_pkg_disabled">%1$s: wyłączony</string>
-    <string name="status_next_up_granted">Przyznano dostęp do Oglądaj dalej</string>
-    <string name="status_next_up_missing">Brak dostępu do Oglądaj dalej</string>
-    <string name="status_debug_on">Debugowanie jest włączone</string>
-    <string name="status_debug_off">Debugowanie jest wyłączone (Opcje programisty)</string>
-    <string name="dh_steps">1. Ustawienia > Ustawienia urządzenia > Informacje > kliknij 7 razy Numer kompilacji.\n2. Opcje programisty > włącz Debugowanie sieciowe.\n3. Naciśnij przycisk poniżej i w komunikacie wybierz Zezwól (zaznacz Zawsze zezwalaj).</string>
+    <string name="dh_steps">1. Ustawienia > Ustawienia urządzenia > Informacje > kliknij 7 razy Numer kompilacji.\n2. Opcje programisty > włącz Debugowanie sieciowe.\n3. Wróć, naciśnij BSfreeTV jako główny i w komunikacie wybierz Zezwól (zaznacz Zawsze zezwalaj).</string>
     <string name="btn_make_home">BSfreeTV jako główny</string>
     <string name="btn_test">Testuj połączenie</string>
-    <string name="btn_allow_next_up">Zezwól na Oglądaj dalej</string>
     <string name="btn_restore">Przywróć fabryczny</string>
     <string name="dh_turn_off">Potem wyłącz debugowanie sieciowe: w przeciwnym razie każdy w Twojej sieci może poprosić o połączenie.</string>
-    <string name="dh_recovery">Cofnij / przywracanie:</string>
     <string name="dh_uninstall_warning">Przywróć fabryczny launcher przed odinstalowaniem BSfreeTV, inaczej przycisk Home niczego nie otworzy.</string>
 
     <string name="task_make_home">Ustaw BSfreeTV jako ekran główny</string>
@@ -190,4 +184,13 @@
     <string name="home_value_unsupported">Nieobsługiwane</string>
     <string name="step_restore_home">Przywróć %1$s jako ekran główny</string>
     <string name="setup_stopped">Zatrzymano tutaj: pozostałe kroki nie zostały wykonane, nic więcej nie zmieniono.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Dostęp do Oglądaj dalej</string>
+    <string name="value_allowed">Przyznany</string>
+    <string name="value_allow">Zezwól</string>
+    <string name="dh_row_debugging">Debugowanie sieciowe</string>
+    <string name="dh_row_debugging_desc">Potrzebne raz, by zmienić ekran główny</string>
+    <string name="dh_row_recovery">Cofnij i przywróć</string>
+    <string name="dh_pc_intro">Na komputerze z adb w tej samej sieci połącz się z telewizorem i uruchom:</string>
 </resources>

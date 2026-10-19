@@ -148,17 +148,11 @@
     <string name="status_home_chooser">Кнопка «Додому» відкриває вибір додатка</string>
     <string name="status_pkg_enabled">%1$s: увімкнено</string>
     <string name="status_pkg_disabled">%1$s: вимкнено</string>
-    <string name="status_next_up_granted">Доступ до «Продовжити перегляд» надано</string>
-    <string name="status_next_up_missing">Доступ до «Продовжити перегляд» не надано</string>
-    <string name="status_debug_on">Налагодження ввімкнено</string>
-    <string name="status_debug_off">Налагодження вимкнено (Параметри розробника)</string>
-    <string name="dh_steps">1. Налаштування > Параметри пристрою > Про пристрій > натисніть 7 разів на «Номер збірки».\n2. Параметри розробника > увімкніть «Налагодження через мережу».\n3. Натисніть кнопку нижче й виберіть «Дозволити» (позначте «Завжди дозволяти») у запиті.</string>
+    <string name="dh_steps">1. Налаштування > Параметри пристрою > Про пристрій > натисніть 7 разів на «Номер збірки».\n2. Параметри розробника > увімкніть «Налагодження через мережу».\n3. Поверніться назад, натисніть «BSfreeTV як головний» і виберіть «Дозволити» (позначте «Завжди дозволяти») у запиті.</string>
     <string name="btn_make_home">BSfreeTV як головний</string>
     <string name="btn_test">Перевірити зв’язок</string>
-    <string name="btn_allow_next_up">Дозволити «Продовжити перегляд»</string>
     <string name="btn_restore">Відновити стандартний</string>
     <string name="dh_turn_off">Після цього знову вимкніть налагодження через мережу: інакше будь-хто у вашій мережі зможе запросити підключення.</string>
-    <string name="dh_recovery">Скасувати / відновлення:</string>
     <string name="dh_uninstall_warning">Відновіть стандартний лаунчер, перш ніж видаляти BSfreeTV, інакше кнопка «Додому» нічого не відкриватиме.</string>
 
     <string name="task_make_home">Зробити BSfreeTV головним екраном</string>
@@ -190,4 +184,13 @@
     <string name="home_value_unsupported">Не підтримується</string>
     <string name="step_restore_home">Повернути %1$s як головний екран</string>
     <string name="setup_stopped">Зупинено тут: решту кроків не виконано, більше нічого не змінено.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Доступ до «Продовжити перегляд»</string>
+    <string name="value_allowed">Дозволено</string>
+    <string name="value_allow">Дозволити</string>
+    <string name="dh_row_debugging">Налагодження через мережу</string>
+    <string name="dh_row_debugging_desc">Потрібне один раз, щоб змінити головний екран</string>
+    <string name="dh_row_recovery">Скасування та відновлення</string>
+    <string name="dh_pc_intro">На комп’ютері з adb у тій самій мережі підключіться до телевізора й виконайте:</string>
 </resources>

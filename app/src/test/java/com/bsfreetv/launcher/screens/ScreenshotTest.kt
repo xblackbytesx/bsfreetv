@@ -221,6 +221,20 @@ class ScreenshotTest {
         }
     }
 
+    private fun homePage(name: String, page: SettingsPage, state: SetupState = SetupState.Idle) {
+        val f = wallpaper("red-frame-tree")
+        shot(name, f.palette) {
+            Home(f, ui(), overlay = true)
+            SettingsPanel(page, ui(), env(state), HomeActions.None, SettingsActions.None)
+        }
+    }
+
+    @Test @Config(qualifiers = "+ar-ldrtl") fun settings_home_ar() = homePage("08e-default-launcher-ar", SettingsPage.DEFAULT_HOME)
+    @Test fun settings_home_idle() = homePage("08-default-launcher-idle", SettingsPage.DEFAULT_HOME)
+    @Test fun settings_home_debugging() = homePage("08b-network-debugging", SettingsPage.HOME_DEBUGGING)
+    @Test fun settings_home_pc() = homePage("08c-from-a-pc", SettingsPage.HOME_PC)
+    @Test fun settings_home_recovery() = homePage("08d-recovery", SettingsPage.HOME_RECOVERY)
+
     @Test fun wallpaper_picker() {
         val f = wallpaper("pagoda-fuji-blossom")
         val list = listOf("pagoda-fuji-blossom", "japanese-castle-full-moon", "capri-faraglioni", "tiger-snow", "tropical-bay-night", "emerald-cliffs")

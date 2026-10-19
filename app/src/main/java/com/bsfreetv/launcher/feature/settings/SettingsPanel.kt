@@ -25,21 +25,13 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.bsfreetv.launcher.BuildConfig
-import com.bsfreetv.launcher.R
-import com.bsfreetv.launcher.feature.home.AppFilter
-import com.bsfreetv.launcher.i18n.SupportedLanguages
-import com.bsfreetv.launcher.ui.label
-import com.bsfreetv.launcher.ui.message
-import com.bsfreetv.launcher.ui.minutesLabel
-import com.bsfreetv.launcher.ui.onOff
-import com.bsfreetv.launcher.ui.paletteLabel
-import kotlin.math.roundToInt
 import com.bsfreetv.launcher.data.AppEntry
 import com.bsfreetv.launcher.domain.CardSize
+import com.bsfreetv.launcher.domain.home.DeviceKind
 import com.bsfreetv.launcher.domain.home.HomeCommands
 import com.bsfreetv.launcher.domain.home.HomeStatus
 import com.bsfreetv.launcher.domain.home.StockLaunchers
@@ -48,20 +40,30 @@ import com.bsfreetv.launcher.domain.Motion
 import com.bsfreetv.launcher.domain.palette.PaletteBuilder
 import com.bsfreetv.launcher.domain.Rotation
 import com.bsfreetv.launcher.domain.ToolsStyle
+import com.bsfreetv.launcher.feature.home.AppFilter
 import com.bsfreetv.launcher.feature.home.HomeActions
 import com.bsfreetv.launcher.feature.home.HomeUi
 import com.bsfreetv.launcher.feature.home.Overlay
 import com.bsfreetv.launcher.feature.home.SettingsPage
+import com.bsfreetv.launcher.i18n.SupportedLanguages
+import com.bsfreetv.launcher.R
 import com.bsfreetv.launcher.system.AdbOutcome
 import com.bsfreetv.launcher.ui.BsfType
+import com.bsfreetv.launcher.ui.components.CodeBlock
+import com.bsfreetv.launcher.ui.components.InfoBlock
 import com.bsfreetv.launcher.ui.components.PanelButton
 import com.bsfreetv.launcher.ui.components.SectionHeader
 import com.bsfreetv.launcher.ui.components.SettingRow
 import com.bsfreetv.launcher.ui.components.StatusLine
 import com.bsfreetv.launcher.ui.components.trapFocus
+import com.bsfreetv.launcher.ui.label
 import com.bsfreetv.launcher.ui.LocalBsfColors
+import com.bsfreetv.launcher.ui.message
+import com.bsfreetv.launcher.ui.minutesLabel
+import com.bsfreetv.launcher.ui.onOff
+import com.bsfreetv.launcher.ui.paletteLabel
 import com.bsfreetv.launcher.ui.toColors
-import com.bsfreetv.launcher.domain.home.DeviceKind
+import kotlin.math.roundToInt
 
 /** Cycle to the next value of a list, wrapping. */
 fun <T> List<T>.after(current: T): T = this[(indexOf(current) + 1).mod(size)]
@@ -128,6 +130,9 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
                         SettingsPage.MAIN -> R.string.settings_title
                         SettingsPage.LANGUAGE -> R.string.set_language
                         SettingsPage.DEFAULT_HOME -> R.string.settings_default_home
+                        SettingsPage.HOME_DEBUGGING -> R.string.dh_row_debugging
+                        SettingsPage.HOME_PC -> R.string.header_from_pc
+                        SettingsPage.HOME_RECOVERY -> R.string.dh_row_recovery
                         SettingsPage.NEXT_UP_APPS -> R.string.settings_next_up_apps
                         SettingsPage.ABOUT -> R.string.settings_about
                     },
@@ -139,7 +144,10 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
             when (page) {
                 SettingsPage.MAIN -> MainPage(ui, env, actions, setup, first)
                 SettingsPage.LANGUAGE -> LanguagePage(env, setup, first)
-                SettingsPage.DEFAULT_HOME -> DefaultHomePage(env, setup, first)
+                SettingsPage.DEFAULT_HOME -> DefaultHomePage(env, actions, setup, first)
+                SettingsPage.HOME_DEBUGGING -> HomeDebuggingPage(first)
+                SettingsPage.HOME_PC -> HomePcPage(env, first)
+                SettingsPage.HOME_RECOVERY -> HomeRecoveryPage(env, setup, first)
                 SettingsPage.NEXT_UP_APPS -> NextUpAppsPage(ui, actions, first)
                 SettingsPage.ABOUT -> AboutPage(env, first)
             }
@@ -264,90 +272,125 @@ private fun LanguagePage(env: SettingsEnv, setup: SettingsActions, current: Focu
     }
 }
 
+/**
+ * Default launcher overview: status, the one action, and rows into the
+ * details. Everything is focusable (rows, buttons, InfoBlocks), so the D-pad
+ * can reach and scroll to every line; long material lives on sub-pages.
+ */
 @Composable
-private fun DefaultHomePage(env: SettingsEnv, setup: SettingsActions, first: FocusRequester) {
+private fun DefaultHomePage(env: SettingsEnv, actions: HomeActions, setup: SettingsActions, first: FocusRequester) {
     val colors = LocalBsfColors.current
     val st = env.homeStatus
     // The switch disables the stock launcher, which is only safe on classic
     // Android TV (the Shield). On Google TV it boot-loops the device (v0.2.0).
     val supported = st?.canSwitchHome == true
-    Column(Modifier.padding(horizontal = 14.dp)) {
-        Text(
-            stringResource(
-                when {
-                    supported -> R.string.dh_intro
-                    st?.deviceKind == DeviceKind.GOOGLE_TV -> R.string.dh_unsupported_google_tv
-                    else -> R.string.dh_unsupported_other
-                },
-            ),
-            style = BsfType.body,
-            color = if (supported) colors.textMuted else colors.text,
-            modifier = Modifier.padding(top = 6.dp, bottom = 12.dp),
-        )
-        if (st != null) {
-            // Where the switch is unsupported, the healthy state is the stock one.
-            StatusLine(
-                if (supported) st.weAreHome else st.currentHome in StockLaunchers,
-                when {
-                    st.weAreHome -> stringResource(R.string.status_home_ours)
-                    st.currentHome in StockLaunchers -> stringResource(R.string.status_home_stock)
-                    st.currentHome == null -> stringResource(R.string.status_home_chooser)
-                    else -> stringResource(R.string.status_home_other, st.currentHome)
-                },
+    if (!supported) {
+        InfoBlock(Modifier.focusRequester(first)) {
+            Text(
+                stringResource(if (st?.deviceKind == DeviceKind.GOOGLE_TV) R.string.dh_unsupported_google_tv else R.string.dh_unsupported_other),
+                style = BsfType.body,
+                color = colors.text,
             )
-            st.stock.forEach {
-                val name = it.packageName.substringAfterLast('.')
-                StatusLine(if (supported) !it.enabled else it.enabled, stringResource(if (it.enabled) R.string.status_pkg_enabled else R.string.status_pkg_disabled, name))
-            }
-            StatusLine(st.tvListingsGranted, stringResource(if (st.tvListingsGranted) R.string.status_next_up_granted else R.string.status_next_up_missing))
-            StatusLine(st.adbEnabled, stringResource(if (st.adbEnabled) R.string.status_debug_on else R.string.status_debug_off))
         }
-        Text(stringResource(R.string.dh_steps), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 12.dp))
-        if (supported) {
-            Row(Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                PanelButton(stringResource(R.string.btn_make_home), primary = true, modifier = Modifier.focusRequester(first)) { setup.makeDefault() }
-                PanelButton(stringResource(R.string.btn_test)) { setup.probe() }
-            }
-            Row(Modifier.padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                PanelButton(stringResource(R.string.btn_allow_next_up)) { setup.grantNextUp() }
-                PanelButton(stringResource(R.string.btn_restore)) { setup.restoreStock() }
-            }
-        } else {
-            // Still offered everywhere: Next Up access is harmless, and Restore
-            // repairs a device an older version already changed.
-            Row(Modifier.padding(top = 14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                PanelButton(stringResource(R.string.btn_restore), modifier = Modifier.focusRequester(first)) { setup.restoreStock() }
-                PanelButton(stringResource(R.string.btn_allow_next_up)) { setup.grantNextUp() }
-            }
+    }
+    if (st != null) HomeStatusCard(st, supported)
+    if (supported) {
+        Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            PanelButton(stringResource(R.string.btn_make_home), primary = true, modifier = Modifier.focusRequester(first)) { setup.makeDefault() }
+            PanelButton(stringResource(R.string.btn_test)) { setup.probe() }
         }
-        SetupResult(env.setupState)
-        Text(stringResource(R.string.dh_turn_off), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 12.dp))
-        SectionHeader(stringResource(R.string.header_from_pc), Modifier.padding(start = 0.dp))
-        Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(8.dp)).background(Color.Black.copy(alpha = 0.5f)).padding(10.dp)) {
-            Text(PC_CONNECT, style = BsfType.mono, color = colors.text)
-            if (supported) env.pcCommands.forEach { Text(it, style = BsfType.mono, color = colors.text) }
-            Text(stringResource(R.string.dh_recovery), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 8.dp))
-            HomeCommands.RECOVERY.forEach { Text(it, style = BsfType.mono, color = colors.text) }
+    }
+    SetupResult(env.setupState)
+    if (st != null) {
+        SettingRow(
+            stringResource(R.string.dh_row_next_up),
+            stringResource(if (st.tvListingsGranted) R.string.value_allowed else R.string.value_allow),
+        ) { if (!st.tvListingsGranted) setup.grantNextUp() }
+    }
+    if (supported) {
+        SettingRow(
+            stringResource(R.string.dh_row_debugging),
+            onOff(st?.adbEnabled == true),
+            description = stringResource(R.string.dh_row_debugging_desc),
+            chevron = true,
+        ) { actions.open(Overlay.Settings(SettingsPage.HOME_DEBUGGING)) }
+        SettingRow(stringResource(R.string.header_from_pc), chevron = true) { actions.open(Overlay.Settings(SettingsPage.HOME_PC)) }
+    }
+    SettingRow(stringResource(R.string.dh_row_recovery), chevron = true) { actions.open(Overlay.Settings(SettingsPage.HOME_RECOVERY)) }
+}
+
+/** Where Home points and the state of each stock launcher, as one quiet card. */
+@Composable
+private fun HomeStatusCard(st: HomeStatus, supported: Boolean) {
+    InfoBlock {
+        // Where the switch is unsupported, the healthy state is the stock one.
+        StatusLine(
+            if (supported) st.weAreHome else st.currentHome in StockLaunchers,
+            when {
+                st.weAreHome -> stringResource(R.string.status_home_ours)
+                st.currentHome in StockLaunchers -> stringResource(R.string.status_home_stock)
+                st.currentHome == null -> stringResource(R.string.status_home_chooser)
+                else -> stringResource(R.string.status_home_other, st.currentHome)
+            },
+        )
+        st.stock.forEach {
+            val name = it.packageName.substringAfterLast('.')
+            StatusLine(
+                if (supported) !it.enabled else it.enabled,
+                stringResource(if (it.enabled) R.string.status_pkg_enabled else R.string.status_pkg_disabled, name),
+                small = true,
+            )
         }
-        Text(stringResource(R.string.dh_uninstall_warning), style = BsfType.label, color = colors.textMuted, modifier = Modifier.padding(top = 10.dp))
     }
 }
 
+/** How to turn on Network debugging, and why it is needed. */
+@Composable
+private fun HomeDebuggingPage(first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    InfoBlock(Modifier.focusRequester(first)) { Text(stringResource(R.string.dh_intro), style = BsfType.body, color = colors.text) }
+    InfoBlock { Text(stringResource(R.string.dh_steps), style = BsfType.body, color = colors.textMuted) }
+    InfoBlock { Text(stringResource(R.string.dh_turn_off), style = BsfType.label, color = colors.textMuted) }
+}
+
+/** The same switch from a computer, for when self-ADB cannot connect. */
+@Composable
+private fun HomePcPage(env: SettingsEnv, first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    InfoBlock(Modifier.focusRequester(first)) {
+        Text(stringResource(R.string.dh_pc_intro), style = BsfType.body, color = colors.text)
+        CodeBlock(listOf(PC_CONNECT) + env.pcCommands)
+    }
+    InfoBlock { Text(stringResource(R.string.dh_turn_off), style = BsfType.label, color = colors.textMuted) }
+}
+
+/** Undo on the TV itself, and the commands that work from a PC when Home is broken. */
+@Composable
+private fun HomeRecoveryPage(env: SettingsEnv, setup: SettingsActions, first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+        PanelButton(stringResource(R.string.btn_restore), primary = true, modifier = Modifier.focusRequester(first)) { setup.restoreStock() }
+    }
+    SetupResult(env.setupState)
+    InfoBlock {
+        Text(stringResource(R.string.header_from_pc), style = BsfType.body, color = colors.text)
+        CodeBlock(HomeCommands.RECOVERY)
+    }
+    InfoBlock { Text(stringResource(R.string.dh_uninstall_warning), style = BsfType.label, color = colors.textMuted) }
+}
+
 /** A shell command, never translated. */
-private const val PC_CONNECT = "adb connect <shield-ip>:5555"
+private const val PC_CONNECT = "adb connect <tv-ip>:5555"
 
 @Composable
 private fun SetupResult(state: SetupState) {
     val colors = LocalBsfColors.current
     when (state) {
         SetupState.Idle -> Unit
-        is SetupState.Working -> Text(
-            stringResource(R.string.setup_working, state.task.label()),
-            style = BsfType.body,
-            color = colors.accent,
-            modifier = Modifier.padding(top = 12.dp),
-        )
-        is SetupState.Result -> Column(Modifier.padding(top = 12.dp)) {
+        is SetupState.Working -> InfoBlock {
+            Text(stringResource(R.string.setup_working, state.task.label()), style = BsfType.body, color = colors.accent)
+        }
+        is SetupState.Result -> InfoBlock {
             when (val o = state.outcome) {
                 is AdbOutcome.Failed -> StatusLine(false, o.error.message(o.detail))
                 is AdbOutcome.Done -> {

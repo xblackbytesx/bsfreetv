@@ -143,17 +143,11 @@
     <string name="status_home_chooser">Le bouton Accueil ouvre un sélecteur</string>
     <string name="status_pkg_enabled">%1$s : activé</string>
     <string name="status_pkg_disabled">%1$s : désactivé</string>
-    <string name="status_next_up_granted">Accès à Reprendre accordé</string>
-    <string name="status_next_up_missing">Accès à Reprendre non accordé</string>
-    <string name="status_debug_on">Le débogage est activé</string>
-    <string name="status_debug_off">Le débogage est désactivé (Options pour les développeurs)</string>
-    <string name="dh_steps">1. Paramètres > Préférences de l\'appareil > À propos > appuyez 7 fois sur Build.\n2. Options pour les développeurs > activez Débogage réseau.\n3. Appuyez sur un bouton ci-dessous et choisissez Autoriser (cochez Toujours autoriser) dans le message.</string>
+    <string name="dh_steps">1. Paramètres > Préférences de l\'appareil > À propos > appuyez 7 fois sur Build.\n2. Options pour les développeurs > activez Débogage réseau.\n3. Revenez en arrière, appuyez sur BSfreeTV comme accueil et choisissez Autoriser (cochez Toujours autoriser) dans le message.</string>
     <string name="btn_make_home">BSfreeTV comme accueil</string>
     <string name="btn_test">Tester la connexion</string>
-    <string name="btn_allow_next_up">Autoriser Reprendre</string>
     <string name="btn_restore">Restaurer l\'origine</string>
     <string name="dh_turn_off">Désactivez ensuite le débogage réseau : sinon, n\'importe qui sur votre réseau pourrait demander à se connecter.</string>
-    <string name="dh_recovery">Annuler / récupération :</string>
     <string name="dh_uninstall_warning">Restaurez le launcher d\'origine avant de désinstaller BSfreeTV, sinon le bouton Accueil n\'ouvrira plus rien.</string>
 
     <string name="task_make_home">Définir BSfreeTV comme appli d\'accueil</string>
@@ -185,4 +179,13 @@
     <string name="home_value_unsupported">Non compatible</string>
     <string name="step_restore_home">Remettre %1$s comme accueil</string>
     <string name="setup_stopped">Arrêté ici : les étapes suivantes n\'ont pas été exécutées, rien d\'autre n\'a été modifié.</string>
+
+    <!-- Default launcher page (v0.2.2) -->
+    <string name="dh_row_next_up">Accès à Reprendre</string>
+    <string name="value_allowed">Autorisé</string>
+    <string name="value_allow">Autoriser</string>
+    <string name="dh_row_debugging">Débogage réseau</string>
+    <string name="dh_row_debugging_desc">Nécessaire une fois, pour changer l\'accueil</string>
+    <string name="dh_row_recovery">Annuler et récupérer</string>
+    <string name="dh_pc_intro">Sur un ordinateur avec adb sur le même réseau, connectez-vous à la télé et lancez :</string>
 </resources>
