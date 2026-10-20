@@ -15,8 +15,8 @@ class ArtworkSizeTest {
     }
 
     @Test fun `icons scale with density and keep a floor`() {
-        assertEquals(256, AppCatalog.iconSizeFor(4f))
-        assertEquals(128, AppCatalog.iconSizeFor(2f))
+        assertEquals(200, AppCatalog.iconSizeFor(4f))
+        assertEquals(100, AppCatalog.iconSizeFor(2f))
         assertEquals(AppCatalog.MIN_ICON_PX, AppCatalog.iconSizeFor(1f))
         assertEquals(AppCatalog.MIN_BANNER_W, AppCatalog.bannerWidthFor(1f))
     }

@@ -172,17 +172,22 @@ fun ToolChip(
     var focused by remember { mutableStateOf(false) }
     val colors = LocalBsfColors.current
     Column(modifier.width(64.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        // The icon is already round and full-size (IconShaper); the chip is just
+        // the icon plus a ring: hairline at rest, accent and halo on focus.
         Box(
             Modifier
                 .size(44.dp)
                 .focusHalo(focused || moving, corner = 22.dp, scaleTo = 1.12f, dimUnfocused = false)
                 .tvClickable(onLongClick = onLongClick, onFocus = { focused = it }, onClick = onClick)
-                .clip(CircleShape)
-                .background(if (focused || moving) colors.surfaceHigh else colors.surface.copy(alpha = 0.7f))
-                .border(if (focused || moving) 2.dp else 1.dp, if (focused || moving) colors.accent else colors.border.copy(alpha = 0.5f), CircleShape),
+                .clip(CircleShape),
             contentAlignment = Alignment.Center,
         ) {
-            Image(app.icon, app.label, Modifier.size(26.dp), filterQuality = FilterQuality.Medium)
+            Image(app.icon, app.label, Modifier.fillMaxSize(), filterQuality = FilterQuality.Medium)
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .border(if (focused || moving) 2.dp else 1.dp, if (focused || moving) colors.accent else Color.White.copy(alpha = 0.18f), CircleShape),
+            )
         }
         Text(
             if (moving) "‹ ${app.label} ›" else app.label,
