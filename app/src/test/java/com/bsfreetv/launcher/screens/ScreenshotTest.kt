@@ -168,6 +168,16 @@ class ScreenshotTest {
         shot("14-tools-4k", f.palette) { Home(f, ui()) }
     }
 
+    @Test fun tools_small() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("15-tools-small", f.palette) { Home(f, ui(LauncherSettings(toolSize = com.bsfreetv.launcher.domain.ToolSize.SMALL))) }
+    }
+
+    @Test fun tools_large() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("15-tools-large", f.palette) { Home(f, ui(LauncherSettings(toolSize = com.bsfreetv.launcher.domain.ToolSize.LARGE))) }
+    }
+
     @Test fun home_castle() {
         val f = wallpaper("japanese-castle-full-moon")
         shot("01-home-castle", f.palette) { Home(f, ui()) }

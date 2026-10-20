@@ -99,6 +99,7 @@
     <string name="tools_hidden">Ausgeblendet</string>
     <string name="set_tools_desc_tray">Kleine Reihe unter deinen Medien</string>
     <string name="set_tools_desc_hidden">Nur hinter der Schaltfläche Tools</string>
+    <string name="set_tool_size">Größe der Tool-Symbole</string>
     <string name="set_clock">Uhr</string>
     <string name="set_animations">Animationen</string>
     <string name="motion_full">Voll</string>

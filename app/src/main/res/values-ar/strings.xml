@@ -111,6 +111,7 @@
     <string name="tools_hidden">مخفية</string>
     <string name="set_tools_desc_tray">صف صغير أسفل الوسائط</string>
     <string name="set_tools_desc_hidden">خلف زر الأدوات فقط</string>
+    <string name="set_tool_size">حجم أيقونات الأدوات</string>
     <string name="set_clock">الساعة</string>
     <string name="set_animations">الرسوم المتحركة</string>
     <string name="motion_full">كاملة</string>

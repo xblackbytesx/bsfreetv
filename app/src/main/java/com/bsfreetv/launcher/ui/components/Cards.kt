@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.Dp
 import com.bsfreetv.launcher.data.AppEntry
+import com.bsfreetv.launcher.domain.ToolSize
 import com.bsfreetv.launcher.ui.BsfType
 import com.bsfreetv.launcher.ui.LocalBsfColors
 import com.bsfreetv.launcher.ui.forScript
@@ -165,19 +166,20 @@ private fun MoveArrows() {
 fun ToolChip(
     app: AppEntry,
     modifier: Modifier = Modifier,
+    size: ToolSize = ToolSize.MEDIUM,
     moving: Boolean = false,
     onLongClick: () -> Unit = {},
     onClick: () -> Unit,
 ) {
     var focused by remember { mutableStateOf(false) }
     val colors = LocalBsfColors.current
-    Column(modifier.width(64.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier.width(size.slotDp.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         // The icon is already round and full-size (IconShaper); the chip is just
         // the icon plus a ring: hairline at rest, accent and halo on focus.
         Box(
             Modifier
-                .size(44.dp)
-                .focusHalo(focused || moving, corner = 22.dp, scaleTo = 1.12f, dimUnfocused = false)
+                .size(size.iconDp.dp)
+                .focusHalo(focused || moving, corner = (size.iconDp / 2).dp, scaleTo = 1.12f, dimUnfocused = false)
                 .tvClickable(onLongClick = onLongClick, onFocus = { focused = it }, onClick = onClick)
                 .clip(CircleShape),
             contentAlignment = Alignment.Center,

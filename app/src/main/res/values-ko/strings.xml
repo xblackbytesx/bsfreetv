@@ -96,6 +96,7 @@
     <string name="tools_hidden">숨김</string>
     <string name="set_tools_desc_tray">미디어 아래 작은 줄로 표시</string>
     <string name="set_tools_desc_hidden">도구 버튼에서만 표시</string>
+    <string name="set_tool_size">도구 아이콘 크기</string>
     <string name="set_clock">시계</string>
     <string name="set_animations">애니메이션</string>
     <string name="motion_full">전체</string>

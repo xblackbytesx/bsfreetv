@@ -102,6 +102,7 @@
     <string name="tools_hidden">Ocultas</string>
     <string name="set_tools_desc_tray">Fila pequeña bajo tus apps multimedia</string>
     <string name="set_tools_desc_hidden">Solo tras el botón Herramientas</string>
+    <string name="set_tool_size">Tamaño de los iconos de herramientas</string>
     <string name="set_clock">Reloj</string>
     <string name="set_animations">Animaciones</string>
     <string name="motion_full">Completas</string>

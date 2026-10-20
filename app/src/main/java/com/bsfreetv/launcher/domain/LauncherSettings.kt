@@ -8,6 +8,9 @@ enum class CardSize(val widthDp: Int) { SMALL(136), MEDIUM(160), LARGE(200) }
 
 enum class ToolsStyle { TRAY, HIDDEN }
 
+/** Tool chip icon diameter and the slot it sits in (the slot also bounds the focused name). */
+enum class ToolSize(val iconDp: Int, val slotDp: Int) { SMALL(28, 52), MEDIUM(34, 56), LARGE(44, 64) }
+
 enum class Motion { FULL, REDUCED, OFF }
 
 enum class Rotation { OFF, DAILY, ON_WAKE }
@@ -23,6 +26,7 @@ data class LauncherSettings(
     val wallpaperBrightness: Float = 0.9f,
     val cardSize: CardSize = CardSize.MEDIUM,
     val toolsStyle: ToolsStyle = ToolsStyle.TRAY,
+    val toolSize: ToolSize = ToolSize.MEDIUM,
     val showClock: Boolean = true,
     val motion: Motion = Motion.FULL,
     /** Minutes without input until only the wallpaper shows; 0 = never. */

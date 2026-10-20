@@ -95,5 +95,7 @@ class LayoutTest {
         val s = json.decodeFromString(LauncherSettings.serializer(), """{"cardSize":"HUGE","showClock":false,"later":true}""")
         assertEquals(CardSize.MEDIUM, s.cardSize)
         assertEquals(false, s.showClock)
+        // Settings saved before the tool size existed get the default.
+        assertEquals(ToolSize.MEDIUM, s.toolSize)
     }
 }

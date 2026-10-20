@@ -96,6 +96,7 @@
     <string name="tools_hidden">非表示</string>
     <string name="set_tools_desc_tray">メディアの下に小さな列で表示</string>
     <string name="set_tools_desc_hidden">「ツール」ボタンからのみ表示</string>
+    <string name="set_tool_size">ツールアイコンのサイズ</string>
     <string name="set_clock">時計</string>
     <string name="set_animations">アニメーション</string>
     <string name="motion_full">フル</string>

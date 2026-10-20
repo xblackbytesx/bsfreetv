@@ -156,7 +156,7 @@ class AppCatalog @Inject constructor(@ApplicationContext private val context: Co
         private const val TAG = "AppCatalog"
         /** Card focus scale in Cards.kt focusHalo (1.08). */
         const val FOCUS_SCALE = 1.08f
-        /** Largest icon on screen: the 44 dp tool chip at its 1.12 focused scale (about 50 dp). */
+        /** Largest icon on screen: the Large (44 dp) tool chip at its 1.12 focused scale (about 50 dp). */
         const val ICON_DP = 50
         // Floors so a low-density test device still gets usable artwork.
         const val MIN_BANNER_W = 320
