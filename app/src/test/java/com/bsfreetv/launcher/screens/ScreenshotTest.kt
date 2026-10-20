@@ -86,16 +86,33 @@ class ScreenshotTest {
         return b.asImageBitmap()
     }
 
-    private fun icon(bg: Int): ImageBitmap {
-        val b = Bitmap.createBitmap(128, 128, Bitmap.Config.ARGB_8888)
-        val c = Canvas(b)
-        c.drawRoundRect(RectF(8f, 8f, 120f, 120f), 28f, 28f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = bg })
-        c.drawCircle(64f, 64f, 22f, Paint(Paint.ANTI_ALIAS_FLAG).apply { color = 0xFFFFFFFF.toInt() })
-        return b.asImageBitmap()
+    /**
+     * A stand-in app icon run through the real IconShaper: an adaptive icon
+     * (colour background, white glyph foreground) or, with [legacy], an old
+     * style logo on transparency that lands on a tinted plate.
+     */
+    private fun icon(bg: Int, legacy: Boolean = false): ImageBitmap {
+        val res = org.robolectric.RuntimeEnvironment.getApplication().resources
+        val size = com.bsfreetv.launcher.data.AppCatalog.iconSizeFor(res.displayMetrics.density)
+        val glyph = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = if (legacy) bg else 0xFFFFFFFF.toInt(); strokeWidth = 9f; strokeCap = Paint.Cap.ROUND }
+        val drawable = if (legacy) {
+            val b = Bitmap.createBitmap(108, 108, Bitmap.Config.ARGB_8888)
+            Canvas(b).apply { drawLine(24f, 24f, 84f, 84f, glyph); drawLine(84f, 24f, 24f, 84f, glyph) }
+            android.graphics.drawable.BitmapDrawable(res, b)
+        } else {
+            val fg = Bitmap.createBitmap(108, 108, Bitmap.Config.ARGB_8888)
+            Canvas(fg).apply {
+                drawCircle(54f, 47f, 13f, glyph)
+                drawLine(54f, 60f, 54f, 70f, glyph)
+                drawLine(42f, 70f, 66f, 70f, glyph)
+            }
+            android.graphics.drawable.AdaptiveIconDrawable(android.graphics.drawable.ColorDrawable(bg), android.graphics.drawable.BitmapDrawable(res, fg))
+        }
+        return com.bsfreetv.launcher.data.IconShaper.round(drawable, size).asImageBitmap()
     }
 
-    private fun app(pkg: String, label: String, bg: Long, withBanner: Boolean = true, fg: Long = 0xFFFFFFFF) =
-        AppEntry(AppInfo(pkg, label, withBanner), if (withBanner) banner(label, bg.toInt(), fg.toInt()) else null, icon(bg.toInt()), 1)
+    private fun app(pkg: String, label: String, bg: Long, withBanner: Boolean = true, fg: Long = 0xFFFFFFFF, legacy: Boolean = false) =
+        AppEntry(AppInfo(pkg, label, withBanner), if (withBanner) banner(label, bg.toInt(), fg.toInt()) else null, icon(bg.toInt(), legacy), 1)
 
     private val media = listOf(
         app("org.jellyfin.androidtv", "jellyfin", 0xFF101B2E),
@@ -111,7 +128,7 @@ class ScreenshotTest {
     private val unsorted = listOf(
         app("org.xbmc.kodi", "Kodi", 0xFF17B2E7),
         app("com.android.vending", "Play Store", 0xFF01875F, withBanner = false),
-        app("com.nvidia.ota", "System upgrade", 0xFF76B900, withBanner = false),
+        app("com.nvidia.ota", "System upgrade", 0xFF76B900, withBanner = false, legacy = true),
     )
 
     private fun ui(settings: LauncherSettings = LauncherSettings(), fresh: Int = 0) = HomeUi(
@@ -143,6 +160,23 @@ class ScreenshotTest {
     @Composable
     private fun Home(frame: WallpaperFrame, ui: HomeUi, next: List<NextUpItem> = emptyList(), idle: IdlePhase = IdlePhase.ACTIVE, overlay: Boolean = false, fullOverlay: Boolean = false) =
         HomeContent(ui, frame, next, idle, moving = null, homeTick = 0, focusRequest = null, overlayOpen = overlay || fullOverlay, actions = HomeActions.None, chromeHidden = fullOverlay, clockOverride = clock)
+
+    /** The tools tray up close at 4K: round icons, sharp edges. */
+    @Test @Config(qualifiers = "w960dp-h540dp-land-television-xxxhdpi")
+    fun tools_4k() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("14-tools-4k", f.palette) { Home(f, ui()) }
+    }
+
+    @Test fun tools_small() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("15-tools-small", f.palette) { Home(f, ui(LauncherSettings(toolSize = com.bsfreetv.launcher.domain.ToolSize.SMALL))) }
+    }
+
+    @Test fun tools_large() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("15-tools-large", f.palette) { Home(f, ui(LauncherSettings(toolSize = com.bsfreetv.launcher.domain.ToolSize.LARGE))) }
+    }
 
     @Test fun home_castle() {
         val f = wallpaper("japanese-castle-full-moon")

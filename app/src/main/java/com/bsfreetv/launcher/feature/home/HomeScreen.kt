@@ -65,6 +65,7 @@ import com.bsfreetv.launcher.domain.idle.IdlePhase
 import com.bsfreetv.launcher.domain.idle.PixelShift
 import com.bsfreetv.launcher.domain.LauncherSettings
 import com.bsfreetv.launcher.domain.Motion
+import com.bsfreetv.launcher.domain.ToolSize
 import com.bsfreetv.launcher.domain.ToolsStyle
 import com.bsfreetv.launcher.ui.BsfColors
 import com.bsfreetv.launcher.ui.BsfType
@@ -209,7 +210,7 @@ fun HomeContent(
                     }
                 }
                 if (s.toolsStyle == ToolsStyle.TRAY && ui.tools.isNotEmpty()) {
-                    ToolsTray(ui.tools, toolsState, moving, ::requester, actions) { app -> lastFocused = app.packageName; hero = HeroText(app.label, toolSubtitle) }
+                    ToolsTray(ui.tools, s.toolSize, toolsState, moving, ::requester, actions) { app -> lastFocused = app.packageName; hero = HeroText(app.label, toolSubtitle) }
                 }
             }
         }
@@ -324,6 +325,7 @@ private fun NextUpCard(item: NextUpItem, appIcon: ImageBitmap?, modifier: Modifi
 @Composable
 private fun ToolsTray(
     tools: List<AppEntry>,
+    size: ToolSize,
     state: LazyListState,
     moving: String?,
     requester: (String) -> FocusRequester,
@@ -338,7 +340,8 @@ private fun ToolsTray(
             color = colors.textMuted.copy(alpha = 0.8f),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(start = Gutter, top = 22.dp, end = 8.dp).widthIn(min = 48.dp, max = 140.dp),
+            // Centred on the chip: tray top padding plus half the icon, minus half a line.
+            modifier = Modifier.padding(start = Gutter, top = (size.iconDp / 2).dp, end = 8.dp).widthIn(min = 48.dp, max = 140.dp),
         )
         LazyRow(
             state = state,
@@ -349,6 +352,7 @@ private fun ToolsTray(
             items(tools, key = { it.packageName }, contentType = { "tool" }) { app ->
                 ToolChip(
                     app = app,
+                    size = size,
                     moving = moving == app.packageName,
                     modifier = Modifier.focusRequester(requester(app.packageName)).onFocusChangedCompat { if (it) onFocused(app) },
                     onLongClick = { actions.openMenu(app.packageName) },

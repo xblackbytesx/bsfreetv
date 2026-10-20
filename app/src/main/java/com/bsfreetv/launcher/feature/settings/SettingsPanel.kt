@@ -39,6 +39,7 @@ import com.bsfreetv.launcher.domain.LauncherSettings
 import com.bsfreetv.launcher.domain.Motion
 import com.bsfreetv.launcher.domain.palette.PaletteBuilder
 import com.bsfreetv.launcher.domain.Rotation
+import com.bsfreetv.launcher.domain.ToolSize
 import com.bsfreetv.launcher.domain.ToolsStyle
 import com.bsfreetv.launcher.feature.home.AppFilter
 import com.bsfreetv.launcher.feature.home.HomeActions
@@ -186,6 +187,9 @@ private fun MainPage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: 
         description = stringResource(if (s.toolsStyle == ToolsStyle.TRAY) R.string.set_tools_desc_tray else R.string.set_tools_desc_hidden),
     ) {
         set { it.copy(toolsStyle = ToolsStyle.entries.after(it.toolsStyle)) }
+    }
+    if (s.toolsStyle == ToolsStyle.TRAY) {
+        SettingRow(stringResource(R.string.set_tool_size), s.toolSize.label()) { set { it.copy(toolSize = ToolSize.entries.after(it.toolSize)) } }
     }
     SettingRow(stringResource(R.string.set_clock), onOff(s.showClock)) { set { it.copy(showClock = !it.showClock) } }
     SettingRow(stringResource(R.string.set_animations), s.motion.label()) { set { it.copy(motion = Motion.entries.after(it.motion)) } }

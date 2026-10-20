@@ -102,6 +102,7 @@
     <string name="tools_hidden">Nascosti</string>
     <string name="set_tools_desc_tray">Piccola riga sotto le tue app multimediali</string>
     <string name="set_tools_desc_hidden">Solo dietro il pulsante Strumenti</string>
+    <string name="set_tool_size">Dimensione delle icone degli strumenti</string>
     <string name="set_clock">Orologio</string>
     <string name="set_animations">Animazioni</string>
     <string name="motion_full">Complete</string>

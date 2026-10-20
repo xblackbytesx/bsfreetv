@@ -105,6 +105,7 @@
     <string name="tools_hidden">Приховані</string>
     <string name="set_tools_desc_tray">Невеликий ряд під медіа</string>
     <string name="set_tools_desc_hidden">Лише за кнопкою «Інструменти»</string>
+    <string name="set_tool_size">Розмір значків інструментів</string>
     <string name="set_clock">Годинник</string>
     <string name="set_animations">Анімації</string>
     <string name="motion_full">Повні</string>

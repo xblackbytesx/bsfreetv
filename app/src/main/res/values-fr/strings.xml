@@ -102,6 +102,7 @@
     <string name="tools_hidden">Masqués</string>
     <string name="set_tools_desc_tray">Petite rangée sous vos applis multimédia</string>
     <string name="set_tools_desc_hidden">Uniquement derrière le bouton Outils</string>
+    <string name="set_tool_size">Taille des icônes d\'outils</string>
     <string name="set_clock">Horloge</string>
     <string name="set_animations">Animations</string>
     <string name="motion_full">Complètes</string>

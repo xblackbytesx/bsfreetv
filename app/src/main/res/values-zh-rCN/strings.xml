@@ -96,6 +96,7 @@
     <string name="tools_hidden">隐藏</string>
     <string name="set_tools_desc_tray">在媒体下方显示一小行</string>
     <string name="set_tools_desc_hidden">仅在“工具”按钮中显示</string>
+    <string name="set_tool_size">工具图标大小</string>
     <string name="set_clock">时钟</string>
     <string name="set_animations">动画</string>
     <string name="motion_full">完整</string>

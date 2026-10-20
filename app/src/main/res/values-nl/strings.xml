@@ -99,6 +99,7 @@
     <string name="tools_hidden">Verborgen</string>
     <string name="set_tools_desc_tray">Kleine rij onder je media</string>
     <string name="set_tools_desc_hidden">Alleen achter de knop Tools</string>
+    <string name="set_tool_size">Grootte toolpictogrammen</string>
     <string name="set_clock">Klok</string>
     <string name="set_animations">Animaties</string>
     <string name="motion_full">Volledig</string>

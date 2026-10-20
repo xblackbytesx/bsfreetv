@@ -116,7 +116,9 @@ class AppCatalog @Inject constructor(@ApplicationContext private val context: Co
             val entry = AppEntry(
                 info = AppInfo(pkg, label, hasBanner = bannerDrawable != null),
                 banner = bannerDrawable?.let { runCatching { it.toBitmap(bannerW, bannerH).asImageBitmap() }.getOrNull() },
-                icon = ri.loadIcon(pm).toBitmap(iconPx, iconPx).asImageBitmap(),
+                icon = runCatching { IconShaper.round(ri.loadIcon(pm), iconPx) }
+                    .getOrElse { ri.loadIcon(pm).toBitmap(iconPx, iconPx) }
+                    .asImageBitmap(),
                 versionCode = version,
             )
             artCache[pkg] = entry
@@ -154,8 +156,8 @@ class AppCatalog @Inject constructor(@ApplicationContext private val context: Co
         private const val TAG = "AppCatalog"
         /** Card focus scale in Cards.kt focusHalo (1.08). */
         const val FOCUS_SCALE = 1.08f
-        /** Largest icon on screen: the tool chip at its focused scale (26 dp) and All apps (36 dp); 64 dp leaves headroom. */
-        const val ICON_DP = 64
+        /** Largest icon on screen: the Large (44 dp) tool chip at its 1.12 focused scale (about 50 dp). */
+        const val ICON_DP = 50
         // Floors so a low-density test device still gets usable artwork.
         const val MIN_BANNER_W = 320
         const val MIN_ICON_PX = 96

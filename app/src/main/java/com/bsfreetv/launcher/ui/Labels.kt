@@ -11,6 +11,7 @@ import com.bsfreetv.launcher.R
 import com.bsfreetv.launcher.domain.CardSize
 import com.bsfreetv.launcher.domain.Motion
 import com.bsfreetv.launcher.domain.Rotation
+import com.bsfreetv.launcher.domain.ToolSize
 import com.bsfreetv.launcher.domain.ToolsStyle
 import com.bsfreetv.launcher.domain.home.AdbStep
 import com.bsfreetv.launcher.domain.home.StepKind
@@ -30,6 +31,14 @@ import java.util.Locale
         CardSize.SMALL -> R.string.size_small
         CardSize.MEDIUM -> R.string.size_medium
         CardSize.LARGE -> R.string.size_large
+    },
+)
+
+@Composable fun ToolSize.label() = stringResource(
+    when (this) {
+        ToolSize.SMALL -> R.string.size_small
+        ToolSize.MEDIUM -> R.string.size_medium
+        ToolSize.LARGE -> R.string.size_large
     },
 )
 

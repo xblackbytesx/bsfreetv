@@ -103,6 +103,7 @@
     <string name="tools_hidden">Ocultas</string>
     <string name="set_tools_desc_tray">Fileira pequena abaixo da sua mídia</string>
     <string name="set_tools_desc_hidden">Só atrás do botão Ferramentas</string>
+    <string name="set_tool_size">Tamanho dos ícones de ferramentas</string>
     <string name="set_clock">Relógio</string>
     <string name="set_animations">Animações</string>
     <string name="motion_full">Completas</string>

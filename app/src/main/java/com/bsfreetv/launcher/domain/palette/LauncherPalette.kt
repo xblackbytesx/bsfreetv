@@ -73,6 +73,17 @@ object PaletteBuilder {
         return LauncherPalette(accent, hover, onAccent, surface, surfaceHigh, border, text, muted)
     }
 
+    /**
+     * Plate behind a legacy logo: the logo's own main colour at OLED-dark
+     * lightness, or null when the logo has no real colour (use a neutral plate).
+     */
+    fun plateFor(pixels: IntArray): Rgb? {
+        val accent = pickAccent(Quantizer.quantize(pixels, 12))
+        if (accent == LauncherPalette.NeutralAccent || accent.sat < 0.15) return null
+        val hls = accent.toHls()
+        return hls.copy(l = 0.16, s = hls.s.coerceAtMost(0.55)).toRgb()
+    }
+
     fun forMode(mode: String, wallpaperPalette: LauncherPalette?): LauncherPalette =
         if (mode == ADAPTIVE) wallpaperPalette ?: LauncherPalette.Neutral
         else fixed.firstOrNull { it.id == mode }?.let { fromAccent(it.accent) } ?: (wallpaperPalette ?: LauncherPalette.Neutral)

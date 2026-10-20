@@ -123,6 +123,7 @@
     <string name="tools_hidden">Hidden</string>
     <string name="set_tools_desc_tray">Small row under your media</string>
     <string name="set_tools_desc_hidden">Behind the Tools button only</string>
+    <string name="set_tool_size">Tool icon size</string>
     <string name="set_clock">Clock</string>
     <string name="set_animations">Animations</string>
     <string name="motion_full">Full</string>

@@ -105,6 +105,7 @@
     <string name="tools_hidden">Ukryte</string>
     <string name="set_tools_desc_tray">Mały rząd pod multimediami</string>
     <string name="set_tools_desc_hidden">Tylko pod przyciskiem Narzędzia</string>
+    <string name="set_tool_size">Rozmiar ikon narzędzi</string>
     <string name="set_clock">Zegar</string>
     <string name="set_animations">Animacje</string>
     <string name="motion_full">Pełne</string>

@@ -50,6 +50,7 @@ posters only), dadb (self-ADB).
 | `domain/idle/` | `IdlePolicy` (active, ambient, black), `PixelShift` orbit |
 | `domain/home/` | Stock launcher ids, `HomeStatus`, `HomeCommands` (exact adb strings, tested) |
 | `domain/LauncherSettings.kt` | Every setting, one JSON document |
+| `data/IconShaper.kt` + `domain/icon/` | Round icons at scan time: adaptive layers clipped to a circle; legacy icons cropped (solid shapes) or put on a plate tinted from the logo (`IconShape.classify`, `PaletteBuilder.plateFor`) |
 | `data/AppCatalog.kt` | Leanback + launcher activities, banners/icons rasterised once off the main thread |
 | `data/Wallpapers.kt` | Built-in assets + `Android/data/<pkg>/files/wallpapers/`, decode, palette cache, import |
 | `data/WatchNext.kt` | TvProvider Watch Next reader (READ_TV_LISTINGS) |
@@ -76,7 +77,9 @@ posters only), dadb (self-ADB).
   shift and drift read animated values inside `graphicsLayer`/draw lambdas.
   Never animate size, padding or anything that re-measures a row.
 - **Artwork is prerasterised.** Rows draw `ImageBitmap`s from `AppCatalog`;
-  never load a Drawable or touch PackageManager while composing.
+  never load a Drawable or touch PackageManager while composing. Icons are
+  shaped round once per app version by `IconShaper` (never the device mask,
+  which is square on the Shield) and drawn full-size in their circle.
 - **Wallpaper decode is screen-sized and HARDWARE.** At most two bitmaps alive
   (during the cross-fade). Screen size comes from the display, capped at 4K and
   at the image's own size.
