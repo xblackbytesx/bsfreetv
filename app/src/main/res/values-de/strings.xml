@@ -170,7 +170,6 @@
     <string name="about_your_wallpapers">Deine Hintergründe</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">Das scheint Google TV zu sein. BSfreeTV als Startbildschirm wird hier nicht unterstützt: Google TV öffnet beim Drücken der Home-Taste direkt seinen eigenen Launcher, und wenn dieser deaktiviert wird, kann das Gerät ständig neu starten. Du kannst BSfreeTV weiterhin über deine Apps öffnen. Hat eine ältere Version dieses Gerät verändert, nutze unten Standard wiederherstellen.</string>
     <string name="dh_unsupported_other">BSfreeTV kann nur auf klassischen Android-TV-Geräten wie der NVIDIA Shield zum Startbildschirm werden. Du kannst es weiterhin über deine Apps öffnen.</string>
     <string name="home_value_unsupported">Nicht unterstützt</string>
     <string name="step_restore_home">Startbildschirm auf %1$s zurücksetzen</string>
@@ -184,4 +183,34 @@
     <string name="dh_row_debugging_desc">Einmalig nötig, um den Startbildschirm zu wechseln</string>
     <string name="dh_row_recovery">Rückgängig und Wiederherstellung</string>
     <string name="dh_pc_intro">Verbinde dich auf einem Computer mit adb im selben Netzwerk mit dem Fernseher und führe aus:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">BSfreeTV Home-Taste</string>
+    <string name="a11y_service_desc">Öffnet BSfreeTV, wenn du Home drückst. Reagiert nur auf die Home-Taste: kann den Bildschirm nicht sehen und sammelt oder sendet nichts. Schalte den Dienst aus, um die Home-Taste an Google TV zurückzugeben.</string>
+    <string name="dh_gtv_intro">Auf Google TV kann BSfreeTV die Home-Taste über einen Bedienungshilfen-Dienst übernehmen. Google TV selbst bleibt installiert, aktiviert und unverändert.</string>
+    <string name="status_override_on">Home-Taste öffnet BSfreeTV</string>
+    <string name="status_override_off">Home-Taste öffnet Google TV</string>
+    <string name="btn_use_home_button">Home für BSfreeTV</string>
+    <string name="btn_turn_off">Ausschalten</string>
+    <string name="dh_row_hold">Home halten für Google TV</string>
+    <string name="dh_row_hold_on_desc">Home drücken für BSfreeTV, halten für den Google TV-Startbildschirm</string>
+    <string name="dh_row_hold_off_desc">Home öffnet immer BSfreeTV. Zurück zu Google TV geht dann nur, indem du den Dienst in den Bedienungshilfen ausschaltest</string>
+    <string name="dh_row_after_restart">Nach Neustart öffnen</string>
+    <string name="dh_row_after_restart_desc">Einmal, direkt nach dem Start des Fernsehers</string>
+    <string name="dh_row_restricted">Schalter ausgegraut?</string>
+    <string name="a11y_title">Home-Taste</string>
+    <string name="a11y_why">Warum eine Bedienungshilfen-Berechtigung? Google TV lässt dich keine andere Home-App wählen, und das Abschalten des Launchers kann das Gerät in eine Neustartschleife bringen. Ein Bedienungshilfen-Dienst, der die Home-Taste abfängt, ist der einzige sichere Weg, BSfreeTV zu deinem Startbildschirm zu machen.</string>
+    <string name="a11y_does">Was er tut: Er achtet auf eine einzige Taste, Home. Drückst du sie, öffnet sich BSfreeTV. Alle anderen Tasten gehen unverändert durch.</string>
+    <string name="a11y_never">Was er nie tut: Er kann nicht sehen, was auf dem Bildschirm ist, liest nicht mit, was du eingibst oder schaust, und sammelt oder sendet nichts. Google TV wird weder deaktiviert noch verändert.</string>
+    <string name="a11y_warning">Android warnt, dass der Dienst deine Aktionen beobachten und das Gerät steuern kann. Diese Warnung erscheint bei jedem Bedienungshilfen-Dienst; BSfreeTV nutzt nur den Teil für die Home-Taste.</string>
+    <string name="a11y_undo">Rückgängig machen: Schalte den Dienst in den Bedienungshilfen aus oder deinstalliere BSfreeTV. Die Home-Taste öffnet sofort wieder Google TV.</string>
+    <string name="a11y_steps">Als Nächstes: Wähle in den Bedienungshilfen BSfreeTV Home-Taste, schalte sie ein und bestätige. Drücke dann Zurück, um hierher zurückzukehren.</string>
+    <string name="btn_open_accessibility">Bedienungshilfen öffnen</string>
+    <string name="btn_not_now">Nicht jetzt</string>
+    <string name="restricted_intro">Android kann den Schalter für Apps sperren, die nicht aus einem App-Store stammen: Er ist dann ausgegraut oder heißt eingeschränkte Einstellung. Es gibt zwei Wege, ihn freizugeben.</string>
+    <string name="restricted_app_info">Am Fernseher: Öffne die App-Info von BSfreeTV und wähle Eingeschränkte Einstellungen zulassen, falls dein Fernseher diese Option zeigt. Versuche den Schalter danach erneut.</string>
+    <string name="btn_app_info">App-Info öffnen</string>
+    <string name="restricted_adb">Oder lass BSfreeTV es über Netzwerk-Debugging freigeben. Dabei läuft ein einziger Befehl, der nur diese Sperre aufhebt; sonst wird am Fernseher nichts geändert.</string>
+    <string name="btn_allow_restricted">Über Netzwerk-Debugging freigeben</string>
+    <string name="task_allow_restricted">Eingeschränkte Einstellungen zulassen</string>
 </resources>

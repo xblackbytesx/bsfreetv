@@ -110,6 +110,7 @@ import java.util.Locale
         SetupTask.MAKE_HOME -> R.string.task_make_home
         SetupTask.RESTORE -> R.string.task_restore
         SetupTask.ALLOW_NEXT_UP -> R.string.task_allow_next_up
+        SetupTask.ALLOW_RESTRICTED -> R.string.task_allow_restricted
         SetupTask.TEST -> R.string.task_test
     },
 )
@@ -122,6 +123,7 @@ import java.util.Locale
         StepKind.PREFERRED_HOME -> stringResource(R.string.step_preferred_home)
         StepKind.RESTORE_HOME -> stringResource(R.string.step_restore_home, pkg)
         StepKind.ALLOW_NEXT_UP -> stringResource(R.string.step_allow_next_up)
+        StepKind.ALLOW_RESTRICTED -> stringResource(R.string.task_allow_restricted)
         StepKind.READ_VERSION -> stringResource(R.string.step_read_version)
     }
 }

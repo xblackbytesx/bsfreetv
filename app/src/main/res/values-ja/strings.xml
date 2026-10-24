@@ -165,7 +165,6 @@
     <string name="about_your_wallpapers">自分の壁紙</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">この端末は Google TV のようです。ここでは BSfreeTV をホームアプリにできません。Google TV はホームボタンを押すと自社のランチャーを直接開くため、それを無効にすると端末が再起動を繰り返すおそれがあります。BSfreeTV はアプリ一覧から引き続き開けます。以前のバージョンでこの端末が変更された場合は、下の「標準に戻す」を使ってください。</string>
     <string name="dh_unsupported_other">BSfreeTV をホームアプリにできるのは、NVIDIA Shield などの従来の Android TV 端末だけです。アプリ一覧からは引き続き開けます。</string>
     <string name="home_value_unsupported">非対応</string>
     <string name="step_restore_home">ホームを %1$s に戻す</string>
@@ -179,4 +178,34 @@
     <string name="dh_row_debugging_desc">ホームを切り替えるときに一度だけ必要です</string>
     <string name="dh_row_recovery">元に戻す / 復旧</string>
     <string name="dh_pc_intro">同じネットワーク上の adb が使える PC からテレビに接続し、次を実行します:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">BSfreeTV ホームボタン</string>
+    <string name="a11y_service_desc">ホームを押すと BSfreeTV を開きます。ホームボタンだけを検知し、画面は見えず、何も収集・送信しません。オフにするとホームボタンは Google TV に戻ります。</string>
+    <string name="dh_gtv_intro">Google TV では、ユーザー補助サービスを使って BSfreeTV がホームボタンを引き受けられます。Google TV 自体はインストールされたまま、有効なまま、変更されません。</string>
+    <string name="status_override_on">ホームボタンで BSfreeTV が開きます</string>
+    <string name="status_override_off">ホームボタンで Google TV が開きます</string>
+    <string name="btn_use_home_button">ホームを BSfreeTV に</string>
+    <string name="btn_turn_off">オフにする</string>
+    <string name="dh_row_hold">ホーム長押しで Google TV</string>
+    <string name="dh_row_hold_on_desc">押すと BSfreeTV、長押しで Google TV のホーム画面</string>
+    <string name="dh_row_hold_off_desc">ホームは常に BSfreeTV を開きます。Google TV に戻るにはユーザー補助でサービスをオフにするしかありません</string>
+    <string name="dh_row_after_restart">再起動後に開く</string>
+    <string name="dh_row_after_restart_desc">テレビの起動直後に 1 回だけ</string>
+    <string name="dh_row_restricted">スイッチがグレー表示?</string>
+    <string name="a11y_title">ホームボタン</string>
+    <string name="a11y_why">なぜユーザー補助の権限が必要? Google TV では別のホームアプリを選べず、ランチャーを無効にすると再起動を繰り返すことがあります。ホームボタンを受け取るユーザー補助サービスが、BSfreeTV をホーム画面にする唯一の安全な方法です。</string>
+    <string name="a11y_does">できること: ホームボタン 1 つだけを見守ります。押すと BSfreeTV が開きます。ほかのボタンはそのまま通過します。</string>
+    <string name="a11y_never">決してしないこと: 画面の内容は見えず、入力内容や視聴内容も読まず、何も収集・送信しません。Google TV を無効にしたり変更したりもしません。</string>
+    <string name="a11y_warning">Android は、このサービスが操作を監視しデバイスを制御できると警告します。これはすべてのユーザー補助サービスに出る共通の警告で、BSfreeTV が使うのはホームボタンの部分だけです。</string>
+    <string name="a11y_undo">元に戻すには、ユーザー補助でサービスをオフにするか BSfreeTV をアンインストールします。ホームボタンはすぐに Google TV を開くようになります。</string>
+    <string name="a11y_steps">次に: ユーザー補助で「BSfreeTV ホームボタン」を選び、オンにして確認します。その後「戻る」でここに戻ります。</string>
+    <string name="btn_open_accessibility">ユーザー補助を開く</string>
+    <string name="btn_not_now">今はしない</string>
+    <string name="restricted_intro">ストア以外からインストールしたアプリでは、Android がスイッチをブロックすることがあります (グレー表示や「制限付き設定」)。許可する方法は 2 つあります。</string>
+    <string name="restricted_app_info">テレビで: BSfreeTV のアプリ情報を開き、「制限付き設定を許可」を選びます (テレビにその項目がある場合)。その後もう一度スイッチを試してください。</string>
+    <string name="btn_app_info">アプリ情報を開く</string>
+    <string name="restricted_adb">または、ネットワーク デバッグ経由で BSfreeTV に許可させます。このブロックだけを解除するコマンドを 1 つ実行し、テレビのほかの設定は変えません。</string>
+    <string name="btn_allow_restricted">ネットワーク デバッグで許可</string>
+    <string name="task_allow_restricted">制限付き設定を許可</string>
 </resources>

@@ -242,18 +242,27 @@ class ScreenshotTest {
         }
     }
 
-    /** Google TV: no Home switch (it boot-looped devices in v0.2.0), only Restore and recovery. */
-    @Test fun settings_default_home_google_tv() {
+    /** Google TV: no ADB switch (it boot-looped devices in v0.2.0); the accessibility Home button instead. */
+    private val googleTv = HomeStatus(
+        listOf(StockLauncher("com.google.android.apps.tv.launcherx", true), StockLauncher("com.google.android.tvlauncher", true)),
+        "com.google.android.apps.tv.launcherx", "com.bsfreetv.launcher", false, true,
+    )
+
+    private fun googleTvPage(name: String, page: SettingsPage, home: HomeStatus = googleTv) {
         val f = wallpaper("red-frame-tree")
-        val googleTv = HomeStatus(
-            listOf(StockLauncher("com.google.android.apps.tv.launcherx", true), StockLauncher("com.google.android.tvlauncher", true)),
-            "com.google.android.apps.tv.launcherx", "com.bsfreetv.launcher", false, true,
-        )
-        shot("08-default-launcher-google-tv", f.palette) {
+        shot(name, f.palette) {
             Home(f, ui(), overlay = true)
-            SettingsPanel(SettingsPage.DEFAULT_HOME, ui(), env(home = googleTv), HomeActions.None, SettingsActions.None)
+            SettingsPanel(page, ui(), env(home = home).copy(restrictedSettings = true), HomeActions.None, SettingsActions.None)
         }
     }
+
+    @Test fun settings_default_home_google_tv() = googleTvPage("08-default-launcher-google-tv", SettingsPage.DEFAULT_HOME)
+    @Test fun settings_default_home_google_tv_on() =
+        googleTvPage("08f-default-launcher-google-tv-on", SettingsPage.DEFAULT_HOME, googleTv.copy(overrideEnabled = true))
+    @Test fun settings_home_accessibility() = googleTvPage("08g-home-button-disclosure", SettingsPage.HOME_ACCESSIBILITY)
+    @Test fun settings_home_restricted() = googleTvPage("08h-restricted-settings", SettingsPage.HOME_RESTRICTED)
+    @Test @Config(qualifiers = "+ar-ldrtl") fun settings_home_accessibility_ar() =
+        googleTvPage("08i-home-button-disclosure-ar", SettingsPage.HOME_ACCESSIBILITY)
 
     private fun homePage(name: String, page: SettingsPage, state: SetupState = SetupState.Idle) {
         val f = wallpaper("red-frame-tree")

@@ -165,7 +165,6 @@
     <string name="about_your_wallpapers">내 배경화면</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">이 기기는 Google TV로 보입니다. 여기서는 BSfreeTV를 홈 앱으로 설정할 수 없습니다. Google TV는 홈 버튼을 누르면 자체 런처를 바로 열며, 그 런처를 사용 중지하면 기기가 계속 재시작될 수 있습니다. BSfreeTV는 앱 목록에서 계속 열 수 있습니다. 이전 버전이 이 기기를 변경했다면 아래의 기본 런처 복원을 사용하세요.</string>
     <string name="dh_unsupported_other">BSfreeTV는 NVIDIA Shield 같은 기존 Android TV 기기에서만 홈 앱이 될 수 있습니다. 앱 목록에서는 계속 열 수 있습니다.</string>
     <string name="home_value_unsupported">지원 안 됨</string>
     <string name="step_restore_home">홈을 %1$s(으)로 되돌리기</string>
@@ -179,4 +178,34 @@
     <string name="dh_row_debugging_desc">홈을 바꿀 때 한 번만 필요합니다</string>
     <string name="dh_row_recovery">되돌리기 및 복구</string>
     <string name="dh_pc_intro">같은 네트워크의 adb가 설치된 PC에서 TV에 연결한 뒤 실행하세요:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">BSfreeTV 홈 버튼</string>
+    <string name="a11y_service_desc">홈을 누르면 BSfreeTV를 엽니다. 홈 버튼만 감지하며, 화면을 볼 수 없고 아무것도 수집하거나 보내지 않습니다. 끄면 홈 버튼이 Google TV로 돌아갑니다.</string>
+    <string name="dh_gtv_intro">Google TV에서는 접근성 서비스로 BSfreeTV가 홈 버튼을 맡을 수 있습니다. Google TV 자체는 설치되고 사용 설정된 그대로, 아무것도 바뀌지 않습니다.</string>
+    <string name="status_override_on">홈 버튼이 BSfreeTV를 엽니다</string>
+    <string name="status_override_off">홈 버튼이 Google TV를 엽니다</string>
+    <string name="btn_use_home_button">홈을 BSfreeTV로</string>
+    <string name="btn_turn_off">끄기</string>
+    <string name="dh_row_hold">홈 길게 눌러 Google TV</string>
+    <string name="dh_row_hold_on_desc">누르면 BSfreeTV, 길게 누르면 Google TV 홈 화면</string>
+    <string name="dh_row_hold_off_desc">홈은 항상 BSfreeTV를 엽니다. Google TV로 돌아가려면 접근성에서 서비스를 꺼야만 합니다</string>
+    <string name="dh_row_after_restart">재시작 후 열기</string>
+    <string name="dh_row_after_restart_desc">TV를 켠 직후 한 번만</string>
+    <string name="dh_row_restricted">스위치가 회색인가요?</string>
+    <string name="a11y_title">홈 버튼</string>
+    <string name="a11y_why">왜 접근성 권한인가요? Google TV는 다른 홈 앱을 고를 수 없게 하고, 런처를 사용 중지하면 기기가 재부팅을 반복할 수 있습니다. 홈 버튼을 받는 접근성 서비스가 BSfreeTV를 홈 화면으로 만드는 유일하게 안전한 방법입니다.</string>
+    <string name="a11y_does">하는 일: 홈 버튼 하나만 지켜봅니다. 누르면 BSfreeTV가 열립니다. 다른 버튼은 모두 그대로 통과합니다.</string>
+    <string name="a11y_never">절대 하지 않는 일: 화면 내용을 볼 수 없고, 입력하거나 시청하는 내용을 읽지 않으며, 아무것도 수집하거나 보내지 않습니다. Google TV를 사용 중지하거나 바꾸지 않습니다.</string>
+    <string name="a11y_warning">Android는 이 서비스가 사용자의 작업을 관찰하고 기기를 제어할 수 있다고 경고합니다. 모든 접근성 서비스에 똑같이 표시되는 경고이며, BSfreeTV는 홈 버튼 부분만 사용합니다.</string>
+    <string name="a11y_undo">되돌리려면 접근성에서 서비스를 끄거나 BSfreeTV를 삭제하세요. 홈 버튼이 바로 다시 Google TV를 엽니다.</string>
+    <string name="a11y_steps">다음: 접근성에서 BSfreeTV 홈 버튼을 선택해 켜고 확인하세요. 그런 다음 뒤로를 눌러 여기로 돌아오세요.</string>
+    <string name="btn_open_accessibility">접근성 열기</string>
+    <string name="btn_not_now">나중에</string>
+    <string name="restricted_intro">앱 스토어 밖에서 설치한 앱은 Android가 스위치를 막을 수 있습니다(회색 표시 또는 제한된 설정). 허용하는 방법은 두 가지입니다.</string>
+    <string name="restricted_app_info">TV에서: BSfreeTV 앱 정보를 열고 제한된 설정 허용을 선택하세요(TV에 그 옵션이 있는 경우). 그런 다음 스위치를 다시 시도하세요.</string>
+    <string name="btn_app_info">앱 정보 열기</string>
+    <string name="restricted_adb">또는 네트워크 디버깅으로 BSfreeTV가 허용하게 하세요. 이 차단만 푸는 명령 하나를 실행하며, TV의 다른 것은 바꾸지 않습니다.</string>
+    <string name="btn_allow_restricted">네트워크 디버깅으로 허용</string>
+    <string name="task_allow_restricted">제한된 설정 허용</string>
 </resources>

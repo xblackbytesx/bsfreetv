@@ -50,6 +50,9 @@ enum class SettingsPage(val parent: SettingsPage? = null) {
     HOME_DEBUGGING(DEFAULT_HOME),
     HOME_PC(DEFAULT_HOME),
     HOME_RECOVERY(DEFAULT_HOME),
+    /** Google TV: what the Home button service does, before the system screen. */
+    HOME_ACCESSIBILITY(DEFAULT_HOME),
+    HOME_RESTRICTED(DEFAULT_HOME),
     NEXT_UP_APPS(MAIN),
     ABOUT(MAIN),
 }

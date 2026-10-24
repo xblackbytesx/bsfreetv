@@ -180,7 +180,6 @@
     <string name="about_your_wallpapers">Ваші шпалери</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">Схоже, це Google TV. Зробити BSfreeTV головним екраном тут не можна: Google TV після натискання «Додому» одразу відкриває власний лаунчер, а його вимкнення може змусити пристрій безкінечно перезавантажуватися. Ви й далі можете відкривати BSfreeTV зі списку додатків. Якщо стара версія вже змінила цей пристрій, скористайтеся кнопкою «Відновити стандартний» нижче.</string>
     <string name="dh_unsupported_other">BSfreeTV може стати головним екраном лише на класичних пристроях Android TV, як-от NVIDIA Shield. Ви й далі можете відкривати його зі списку додатків.</string>
     <string name="home_value_unsupported">Не підтримується</string>
     <string name="step_restore_home">Повернути %1$s як головний екран</string>
@@ -194,4 +193,34 @@
     <string name="dh_row_debugging_desc">Потрібне один раз, щоб змінити головний екран</string>
     <string name="dh_row_recovery">Скасування та відновлення</string>
     <string name="dh_pc_intro">На комп’ютері з adb у тій самій мережі підключіться до телевізора й виконайте:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">Кнопка «Додому» BSfreeTV</string>
+    <string name="a11y_service_desc">Відкриває BSfreeTV, коли ви натискаєте «Додому». Слухає лише кнопку «Додому»: не бачить екран і нічого не збирає й не надсилає. Вимкніть сервіс, щоб повернути кнопку «Додому» Google TV.</string>
+    <string name="dh_gtv_intro">На Google TV BSfreeTV може перебрати кнопку «Додому» за допомогою сервісу спеціальних можливостей. Сам Google TV лишається встановленим, увімкненим і недоторканим.</string>
+    <string name="status_override_on">Кнопка «Додому» відкриває BSfreeTV</string>
+    <string name="status_override_off">Кнопка «Додому» відкриває Google TV</string>
+    <string name="btn_use_home_button">«Додому» для BSfreeTV</string>
+    <string name="btn_turn_off">Вимкнути</string>
+    <string name="dh_row_hold">Утримувати «Додому» для Google TV</string>
+    <string name="dh_row_hold_on_desc">Натисніть «Додому» для BSfreeTV, утримуйте для головного екрана Google TV</string>
+    <string name="dh_row_hold_off_desc">«Додому» завжди відкриває BSfreeTV. Повернутися до Google TV можна лише вимкнувши сервіс у спеціальних можливостях</string>
+    <string name="dh_row_after_restart">Відкривати після перезапуску</string>
+    <string name="dh_row_after_restart_desc">Один раз, одразу після запуску телевізора</string>
+    <string name="dh_row_restricted">Перемикач неактивний?</string>
+    <string name="a11y_title">Кнопка «Додому»</string>
+    <string name="a11y_why">Навіщо дозвіл спеціальних можливостей? Google TV не дає вибрати інший головний застосунок, а вимкнення його лаунчера може загнати пристрій у цикл перезапусків. Сервіс спеціальних можливостей, що перехоплює кнопку «Додому», це єдиний безпечний спосіб зробити BSfreeTV вашим головним екраном.</string>
+    <string name="a11y_does">Що він робить: стежить за однією кнопкою, «Додому». Коли ви її натискаєте, відкривається BSfreeTV. Усі інші кнопки проходять без змін.</string>
+    <string name="a11y_never">Чого він ніколи не робить: не бачить, що на екрані, не читає, що ви вводите чи дивитеся, і нічого не збирає й не надсилає. Не вимикає й не змінює Google TV.</string>
+    <string name="a11y_warning">Android попередить, що сервіс може спостерігати за вашими діями й керувати пристроєм. Таке саме попередження отримує кожен сервіс спеціальних можливостей; BSfreeTV використовує лише частину для кнопки «Додому».</string>
+    <string name="a11y_undo">Щоб скасувати, вимкніть сервіс у спеціальних можливостях або видаліть BSfreeTV. Кнопка «Додому» одразу знову відкриватиме Google TV.</string>
+    <string name="a11y_steps">Далі: у спеціальних можливостях виберіть Кнопка «Додому» BSfreeTV, увімкніть і підтвердьте. Потім натисніть «Назад», щоб повернутися сюди.</string>
+    <string name="btn_open_accessibility">Відкрити спеціальні можливості</string>
+    <string name="btn_not_now">Не зараз</string>
+    <string name="restricted_intro">Android може блокувати перемикач для застосунків, встановлених не з магазину: він сірий або позначений як обмежене налаштування. Дозволити це можна двома способами.</string>
+    <string name="restricted_app_info">На телевізорі: відкрийте інформацію про застосунок BSfreeTV і виберіть «Дозволити обмежені налаштування», якщо телевізор має таку опцію. Потім спробуйте перемикач знову.</string>
+    <string name="btn_app_info">Відкрити інформацію про застосунок</string>
+    <string name="restricted_adb">Або дозвольте BSfreeTV зробити це через налагодження через мережу. Виконується одна команда, яка знімає лише це блокування; більше нічого на телевізорі не змінюється.</string>
+    <string name="btn_allow_restricted">Дозволити через налагодження</string>
+    <string name="task_allow_restricted">Дозволити обмежені налаштування</string>
 </resources>

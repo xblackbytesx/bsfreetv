@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 /** The self-ADB jobs the Default launcher page can start; named in ui/Labels.kt. */
-enum class SetupTask { MAKE_HOME, RESTORE, ALLOW_NEXT_UP, TEST }
+enum class SetupTask { MAKE_HOME, RESTORE, ALLOW_NEXT_UP, ALLOW_RESTRICTED, TEST }
 
 sealed interface SetupState {
     data object Idle : SetupState
@@ -38,6 +38,12 @@ class HomeSetupViewModel @Inject constructor(private val control: HomeControl) :
     fun restoreStock() = run(SetupTask.RESTORE) { HomeCommands.restoreStock(it) }
 
     fun grantNextUp() = run(SetupTask.ALLOW_NEXT_UP) { listOf(HomeCommands.grantTvListings(it.selfPackage)) }
+
+    fun allowRestricted() = run(SetupTask.ALLOW_RESTRICTED) { listOf(HomeCommands.allowRestrictedSettings(it.selfPackage)) }
+
+    fun openAccessibilitySettings() = control.openAccessibilitySettings()
+
+    fun openAppInfo() = control.openAppInfo()
 
     fun probe() {
         if (_state.value is SetupState.Working) return

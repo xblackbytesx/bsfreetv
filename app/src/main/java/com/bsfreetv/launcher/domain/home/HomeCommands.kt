@@ -30,6 +30,8 @@ data class HomeStatus(
     val selfPackage: String,
     val tvListingsGranted: Boolean,
     val adbEnabled: Boolean,
+    /** Our Home button accessibility service is switched on (Google TV method). */
+    val overrideEnabled: Boolean = false,
 ) {
     val weAreHome get() = currentHome == selfPackage
     val stockEnabled get() = stock.any { it.enabled }
@@ -43,10 +45,19 @@ data class HomeStatus(
         }
 
     val canSwitchHome get() = deviceKind == DeviceKind.CLASSIC_ANDROID_TV
+
+    val method get() = deviceKind.homeMethod
+
+    /** The Home button opens us, by whichever method this device uses. */
+    val homeIsOurs get() = when (method) {
+        HomeMethod.ADB_SWITCH -> weAreHome
+        HomeMethod.ACCESSIBILITY -> overrideEnabled
+        HomeMethod.NONE -> weAreHome
+    }
 }
 
 /** What a step does, for the UI to name it (string resources live in ui/Labels.kt). */
-enum class StepKind { DISABLE, ENABLE, PREFERRED_HOME, RESTORE_HOME, ALLOW_NEXT_UP, READ_VERSION }
+enum class StepKind { DISABLE, ENABLE, PREFERRED_HOME, RESTORE_HOME, ALLOW_NEXT_UP, ALLOW_RESTRICTED, READ_VERSION }
 
 /**
  * One adb shell command plus how to recognise that it worked. [target] is the
@@ -104,6 +115,14 @@ object HomeCommands {
     }
 
     fun grantTvListings(selfPackage: String) = AdbStep(StepKind.ALLOW_NEXT_UP, "pm grant $selfPackage $TV_LISTINGS")
+
+    /**
+     * Android 13+ may block switching on an accessibility service for apps not
+     * installed from a store ("restricted setting"). This lifts only that block,
+     * for us; the user still turns the service on in system settings.
+     */
+    fun allowRestrictedSettings(selfPackage: String) =
+        AdbStep(StepKind.ALLOW_RESTRICTED, "appops set $selfPackage ACCESS_RESTRICTED_SETTINGS allow")
 
     /** Execute in order, stopping at the first failed required step. */
     fun runSteps(steps: List<AdbStep>, exec: (String) -> Pair<Int, String>): List<StepResult> {

@@ -1,13 +1,17 @@
 package com.bsfreetv.launcher.system
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import com.bsfreetv.launcher.data.isPackageEnabled
+import com.bsfreetv.launcher.domain.home.accessibilityServiceEnabled
 import com.bsfreetv.launcher.domain.home.AdbStep
 import com.bsfreetv.launcher.domain.home.HomeCommands
+import com.bsfreetv.launcher.domain.home.HomeMethod
 import com.bsfreetv.launcher.domain.home.HomeStatus
 import com.bsfreetv.launcher.domain.home.StockLauncher
 import com.bsfreetv.launcher.domain.home.StockLaunchers
@@ -60,7 +64,46 @@ class HomeControl @Inject constructor(@ApplicationContext private val context: C
             selfPackage = context.packageName,
             tvListingsGranted = context.checkSelfPermission(HomeCommands.TV_LISTINGS) == PackageManager.PERMISSION_GRANTED,
             adbEnabled = Settings.Global.getInt(context.contentResolver, Settings.Global.ADB_ENABLED, 0) == 1,
+            overrideEnabled = accessibilityServiceEnabled(
+                runCatching { Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES) }.getOrNull(),
+                context.packageName,
+                HomeButtonService::class.java.name,
+            ),
         )
+    }
+
+    /**
+     * The Home button service exists only on Google TV: elsewhere its component
+     * stays disabled, so Android's Accessibility list never shows it (the
+     * Shield uses the ADB switch). Our own component, no permission needed.
+     */
+    fun syncHomeButtonService() {
+        val component = ComponentName(context, HomeButtonService::class.java)
+        val want = if (status().method == HomeMethod.ACCESSIBILITY) {
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        } else {
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        }
+        if (pm.getComponentEnabledSetting(component) != want) {
+            pm.setComponentEnabledSetting(component, want, PackageManager.DONT_KILL_APP)
+        }
+    }
+
+    /** Where the user switches the Home button service on or off. Falls back to Android settings. */
+    fun openAccessibilitySettings(): Boolean =
+        start(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) || start(Intent(Settings.ACTION_SETTINGS))
+
+    /** Our App info page (Allow restricted settings lives in its menu on Android 13+). */
+    fun openAppInfo(): Boolean =
+        start(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", context.packageName, null))) ||
+            start(Intent(Settings.ACTION_SETTINGS))
+
+    private fun start(intent: Intent): Boolean = try {
+        context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        true
+    } catch (e: Exception) {
+        Log.w(TAG, "cannot start $intent", e)
+        false
     }
 
     /** Run [steps] over self-ADB. Blocks for up to [promptTimeoutMs] while the TV shows the prompt. */

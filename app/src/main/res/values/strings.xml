@@ -201,7 +201,6 @@
     <string name="about_your_wallpapers">Your wallpapers</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">This looks like Google TV. Making BSfreeTV the Home app is not supported here: Google TV opens its own launcher directly when you press Home, and disabling that launcher can leave the device stuck restarting. You can still open BSfreeTV from your apps. If an older version changed this device, use Restore below.</string>
     <string name="dh_unsupported_other">BSfreeTV can only become the Home app on classic Android TV devices such as the NVIDIA Shield. You can still open it from your apps.</string>
     <string name="home_value_unsupported">Not supported</string>
     <string name="step_restore_home">Set Home back to %1$s</string>
@@ -215,4 +214,35 @@
     <string name="dh_row_debugging_desc">Needed once, to switch Home</string>
     <string name="dh_row_recovery">Undo and recovery</string>
     <string name="dh_pc_intro">On a computer with adb on the same network, connect to the TV and run:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="home_value_google_tv" translatable="false">Google TV</string>
+    <string name="a11y_service_label">BSfreeTV Home button</string>
+    <string name="a11y_service_desc">Opens BSfreeTV when you press Home. It only listens for the Home button: it cannot see the screen, and it collects and sends nothing. Turn it off to give the Home button back to Google TV.</string>
+    <string name="dh_gtv_intro">On Google TV, BSfreeTV can take over the Home button with an accessibility service. Google TV itself stays installed, enabled and untouched.</string>
+    <string name="status_override_on">Home button opens BSfreeTV</string>
+    <string name="status_override_off">Home button opens Google TV</string>
+    <string name="btn_use_home_button">Use Home for BSfreeTV</string>
+    <string name="btn_turn_off">Turn off</string>
+    <string name="dh_row_hold">Hold Home for Google TV</string>
+    <string name="dh_row_hold_on_desc">Press Home for BSfreeTV, hold it for the Google TV home screen</string>
+    <string name="dh_row_hold_off_desc">Home always opens BSfreeTV. The only way back to Google TV is turning the service off in Accessibility</string>
+    <string name="dh_row_after_restart">Open after restart</string>
+    <string name="dh_row_after_restart_desc">Once, right after the TV starts up</string>
+    <string name="dh_row_restricted">Switch greyed out?</string>
+    <string name="a11y_title">Home button</string>
+    <string name="a11y_why">Why an accessibility permission? Google TV does not let you choose another Home app, and switching off its launcher can leave the device restarting in a loop. An accessibility service that catches the Home button is the only safe way to make BSfreeTV your home screen.</string>
+    <string name="a11y_does">What it does: it watches for one button, Home. When you press it, BSfreeTV opens. Every other button passes straight through, unchanged.</string>
+    <string name="a11y_never">What it never does: it cannot see what is on the screen, does not read what you type or watch, and collects and sends nothing. It does not disable or change Google TV.</string>
+    <string name="a11y_warning">Android will warn that the service can observe your actions and control the device. Every accessibility service gets that same warning; BSfreeTV only uses the Home button part.</string>
+    <string name="a11y_undo">To undo, switch the service off in Accessibility or uninstall BSfreeTV. The Home button opens Google TV again straight away.</string>
+    <string name="a11y_steps">Next: in Accessibility, choose BSfreeTV Home button, turn it on and confirm. Then press Back to return here.</string>
+    <string name="btn_open_accessibility">Open Accessibility</string>
+    <string name="btn_not_now">Not now</string>
+    <string name="restricted_intro">Android may block the switch for apps installed from outside an app store: it shows as greyed out or as a restricted setting. There are two ways to allow it.</string>
+    <string name="restricted_app_info">On the TV: open App info for BSfreeTV and choose Allow restricted settings, if your TV shows that option. Then try the switch again.</string>
+    <string name="btn_app_info">Open App info</string>
+    <string name="restricted_adb">Or let BSfreeTV allow it over Network debugging. This runs a single command that lifts only this block; nothing else on the TV is changed.</string>
+    <string name="btn_allow_restricted">Allow with Network debugging</string>
+    <string name="task_allow_restricted">Allow restricted settings</string>
 </resources>

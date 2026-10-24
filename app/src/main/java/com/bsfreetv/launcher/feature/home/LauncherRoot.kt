@@ -1,6 +1,7 @@
 package com.bsfreetv.launcher.feature.home
 
 import android.content.Intent
+import android.os.Build
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -17,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.Lifecycle
 import com.bsfreetv.launcher.domain.home.HomeCommands
 import com.bsfreetv.launcher.domain.Motion
 import com.bsfreetv.launcher.feature.apps.AllAppsOverlay
@@ -63,6 +66,8 @@ fun LauncherRoot(vm: HomeViewModel) {
     }
 
     BackHandler { vm.back() }
+    // Back from system settings (Accessibility, App info): show what changed.
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { setupVm.refresh() }
 
     CompositionLocalProvider(LocalMotion provides ui.settings.motion) {
         BsfTheme(palette, animate = ui.settings.motion != Motion.OFF) {
@@ -94,6 +99,7 @@ fun LauncherRoot(vm: HomeViewModel) {
                             pcCommands = setupVm.pcCommands(),
                             userDir = vm.userWallpaperDir,
                             languageTag = languageTag,
+                            restrictedSettings = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU,
                         ),
                         actions = vm,
                         setup = object : SettingsActions {
@@ -103,6 +109,9 @@ fun LauncherRoot(vm: HomeViewModel) {
                             override fun restoreStock() = setupVm.restoreStock()
                             override fun grantNextUp() = setupVm.grantNextUp()
                             override fun refreshStatus() = setupVm.refresh()
+                            override fun allowRestricted() = setupVm.allowRestricted()
+                            override fun openAccessibilitySettings() { setupVm.openAccessibilitySettings() }
+                            override fun openAppInfo() { setupVm.openAppInfo() }
                             override fun setLanguage(tag: String?) {
                                 LanguageStore.set(context, tag)
                                 // The panel stays open: overlay state lives in the ViewModel.
