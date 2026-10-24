@@ -175,7 +175,6 @@
     <string name="about_your_wallpapers">Vos fonds d\'écran</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">Cet appareil semble être sous Google TV. Définir BSfreeTV comme appli d\'accueil n\'est pas possible ici : Google TV ouvre directement son propre launcher quand vous appuyez sur Accueil, et le désactiver peut faire redémarrer l\'appareil en boucle. Vous pouvez toujours ouvrir BSfreeTV depuis vos applis. Si une ancienne version a modifié cet appareil, utilisez Restaurer l\'origine ci-dessous.</string>
     <string name="dh_unsupported_other">BSfreeTV ne peut devenir l\'appli d\'accueil que sur les appareils Android TV classiques comme la NVIDIA Shield. Vous pouvez toujours l\'ouvrir depuis vos applis.</string>
     <string name="home_value_unsupported">Non compatible</string>
     <string name="step_restore_home">Remettre %1$s comme accueil</string>
@@ -189,4 +188,34 @@
     <string name="dh_row_debugging_desc">Nécessaire une fois, pour changer l\'accueil</string>
     <string name="dh_row_recovery">Annuler et récupérer</string>
     <string name="dh_pc_intro">Sur un ordinateur avec adb sur le même réseau, connectez-vous à la télé et lancez :</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">Bouton Accueil BSfreeTV</string>
+    <string name="a11y_service_desc">Ouvre BSfreeTV quand vous appuyez sur Accueil. N\'écoute que le bouton Accueil : ne peut pas voir l\'écran et ne collecte ni n\'envoie rien. Désactivez-le pour rendre le bouton Accueil à Google TV.</string>
+    <string name="dh_gtv_intro">Sur Google TV, BSfreeTV peut prendre en charge le bouton Accueil grâce à un service d\'accessibilité. Google TV reste installé, activé et intact.</string>
+    <string name="status_override_on">Le bouton Accueil ouvre BSfreeTV</string>
+    <string name="status_override_off">Le bouton Accueil ouvre Google TV</string>
+    <string name="btn_use_home_button">Accueil pour BSfreeTV</string>
+    <string name="btn_turn_off">Désactiver</string>
+    <string name="dh_row_hold">Maintenir Accueil pour Google TV</string>
+    <string name="dh_row_hold_on_desc">Appuyez sur Accueil pour BSfreeTV, maintenez-le pour l\'écran d\'accueil Google TV</string>
+    <string name="dh_row_hold_off_desc">Accueil ouvre toujours BSfreeTV. Le seul moyen de revenir à Google TV est de désactiver le service dans Accessibilité</string>
+    <string name="dh_row_after_restart">Ouvrir après redémarrage</string>
+    <string name="dh_row_after_restart_desc">Une fois, juste après le démarrage de la TV</string>
+    <string name="dh_row_restricted">Interrupteur grisé ?</string>
+    <string name="a11y_title">Bouton Accueil</string>
+    <string name="a11y_why">Pourquoi une autorisation d\'accessibilité ? Google TV ne permet pas de choisir une autre application d\'accueil, et désactiver son lanceur peut faire redémarrer l\'appareil en boucle. Un service d\'accessibilité qui intercepte le bouton Accueil est le seul moyen sûr de faire de BSfreeTV votre écran d\'accueil.</string>
+    <string name="a11y_does">Ce qu\'il fait : il surveille un seul bouton, Accueil. Quand vous appuyez dessus, BSfreeTV s\'ouvre. Tous les autres boutons passent tels quels.</string>
+    <string name="a11y_never">Ce qu\'il ne fait jamais : il ne peut pas voir ce qui est à l\'écran, ne lit pas ce que vous tapez ou regardez, et ne collecte ni n\'envoie rien. Il ne désactive ni ne modifie Google TV.</string>
+    <string name="a11y_warning">Android vous avertira que le service peut observer vos actions et contrôler l\'appareil. Tout service d\'accessibilité reçoit ce même avertissement ; BSfreeTV n\'utilise que la partie bouton Accueil.</string>
+    <string name="a11y_undo">Pour annuler, désactivez le service dans Accessibilité ou désinstallez BSfreeTV. Le bouton Accueil rouvre aussitôt Google TV.</string>
+    <string name="a11y_steps">Ensuite : dans Accessibilité, choisissez Bouton Accueil BSfreeTV, activez-le et confirmez. Puis appuyez sur Retour pour revenir ici.</string>
+    <string name="btn_open_accessibility">Ouvrir Accessibilité</string>
+    <string name="btn_not_now">Plus tard</string>
+    <string name="restricted_intro">Android peut bloquer l\'interrupteur pour les applications installées hors d\'une boutique : il apparaît grisé ou comme paramètre restreint. Il y a deux façons de l\'autoriser.</string>
+    <string name="restricted_app_info">Sur la TV : ouvrez les infos de l\'application BSfreeTV et choisissez Autoriser les paramètres restreints, si votre TV propose cette option. Puis réessayez l\'interrupteur.</string>
+    <string name="btn_app_info">Ouvrir les infos de l\'appli</string>
+    <string name="restricted_adb">Ou laissez BSfreeTV l\'autoriser via le débogage réseau. Une seule commande est exécutée, qui lève uniquement ce blocage ; rien d\'autre n\'est modifié sur la TV.</string>
+    <string name="btn_allow_restricted">Autoriser via le débogage réseau</string>
+    <string name="task_allow_restricted">Autoriser les paramètres restreints</string>
 </resources>

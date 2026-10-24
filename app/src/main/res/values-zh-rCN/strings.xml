@@ -165,7 +165,6 @@
     <string name="about_your_wallpapers">你的壁纸</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">此设备似乎是 Google TV。这里无法将 BSfreeTV 设为主屏幕应用：按主屏幕键时，Google TV 会直接打开自己的启动器，停用该启动器可能导致设备不断重启。你仍可以从应用列表打开 BSfreeTV。如果旧版本已更改过此设备，请使用下方的“恢复系统自带”。</string>
     <string name="dh_unsupported_other">BSfreeTV 只能在 NVIDIA Shield 等经典 Android TV 设备上成为主屏幕应用。你仍可以从应用列表打开它。</string>
     <string name="home_value_unsupported">不支持</string>
     <string name="step_restore_home">将主屏幕恢复为 %1$s</string>
@@ -179,4 +178,34 @@
     <string name="dh_row_debugging_desc">切换主屏幕时只需开启一次</string>
     <string name="dh_row_recovery">撤销与恢复</string>
     <string name="dh_pc_intro">在同一网络中装有 adb 的电脑上连接电视并运行：</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">BSfreeTV 主屏幕按钮</string>
+    <string name="a11y_service_desc">按主屏幕键时打开 BSfreeTV。它只监听主屏幕键:看不到屏幕内容,也不收集或发送任何东西。关闭它即可把主屏幕键交还给 Google TV。</string>
+    <string name="dh_gtv_intro">在 Google TV 上,BSfreeTV 可以通过无障碍服务接管主屏幕键。Google TV 本身保持安装、启用,不做任何改动。</string>
+    <string name="status_override_on">主屏幕键打开 BSfreeTV</string>
+    <string name="status_override_off">主屏幕键打开 Google TV</string>
+    <string name="btn_use_home_button">主屏幕键给 BSfreeTV</string>
+    <string name="btn_turn_off">关闭</string>
+    <string name="dh_row_hold">长按主屏幕键进入 Google TV</string>
+    <string name="dh_row_hold_on_desc">按一下打开 BSfreeTV,长按进入 Google TV 主屏幕</string>
+    <string name="dh_row_hold_off_desc">主屏幕键总是打开 BSfreeTV。要回到 Google TV,只能在无障碍中关闭这项服务</string>
+    <string name="dh_row_after_restart">重启后打开</string>
+    <string name="dh_row_after_restart_desc">电视开机后立即打开一次</string>
+    <string name="dh_row_restricted">开关是灰色的?</string>
+    <string name="a11y_title">主屏幕键</string>
+    <string name="a11y_why">为什么需要无障碍权限?Google TV 不允许选择其他主屏幕应用,而停用它的启动器可能让设备反复重启。用无障碍服务接收主屏幕键,是让 BSfreeTV 成为主屏幕的唯一安全方式。</string>
+    <string name="a11y_does">它会做什么:只关注一个按键,主屏幕键。按下时打开 BSfreeTV。其他所有按键原样通过。</string>
+    <string name="a11y_never">它绝不会做什么:看不到屏幕上的内容,不读取你输入或观看的内容,不收集也不发送任何东西。不会停用或更改 Google TV。</string>
+    <string name="a11y_warning">Android 会提示该服务可以观察你的操作并控制设备。所有无障碍服务都会显示同样的提示;BSfreeTV 只使用其中主屏幕键的部分。</string>
+    <string name="a11y_undo">如需撤销,在无障碍中关闭这项服务或卸载 BSfreeTV。主屏幕键会立即重新打开 Google TV。</string>
+    <string name="a11y_steps">下一步:在无障碍中选择“BSfreeTV 主屏幕按钮”,打开并确认。然后按返回键回到这里。</string>
+    <string name="btn_open_accessibility">打开无障碍</string>
+    <string name="btn_not_now">以后再说</string>
+    <string name="restricted_intro">对于不是从应用商店安装的应用,Android 可能会阻止这个开关:显示为灰色或“受限设置”。有两种方法可以允许。</string>
+    <string name="restricted_app_info">在电视上:打开 BSfreeTV 的应用信息,选择“允许受限设置”(如果电视有此选项)。然后再试一次开关。</string>
+    <string name="btn_app_info">打开应用信息</string>
+    <string name="restricted_adb">或者让 BSfreeTV 通过网络调试来允许。只运行一条命令,仅解除这一限制;电视上的其他内容都不会改变。</string>
+    <string name="btn_allow_restricted">通过网络调试允许</string>
+    <string name="task_allow_restricted">允许受限设置</string>
 </resources>

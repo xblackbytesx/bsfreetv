@@ -175,7 +175,6 @@
     <string name="about_your_wallpapers">I tuoi sfondi</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">Sembra un dispositivo Google TV. Qui non è possibile impostare BSfreeTV come app Home: Google TV apre direttamente il proprio launcher quando premi Home, e disattivarlo può far riavviare il dispositivo di continuo. Puoi comunque aprire BSfreeTV dalle tue app. Se una versione precedente ha modificato questo dispositivo, usa Ripristina l\'originale qui sotto.</string>
     <string name="dh_unsupported_other">BSfreeTV può diventare l\'app Home solo sui dispositivi Android TV classici come la NVIDIA Shield. Puoi comunque aprirlo dalle tue app.</string>
     <string name="home_value_unsupported">Non supportato</string>
     <string name="step_restore_home">Reimposta %1$s come Home</string>
@@ -189,4 +188,34 @@
     <string name="dh_row_debugging_desc">Serve una volta, per cambiare la Home</string>
     <string name="dh_row_recovery">Annulla e ripristino</string>
     <string name="dh_pc_intro">Su un computer con adb nella stessa rete, collegati alla TV ed esegui:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">Tasto Home di BSfreeTV</string>
+    <string name="a11y_service_desc">Apre BSfreeTV quando premi Home. Ascolta solo il tasto Home: non può vedere lo schermo e non raccoglie né invia nulla. Disattivalo per restituire il tasto Home a Google TV.</string>
+    <string name="dh_gtv_intro">Su Google TV, BSfreeTV può gestire il tasto Home tramite un servizio di accessibilità. Google TV resta installato, attivo e intatto.</string>
+    <string name="status_override_on">Il tasto Home apre BSfreeTV</string>
+    <string name="status_override_off">Il tasto Home apre Google TV</string>
+    <string name="btn_use_home_button">Home per BSfreeTV</string>
+    <string name="btn_turn_off">Disattiva</string>
+    <string name="dh_row_hold">Tieni premuto Home per Google TV</string>
+    <string name="dh_row_hold_on_desc">Premi Home per BSfreeTV, tienilo premuto per la schermata Home di Google TV</string>
+    <string name="dh_row_hold_off_desc">Home apre sempre BSfreeTV. L\'unico modo per tornare a Google TV è disattivare il servizio in Accessibilità</string>
+    <string name="dh_row_after_restart">Apri dopo il riavvio</string>
+    <string name="dh_row_after_restart_desc">Una volta, subito dopo l\'accensione della TV</string>
+    <string name="dh_row_restricted">Interruttore grigio?</string>
+    <string name="a11y_title">Tasto Home</string>
+    <string name="a11y_why">Perché un permesso di accessibilità? Google TV non permette di scegliere un\'altra app Home, e disattivare il suo launcher può far riavviare il dispositivo in loop. Un servizio di accessibilità che intercetta il tasto Home è l\'unico modo sicuro per rendere BSfreeTV la tua schermata iniziale.</string>
+    <string name="a11y_does">Cosa fa: controlla un solo tasto, Home. Quando lo premi, si apre BSfreeTV. Tutti gli altri tasti passano invariati.</string>
+    <string name="a11y_never">Cosa non fa mai: non può vedere cosa c\'è sullo schermo, non legge ciò che digiti o guardi, e non raccoglie né invia nulla. Non disattiva né modifica Google TV.</string>
+    <string name="a11y_warning">Android avviserà che il servizio può osservare le tue azioni e controllare il dispositivo. Ogni servizio di accessibilità riceve lo stesso avviso; BSfreeTV usa solo la parte del tasto Home.</string>
+    <string name="a11y_undo">Per annullare, disattiva il servizio in Accessibilità o disinstalla BSfreeTV. Il tasto Home riapre subito Google TV.</string>
+    <string name="a11y_steps">Poi: in Accessibilità scegli Tasto Home di BSfreeTV, attivalo e conferma. Quindi premi Indietro per tornare qui.</string>
+    <string name="btn_open_accessibility">Apri Accessibilità</string>
+    <string name="btn_not_now">Non ora</string>
+    <string name="restricted_intro">Android può bloccare l\'interruttore per le app installate fuori da uno store: appare grigio o come impostazione con limitazioni. Ci sono due modi per consentirlo.</string>
+    <string name="restricted_app_info">Sulla TV: apri le informazioni app di BSfreeTV e scegli Consenti impostazioni con limitazioni, se la tua TV mostra questa opzione. Poi riprova l\'interruttore.</string>
+    <string name="btn_app_info">Apri info app</string>
+    <string name="restricted_adb">Oppure lascia che BSfreeTV lo consenta tramite il debug di rete. Viene eseguito un solo comando che rimuove solo questo blocco; nient\'altro cambia sulla TV.</string>
+    <string name="btn_allow_restricted">Consenti con il debug di rete</string>
+    <string name="task_allow_restricted">Consenti impostazioni con limitazioni</string>
 </resources>

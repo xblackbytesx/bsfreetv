@@ -180,7 +180,6 @@
     <string name="about_your_wallpapers">Twoje tapety</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">To wygląda na Google TV. Ustawienie BSfreeTV jako ekranu głównego nie jest tu obsługiwane: Google TV po naciśnięciu Home od razu otwiera własny launcher, a jego wyłączenie może sprawić, że urządzenie będzie się ciągle restartować. Nadal możesz otwierać BSfreeTV z listy aplikacji. Jeśli starsza wersja zmieniła to urządzenie, użyj poniżej Przywróć fabryczny.</string>
     <string name="dh_unsupported_other">BSfreeTV może zostać ekranem głównym tylko na klasycznych urządzeniach Android TV, takich jak NVIDIA Shield. Nadal możesz go otwierać z listy aplikacji.</string>
     <string name="home_value_unsupported">Nieobsługiwane</string>
     <string name="step_restore_home">Przywróć %1$s jako ekran główny</string>
@@ -194,4 +193,34 @@
     <string name="dh_row_debugging_desc">Potrzebne raz, by zmienić ekran główny</string>
     <string name="dh_row_recovery">Cofnij i przywróć</string>
     <string name="dh_pc_intro">Na komputerze z adb w tej samej sieci połącz się z telewizorem i uruchom:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">Przycisk Home BSfreeTV</string>
+    <string name="a11y_service_desc">Otwiera BSfreeTV po naciśnięciu Home. Nasłuchuje tylko przycisku Home: nie widzi ekranu i niczego nie zbiera ani nie wysyła. Wyłącz usługę, aby oddać przycisk Home Google TV.</string>
+    <string name="dh_gtv_intro">Na Google TV BSfreeTV może przejąć przycisk Home za pomocą usługi ułatwień dostępu. Samo Google TV pozostaje zainstalowane, włączone i nietknięte.</string>
+    <string name="status_override_on">Przycisk Home otwiera BSfreeTV</string>
+    <string name="status_override_off">Przycisk Home otwiera Google TV</string>
+    <string name="btn_use_home_button">Home dla BSfreeTV</string>
+    <string name="btn_turn_off">Wyłącz</string>
+    <string name="dh_row_hold">Przytrzymaj Home dla Google TV</string>
+    <string name="dh_row_hold_on_desc">Naciśnij Home dla BSfreeTV, przytrzymaj dla ekranu głównego Google TV</string>
+    <string name="dh_row_hold_off_desc">Home zawsze otwiera BSfreeTV. Jedyna droga powrotu do Google TV to wyłączenie usługi w Ułatwieniach dostępu</string>
+    <string name="dh_row_after_restart">Otwórz po restarcie</string>
+    <string name="dh_row_after_restart_desc">Raz, zaraz po uruchomieniu telewizora</string>
+    <string name="dh_row_restricted">Przełącznik wyszarzony?</string>
+    <string name="a11y_title">Przycisk Home</string>
+    <string name="a11y_why">Dlaczego uprawnienie ułatwień dostępu? Google TV nie pozwala wybrać innej aplikacji ekranu głównego, a wyłączenie jego launchera może wprowadzić urządzenie w pętlę restartów. Usługa ułatwień dostępu przechwytująca przycisk Home to jedyny bezpieczny sposób, by BSfreeTV był Twoim ekranem głównym.</string>
+    <string name="a11y_does">Co robi: pilnuje jednego przycisku, Home. Gdy go naciśniesz, otwiera się BSfreeTV. Wszystkie inne przyciski działają bez zmian.</string>
+    <string name="a11y_never">Czego nigdy nie robi: nie widzi, co jest na ekranie, nie czyta tego, co wpisujesz lub oglądasz, i niczego nie zbiera ani nie wysyła. Nie wyłącza ani nie zmienia Google TV.</string>
+    <string name="a11y_warning">Android ostrzeże, że usługa może obserwować Twoje działania i sterować urządzeniem. To samo ostrzeżenie dostaje każda usługa ułatwień dostępu; BSfreeTV używa tylko części dotyczącej przycisku Home.</string>
+    <string name="a11y_undo">Aby cofnąć, wyłącz usługę w Ułatwieniach dostępu lub odinstaluj BSfreeTV. Przycisk Home od razu znowu otwiera Google TV.</string>
+    <string name="a11y_steps">Dalej: w Ułatwieniach dostępu wybierz Przycisk Home BSfreeTV, włącz go i potwierdź. Potem naciśnij Wstecz, aby tu wrócić.</string>
+    <string name="btn_open_accessibility">Otwórz Ułatwienia dostępu</string>
+    <string name="btn_not_now">Nie teraz</string>
+    <string name="restricted_intro">Android może blokować przełącznik dla aplikacji zainstalowanych spoza sklepu: jest wtedy wyszarzony lub oznaczony jako ustawienie z ograniczeniami. Można na to zezwolić na dwa sposoby.</string>
+    <string name="restricted_app_info">Na telewizorze: otwórz informacje o aplikacji BSfreeTV i wybierz Zezwól na ustawienia z ograniczeniami, jeśli telewizor ma tę opcję. Potem spróbuj przełącznika ponownie.</string>
+    <string name="btn_app_info">Otwórz informacje o aplikacji</string>
+    <string name="restricted_adb">Albo pozwól BSfreeTV zezwolić na to przez debugowanie sieciowe. Wykonywane jest jedno polecenie, które znosi tylko tę blokadę; nic innego na telewizorze się nie zmienia.</string>
+    <string name="btn_allow_restricted">Zezwól przez debugowanie sieciowe</string>
+    <string name="task_allow_restricted">Zezwól na ustawienia z ograniczeniami</string>
 </resources>

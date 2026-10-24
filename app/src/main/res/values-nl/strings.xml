@@ -170,7 +170,6 @@
     <string name="about_your_wallpapers">Je eigen achtergronden</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">Dit lijkt Google TV te zijn. BSfreeTV als startscherm instellen wordt hier niet ondersteund: Google TV opent bij de thuisknop direct zijn eigen launcher, en die uitschakelen kan het apparaat blijven laten herstarten. Je kunt BSfreeTV nog steeds openen vanuit je apps. Heeft een oudere versie dit apparaat aangepast? Gebruik dan Standaard herstellen hieronder.</string>
     <string name="dh_unsupported_other">BSfreeTV kan alleen het startscherm worden op klassieke Android TV-apparaten zoals de NVIDIA Shield. Je kunt het nog steeds openen vanuit je apps.</string>
     <string name="home_value_unsupported">Niet ondersteund</string>
     <string name="step_restore_home">Startscherm terugzetten naar %1$s</string>
@@ -184,4 +183,34 @@
     <string name="dh_row_debugging_desc">Eenmalig nodig om het startscherm te wisselen</string>
     <string name="dh_row_recovery">Ongedaan maken en herstel</string>
     <string name="dh_pc_intro">Maak op een computer met adb in hetzelfde netwerk verbinding met de tv en voer uit:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">BSfreeTV Home-knop</string>
+    <string name="a11y_service_desc">Opent BSfreeTV als je op Home drukt. Luistert alleen naar de Home-knop: kan het scherm niet zien en verzamelt of verstuurt niets. Zet de service uit om de Home-knop terug te geven aan Google TV.</string>
+    <string name="dh_gtv_intro">Op Google TV kan BSfreeTV de Home-knop overnemen met een toegankelijkheidsservice. Google TV zelf blijft geïnstalleerd, ingeschakeld en onaangeroerd.</string>
+    <string name="status_override_on">Home-knop opent BSfreeTV</string>
+    <string name="status_override_off">Home-knop opent Google TV</string>
+    <string name="btn_use_home_button">Home voor BSfreeTV</string>
+    <string name="btn_turn_off">Uitzetten</string>
+    <string name="dh_row_hold">Home ingedrukt houden voor Google TV</string>
+    <string name="dh_row_hold_on_desc">Druk op Home voor BSfreeTV, houd ingedrukt voor het Google TV-startscherm</string>
+    <string name="dh_row_hold_off_desc">Home opent altijd BSfreeTV. Terug naar Google TV kan dan alleen door de service uit te zetten bij Toegankelijkheid</string>
+    <string name="dh_row_after_restart">Openen na herstart</string>
+    <string name="dh_row_after_restart_desc">Eén keer, direct nadat de tv is opgestart</string>
+    <string name="dh_row_restricted">Schakelaar grijs?</string>
+    <string name="a11y_title">Home-knop</string>
+    <string name="a11y_why">Waarom een toegankelijkheidsrecht? Google TV laat je geen andere Home-app kiezen, en de launcher uitschakelen kan het apparaat in een herstartlus brengen. Een toegankelijkheidsservice die de Home-knop opvangt is de enige veilige manier om BSfreeTV je startscherm te maken.</string>
+    <string name="a11y_does">Wat de service doet: hij let op één knop, Home. Druk je erop, dan opent BSfreeTV. Alle andere knoppen gaan ongewijzigd door.</string>
+    <string name="a11y_never">Wat de service nooit doet: hij kan niet zien wat er op het scherm staat, leest niet wat je typt of kijkt, en verzamelt of verstuurt niets. Google TV wordt niet uitgeschakeld of aangepast.</string>
+    <string name="a11y_warning">Android waarschuwt dat de service je acties kan zien en het apparaat kan bedienen. Die waarschuwing krijgt elke toegankelijkheidsservice; BSfreeTV gebruikt alleen het deel voor de Home-knop.</string>
+    <string name="a11y_undo">Ongedaan maken: zet de service uit bij Toegankelijkheid of verwijder BSfreeTV. De Home-knop opent dan meteen weer Google TV.</string>
+    <string name="a11y_steps">Volgende stap: kies bij Toegankelijkheid BSfreeTV Home-knop, zet hem aan en bevestig. Druk daarna op Terug om hier terug te komen.</string>
+    <string name="btn_open_accessibility">Toegankelijkheid openen</string>
+    <string name="btn_not_now">Niet nu</string>
+    <string name="restricted_intro">Android kan de schakelaar blokkeren voor apps die niet uit een appwinkel komen: hij is dan grijs of heet een beperkte instelling. Je kunt dit op twee manieren toestaan.</string>
+    <string name="restricted_app_info">Op de tv: open App-info van BSfreeTV en kies Beperkte instellingen toestaan, als je tv die optie heeft. Probeer de schakelaar daarna opnieuw.</string>
+    <string name="btn_app_info">App-info openen</string>
+    <string name="restricted_adb">Of laat BSfreeTV het toestaan via Netwerkfoutopsporing. Dat voert één opdracht uit die alleen deze blokkade opheft; verder verandert er niets op de tv.</string>
+    <string name="btn_allow_restricted">Toestaan via Netwerkfoutopsporing</string>
+    <string name="task_allow_restricted">Beperkte instellingen toestaan</string>
 </resources>

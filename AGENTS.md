@@ -56,6 +56,7 @@ posters only), dadb (self-ADB).
 | `data/WatchNext.kt` | TvProvider Watch Next reader (READ_TV_LISTINGS) |
 | `data/LauncherStore.kt` | DataStore: layout + settings JSON, decode failure = defaults |
 | `system/HomeControl.kt` | Home status and self-ADB (dadb to 127.0.0.1:5555) |
+| `system/HomeButtonService.kt` + `HomeGuard.kt` | Google TV only: accessibility service that turns the Home key into "open BSfreeTV"; policy in `domain/home/HomeOverride.kt` (`HomeKeyPolicy`, `CrashGuard`, `BootLaunch`) |
 | `feature/home/` | `HomeViewModel` (implements `HomeActions`), stateless `HomeContent`, `LauncherRoot` |
 | `feature/apps/`, `feature/settings/`, `feature/wallpaper/` | Overlays: All apps + app menu, settings panel, wallpaper strip |
 | `ui/` | `BsfTheme` (animated palette), type scale, `tvClickable`, focus halo, panels |
@@ -106,6 +107,32 @@ posters only), dadb (self-ADB).
   tvlauncher last; `HomeCommands.runSteps` stops at the first required failure.
   Every restore path re-enables all stock launchers (launcherx too) and sets
   Home back. `HomeCommandsTest` pins all of this.
+- **One Home method per device** (`HomeMethod`): classic Android TV gets the
+  ADB switch, Google TV the accessibility service, anything else neither.
+  The Shield supports accessibility services, but is never offered this one.
+- **The Google TV Home button service is harmless by construction.**
+  - It disables nothing and changes no settings: it only starts our activity
+    (the same `CATEGORY_HOME` intent a Home press delivers).
+  - It handles only `KEYCODE_HOME`; every other key returns false at once. No
+    window content, no accessibility events (`res/xml/home_button_service.xml`).
+  - It only exists on Google TV: the manifest declares it `enabled="false"`
+    and `HomeControl.syncHomeButtonService` (from `BsfApp`) switches it on
+    only there, so other devices never list it in Accessibility. It is also
+    inert unless `DeviceKind.GOOGLE_TV`, in case it were ever switched on.
+  - **Crash guard** (`CrashGuard`): two crashes within 2 minutes since the last
+    clean run (10 s resumed) and it stops consuming Home until BSfreeTV runs
+    cleanly again. The crash time is written with `commit()` in the uncaught
+    handler (`HomeGuard`).
+  - **Boot launch** (`BootLaunch`): at most once per `BOOT_COUNT`, only in the
+    first 3 minutes of uptime, never on first enabling. A rebind mid-film
+    launches nothing.
+  - **Hold Home** opens launcherx explicitly (`homeHoldForStock`, default on).
+    If that fails it uses `GLOBAL_ACTION_HOME`, and a new Home press within
+    1 s passes through, so a replayed Home reaches Google TV.
+  - The user switches it on in system settings after reading the disclosure
+    page (`SettingsPage.HOME_ACCESSIBILITY`). The only self-ADB command on
+    Google TV is the `appops ... ACCESS_RESTRICTED_SETTINGS allow` unblock.
+  - `HomeOverrideTest` and `HomeButtonServiceTest` pin all of this.
 - **Self-ADB never runs unasked** and only the commands in `HomeCommands`.
   `READ_TV_LISTINGS` is not in `Manifest.permission`: use the string.
 - `@Serializable` classes never get a private companion (ART-only decode failure).
@@ -128,8 +155,8 @@ posters only), dadb (self-ADB).
   Settings and notifications are separate packages and keep working. OTAs or a
   factory reset can re-enable it: the Default launcher page shows the state.
 - Google TV (launcherx) is not a Shield: its Home key bypasses HOME
-  resolution and starts launcherx directly. Replacing Home there needs an
-  accessibility override (roadmap), never disabling.
+  resolution and starts launcherx directly. Replacing Home there is the
+  accessibility service (v0.4.0), never disabling.
 - `READ_TV_LISTINGS` (dangerous) lets TvProvider return other apps' searchable
   Watch Next rows. Custom selections throw; filter in code. Jellyfin publishes.
 - The UI renders at the output resolution: 960x540 dp at 2x on a 1080p TV,
@@ -142,12 +169,17 @@ posters only), dadb (self-ADB).
 - Self-ADB to `127.0.0.1:5555` with Network debugging on (use **Test connection**).
 - `cmd package set-home-activity` on the Shield build (marked optional).
 - Watch Next contents from Netflix / NPO Start (Jellyfin is known to publish).
+- Google TV Home button service (no Google TV device in hand; needs a tester):
+  - that the Home key reaches accessibility `onKeyEvent` on Google TV remotes;
+  - that an explicit launcherx HOME intent opens the Google TV home (hold);
+  - that the service may start activities from the background;
+  - restricted settings on the Streamer (Android 14) and the appops unblock;
+  - the boot launch timing.
 
 ## Roadmap
 
-- Accessibility-service Home watcher (Projectivy style): the only acceptable
-  route to a Home switch on Google TV, and a fallback when an OTA re-enables
-  the stock launcher on the Shield.
+- Possibly offer the Home button service on the Shield as a fallback when an
+  OTA re-enables tvlauncher (currently ADB only, by choice).
 - DreamService screensaver using the built-in wallpapers.
 - Next Up straight from the Jellyfin API (`/Shows/NextUp`, `/UserItems/Resume`).
 - Layout/settings export and import.

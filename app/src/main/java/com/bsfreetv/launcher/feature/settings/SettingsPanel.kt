@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.bsfreetv.launcher.BuildConfig
 import com.bsfreetv.launcher.data.AppEntry
 import com.bsfreetv.launcher.domain.CardSize
-import com.bsfreetv.launcher.domain.home.DeviceKind
+import com.bsfreetv.launcher.domain.home.HomeMethod
 import com.bsfreetv.launcher.domain.home.HomeCommands
 import com.bsfreetv.launcher.domain.home.HomeStatus
 import com.bsfreetv.launcher.domain.home.StockLaunchers
@@ -79,6 +79,8 @@ data class SettingsEnv(
     val userDir: String?,
     /** In-app language override tag, or null for the system language. */
     val languageTag: String? = null,
+    /** Android 13+: an accessibility service from outside a store may be blocked ("restricted setting"). */
+    val restrictedSettings: Boolean = false,
 )
 
 interface SettingsActions {
@@ -88,6 +90,9 @@ interface SettingsActions {
     fun restoreStock()
     fun grantNextUp()
     fun refreshStatus()
+    fun allowRestricted()
+    fun openAccessibilitySettings()
+    fun openAppInfo()
     /** Switch to [tag] (null = system) and restart the activity in it. */
     fun setLanguage(tag: String?)
 
@@ -98,6 +103,9 @@ interface SettingsActions {
         override fun restoreStock() = Unit
         override fun grantNextUp() = Unit
         override fun refreshStatus() = Unit
+        override fun allowRestricted() = Unit
+        override fun openAccessibilitySettings() = Unit
+        override fun openAppInfo() = Unit
         override fun setLanguage(tag: String?) = Unit
     }
 }
@@ -134,6 +142,8 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
                         SettingsPage.HOME_DEBUGGING -> R.string.dh_row_debugging
                         SettingsPage.HOME_PC -> R.string.header_from_pc
                         SettingsPage.HOME_RECOVERY -> R.string.dh_row_recovery
+                        SettingsPage.HOME_ACCESSIBILITY -> R.string.a11y_title
+                        SettingsPage.HOME_RESTRICTED -> R.string.dh_row_restricted
                         SettingsPage.NEXT_UP_APPS -> R.string.settings_next_up_apps
                         SettingsPage.ABOUT -> R.string.settings_about
                     },
@@ -145,7 +155,11 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
             when (page) {
                 SettingsPage.MAIN -> MainPage(ui, env, actions, setup, first)
                 SettingsPage.LANGUAGE -> LanguagePage(env, setup, first)
-                SettingsPage.DEFAULT_HOME -> DefaultHomePage(env, actions, setup, first)
+                SettingsPage.DEFAULT_HOME ->
+                    if (env.homeStatus?.method == HomeMethod.ACCESSIBILITY) GoogleTvHomePage(ui, env, actions, setup, first)
+                    else DefaultHomePage(env, actions, setup, first)
+                SettingsPage.HOME_ACCESSIBILITY -> HomeAccessibilityPage(actions, setup, first)
+                SettingsPage.HOME_RESTRICTED -> HomeRestrictedPage(env, setup, first)
                 SettingsPage.HOME_DEBUGGING -> HomeDebuggingPage(first)
                 SettingsPage.HOME_PC -> HomePcPage(env, first)
                 SettingsPage.HOME_RECOVERY -> HomeRecoveryPage(env, setup, first)
@@ -239,7 +253,8 @@ private fun MainPage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: 
         stringResource(R.string.settings_default_home),
         when {
             home == null -> ""
-            home.weAreHome -> stringResource(R.string.app_name)
+            home.homeIsOurs -> stringResource(R.string.app_name)
+            home.method == HomeMethod.ACCESSIBILITY -> stringResource(R.string.home_value_google_tv)
             !home.canSwitchHome -> stringResource(R.string.home_value_unsupported)
             home.stockEnabled -> stringResource(R.string.home_value_stock)
             else -> stringResource(R.string.home_value_not_set)
@@ -286,15 +301,12 @@ private fun DefaultHomePage(env: SettingsEnv, actions: HomeActions, setup: Setti
     val colors = LocalBsfColors.current
     val st = env.homeStatus
     // The switch disables the stock launcher, which is only safe on classic
-    // Android TV (the Shield). On Google TV it boot-loops the device (v0.2.0).
+    // Android TV (the Shield). On Google TV it boot-loops the device (v0.2.0),
+    // so Google TV gets GoogleTvHomePage instead and never reaches this page.
     val supported = st?.canSwitchHome == true
     if (!supported) {
         InfoBlock(Modifier.focusRequester(first)) {
-            Text(
-                stringResource(if (st?.deviceKind == DeviceKind.GOOGLE_TV) R.string.dh_unsupported_google_tv else R.string.dh_unsupported_other),
-                style = BsfType.body,
-                color = colors.text,
-            )
+            Text(stringResource(R.string.dh_unsupported_other), style = BsfType.body, color = colors.text)
         }
     }
     if (st != null) HomeStatusCard(st, supported)
@@ -321,6 +333,99 @@ private fun DefaultHomePage(env: SettingsEnv, actions: HomeActions, setup: Setti
         SettingRow(stringResource(R.string.header_from_pc), chevron = true) { actions.open(Overlay.Settings(SettingsPage.HOME_PC)) }
     }
     SettingRow(stringResource(R.string.dh_row_recovery), chevron = true) { actions.open(Overlay.Settings(SettingsPage.HOME_RECOVERY)) }
+}
+
+/**
+ * Google TV: the Home button through an accessibility service. Nothing is
+ * disabled, so every stock launcher reading "enabled" is the healthy state.
+ * The service is switched on by the user in system settings, after
+ * [HomeAccessibilityPage] has said exactly what it does.
+ */
+@Composable
+private fun GoogleTvHomePage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: SettingsActions, first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    val st = env.homeStatus ?: return
+    val s = ui.settings
+    InfoBlock(Modifier.focusRequester(first)) {
+        Text(stringResource(R.string.dh_gtv_intro), style = BsfType.body, color = colors.text)
+    }
+    InfoBlock {
+        StatusLine(st.overrideEnabled, stringResource(if (st.overrideEnabled) R.string.status_override_on else R.string.status_override_off))
+        st.stock.forEach {
+            StatusLine(
+                it.enabled,
+                stringResource(if (it.enabled) R.string.status_pkg_enabled else R.string.status_pkg_disabled, it.packageName.substringAfterLast('.')),
+                small = true,
+            )
+        }
+    }
+    Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+        if (st.overrideEnabled) {
+            PanelButton(stringResource(R.string.btn_turn_off)) { setup.openAccessibilitySettings() }
+        } else {
+            PanelButton(stringResource(R.string.btn_use_home_button), primary = true) { actions.open(Overlay.Settings(SettingsPage.HOME_ACCESSIBILITY)) }
+        }
+    }
+    SettingRow(
+        stringResource(R.string.dh_row_hold),
+        onOff(s.homeHoldForStock),
+        description = stringResource(if (s.homeHoldForStock) R.string.dh_row_hold_on_desc else R.string.dh_row_hold_off_desc),
+    ) { actions.updateSettings { it.copy(homeHoldForStock = !it.homeHoldForStock) } }
+    SettingRow(
+        stringResource(R.string.dh_row_after_restart),
+        onOff(s.homeOpenAfterBoot),
+        description = stringResource(R.string.dh_row_after_restart_desc),
+    ) { actions.updateSettings { it.copy(homeOpenAfterBoot = !it.homeOpenAfterBoot) } }
+    SettingRow(
+        stringResource(R.string.dh_row_next_up),
+        stringResource(if (st.tvListingsGranted) R.string.value_allowed else R.string.value_allow),
+    ) { if (!st.tvListingsGranted) setup.grantNextUp() }
+    SetupResult(env.setupState)
+    if (env.restrictedSettings && !st.overrideEnabled) {
+        SettingRow(stringResource(R.string.dh_row_restricted), chevron = true) { actions.open(Overlay.Settings(SettingsPage.HOME_RESTRICTED)) }
+    }
+    SettingRow(stringResource(R.string.dh_row_recovery), chevron = true) { actions.open(Overlay.Settings(SettingsPage.HOME_RECOVERY)) }
+}
+
+/**
+ * The disclosure, before Android's own screen: why an accessibility service,
+ * what it does, what it never does, the system warning, and the way back.
+ * Read top to bottom; the buttons come last.
+ */
+@Composable
+private fun HomeAccessibilityPage(actions: HomeActions, setup: SettingsActions, first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    InfoBlock(Modifier.focusRequester(first)) { Text(stringResource(R.string.a11y_why), style = BsfType.body, color = colors.text) }
+    InfoBlock { Text(stringResource(R.string.a11y_does), style = BsfType.body, color = colors.text) }
+    InfoBlock { Text(stringResource(R.string.a11y_never), style = BsfType.body, color = colors.text) }
+    InfoBlock { Text(stringResource(R.string.a11y_warning), style = BsfType.body, color = colors.textMuted) }
+    InfoBlock { Text(stringResource(R.string.a11y_undo), style = BsfType.body, color = colors.textMuted) }
+    InfoBlock { Text(stringResource(R.string.a11y_steps), style = BsfType.body, color = colors.text) }
+    Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        PanelButton(stringResource(R.string.btn_open_accessibility), primary = true) { setup.openAccessibilitySettings() }
+        PanelButton(stringResource(R.string.btn_not_now)) { actions.open(Overlay.Settings(SettingsPage.DEFAULT_HOME)) }
+    }
+}
+
+/** Android 13+ "restricted setting": the switch is greyed out for apps from outside a store. */
+@Composable
+private fun HomeRestrictedPage(env: SettingsEnv, setup: SettingsActions, first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    InfoBlock(Modifier.focusRequester(first)) { Text(stringResource(R.string.restricted_intro), style = BsfType.body, color = colors.text) }
+    InfoBlock { Text(stringResource(R.string.restricted_app_info), style = BsfType.body, color = colors.text) }
+    Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+        PanelButton(stringResource(R.string.btn_app_info)) { setup.openAppInfo() }
+    }
+    InfoBlock { Text(stringResource(R.string.restricted_adb), style = BsfType.body, color = colors.text) }
+    Row(Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
+        PanelButton(stringResource(R.string.btn_allow_restricted), primary = true) { setup.allowRestricted() }
+    }
+    SetupResult(env.setupState)
+    InfoBlock {
+        Text(stringResource(R.string.header_from_pc), style = BsfType.body, color = colors.text)
+        CodeBlock(listOf(PC_CONNECT) + HomeCommands.forPc(listOf(HomeCommands.allowRestrictedSettings(BuildConfig.APPLICATION_ID))))
+    }
+    InfoBlock { Text(stringResource(R.string.dh_turn_off), style = BsfType.label, color = colors.textMuted) }
 }
 
 /** Where Home points and the state of each stock launcher, as one quiet card. */

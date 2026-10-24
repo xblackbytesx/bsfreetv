@@ -15,7 +15,8 @@ NVIDIA SHIELD TV Pro, made to run on any TV box with Android 11 or newer.
 - OLED care: true black, wallpaper-only after a few idle minutes, then black,
   slow pixel shift on everything static.
 - Optional Next Up row from apps that publish Watch Next (Jellyfin does).
-- Makes itself the Home app from its own settings (self-ADB), with one-click undo.
+- Makes itself the Home app from its own settings (self-ADB on Android TV, an
+  opt-in Home button service on Google TV), with one-click undo.
 
 ## Screenshots
 
@@ -38,7 +39,7 @@ NVIDIA SHIELD TV Pro, made to run on any TV box with Android 11 or newer.
 |---|---|
 | NVIDIA SHIELD TV / TV Pro (2019) | Tested daily. Everything, including the in-app Home switch |
 | Other classic Android TV, Android 11+ | Should work, not yet tested. If the in-app Home switch can't connect, use the PC commands below |
-| Google TV (Chromecast with Google TV, Google TV Streamer, Google TV TVs) | Runs as an app. **The Home switch is not supported** and is disabled in the app |
+| Google TV (Chromecast with Google TV, Google TV Streamer, Google TV TVs) | Home button through an opt-in accessibility service (**experimental**, see below). The ADB switch is never used here |
 | Android 10 and older | Not supported |
 
 Tested it on another box? Open an issue with the device and what worked.
@@ -60,6 +61,7 @@ Open BSfreeTV from the app list, then **Settings > Default launcher**.
 > Google TV opens its own launcher directly when you press Home. Disabling it
 > makes the device restart in a loop. Version 0.2.0 did this on Google TV;
 > 0.2.1 and later refuse. If your Google TV is affected, see Recovery below.
+> Google TV has its own safe method, see [Google TV](#google-tv).
 
 1. Shield: Settings > Device Preferences > About, press Build 7 times.
 2. Developer options: turn on **Network debugging**.
@@ -90,6 +92,37 @@ These commands need a working adb connection. A device already stuck in a
 reboot loop may need a factory reset from its recovery menu.
 
 Restore the stock launcher before uninstalling BSfreeTV.
+
+### Google TV
+
+Experimental, new in 0.4.0. Google TV won't let another app be Home, and
+disabling its launcher makes the device restart in a loop. Instead, BSfreeTV
+offers an accessibility service that does one thing: when you press Home, it
+opens BSfreeTV.
+
+- **What it can do:** it receives button presses and reacts only to Home.
+  Every other button passes through untouched.
+- **What it can't do:** it can't see the screen and doesn't read what you type
+  or watch. It collects nothing, sends nothing, and disables nothing. Google TV
+  stays installed and enabled.
+- **Android's warning:** when you switch it on, Android shows its standard
+  warning that the service "can observe your actions". Every accessibility
+  service gets that same text.
+- **The way back:** hold Home to open the Google TV home screen (this can be
+  switched off). If BSfreeTV crashes twice within two minutes, Home goes back
+  to Google TV on its own.
+- **After a restart:** BSfreeTV opens once (can be switched off).
+
+To set it up: BSfreeTV Settings > Default launcher > **Use Home for BSfreeTV**.
+Read the page, open Accessibility, choose **BSfreeTV Home button** and turn it
+on. If the switch is greyed out ("restricted setting"), the app shows two ways
+to allow it, or from a PC:
+
+```
+adb shell appops set com.bsfreetv.launcher ACCESS_RESTRICTED_SETTINGS allow
+```
+
+To undo: switch the service off in Accessibility, or uninstall BSfreeTV.
 
 ## Using it
 

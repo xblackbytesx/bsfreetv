@@ -69,9 +69,33 @@ class DefaultHomePageTest {
 
     @Test fun `google tv overview reaches the explanation and recovery`() {
         show(SettingsPage.DEFAULT_HOME, googleTv)
-        focusedHas("This looks like Google TV")
+        focusedHas("accessibility service")
         walk(Key.DirectionDown)
         focusedHas("Undo and recovery")
+    }
+
+    @Test fun `google tv overview with the service on still reaches recovery`() {
+        show(SettingsPage.DEFAULT_HOME, googleTv.copy(overrideEnabled = true))
+        walk(Key.DirectionUp)
+        focusedHas("accessibility service")
+        walk(Key.DirectionDown)
+        focusedHas("Undo and recovery")
+    }
+
+    @Test fun `disclosure page is read top to bottom and ends on the buttons`() {
+        show(SettingsPage.HOME_ACCESSIBILITY, googleTv)
+        focusedHas("Why an accessibility permission")
+        walk(Key.DirectionDown)
+        rule.onNode(isFocused()).assert(hasAnyDescendant(hasText("Open Accessibility") or hasText("Not now")))
+        walk(Key.DirectionUp)
+        focusedHas("Why an accessibility permission")
+    }
+
+    @Test fun `restricted page reaches the pc command`() {
+        show(SettingsPage.HOME_RESTRICTED, googleTv)
+        focusedHas("outside an app store")
+        walk(Key.DirectionDown)
+        focusedHas("Network debugging off")
     }
 
     @Test fun `recovery page reaches the commands and the uninstall warning`() {

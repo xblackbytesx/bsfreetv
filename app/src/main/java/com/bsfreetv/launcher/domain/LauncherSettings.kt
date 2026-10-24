@@ -37,6 +37,10 @@ data class LauncherSettings(
     val nextUp: Boolean = false,
     /** Packages whose Watch Next rows show; null = the Media section. */
     val nextUpPackages: Set<String>? = null,
+    /** Google TV Home button service: holding Home opens the stock home (the way back). */
+    val homeHoldForStock: Boolean = true,
+    /** Google TV Home button service: open BSfreeTV once right after a restart. */
+    val homeOpenAfterBoot: Boolean = true,
     /** Epoch day of the last daily rotation. */
     val rotatedOnDay: Long = 0,
 ) {

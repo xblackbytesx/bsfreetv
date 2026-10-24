@@ -190,7 +190,6 @@
     <string name="about_your_wallpapers">خلفياتك</string>
 
     <!-- Home switch safety (v0.2.1) -->
-    <string name="dh_unsupported_google_tv">يبدو أن هذا الجهاز يعمل بنظام Google TV. لا يمكن تعيين BSfreeTV كشاشة رئيسية هنا: يفتح Google TV المشغّل الخاص به مباشرة عند الضغط على زر الصفحة الرئيسية، وتعطيله قد يجعل الجهاز يعيد التشغيل باستمرار. لا يزال بإمكانك فتح BSfreeTV من تطبيقاتك. إذا كان إصدار أقدم قد غيّر هذا الجهاز، فاستخدم استعادة الأصلي أدناه.</string>
     <string name="dh_unsupported_other">لا يمكن أن يصبح BSfreeTV الشاشة الرئيسية إلا على أجهزة Android TV الكلاسيكية مثل NVIDIA Shield. لا يزال بإمكانك فتحه من تطبيقاتك.</string>
     <string name="home_value_unsupported">غير مدعوم</string>
     <string name="step_restore_home">إعادة %1$s كشاشة رئيسية</string>
@@ -204,4 +203,34 @@
     <string name="dh_row_debugging_desc">مطلوب مرة واحدة لتغيير الشاشة الرئيسية</string>
     <string name="dh_row_recovery">التراجع والاستعادة</string>
     <string name="dh_pc_intro">على كمبيوتر مثبت عليه adb وعلى الشبكة نفسها، اتصل بالتلفزيون ونفّذ:</string>
+
+    <!-- Google TV Home button (accessibility service, v0.4.0) -->
+    <string name="a11y_service_label">زر الصفحة الرئيسية لـ BSfreeTV</string>
+    <string name="a11y_service_desc">يفتح BSfreeTV عند الضغط على زر الصفحة الرئيسية. يستمع إلى هذا الزر فقط: لا يمكنه رؤية الشاشة ولا يجمع أو يرسل أي شيء. أوقفه لإعادة زر الصفحة الرئيسية إلى Google TV.</string>
+    <string name="dh_gtv_intro">على Google TV، يمكن لـ BSfreeTV تولّي زر الصفحة الرئيسية عبر خدمة إمكانية الوصول. يبقى Google TV نفسه مثبتًا ومفعّلًا ودون أي تغيير.</string>
+    <string name="status_override_on">زر الصفحة الرئيسية يفتح BSfreeTV</string>
+    <string name="status_override_off">زر الصفحة الرئيسية يفتح Google TV</string>
+    <string name="btn_use_home_button">الرئيسية لـ BSfreeTV</string>
+    <string name="btn_turn_off">إيقاف</string>
+    <string name="dh_row_hold">اضغط مطولًا للوصول إلى Google TV</string>
+    <string name="dh_row_hold_on_desc">اضغط لفتح BSfreeTV، واضغط مطولًا لشاشة Google TV الرئيسية</string>
+    <string name="dh_row_hold_off_desc">زر الصفحة الرئيسية يفتح BSfreeTV دائمًا. الطريقة الوحيدة للعودة إلى Google TV هي إيقاف الخدمة من إمكانية الوصول</string>
+    <string name="dh_row_after_restart">الفتح بعد إعادة التشغيل</string>
+    <string name="dh_row_after_restart_desc">مرة واحدة، مباشرة بعد تشغيل التلفزيون</string>
+    <string name="dh_row_restricted">المفتاح غير متاح؟</string>
+    <string name="a11y_title">زر الصفحة الرئيسية</string>
+    <string name="a11y_why">لماذا إذن إمكانية الوصول؟ لا يتيح Google TV اختيار تطبيق رئيسي آخر، وإيقاف المشغّل الخاص به قد يجعل الجهاز يعيد التشغيل في حلقة. خدمة إمكانية وصول تلتقط زر الصفحة الرئيسية هي الطريقة الآمنة الوحيدة لجعل BSfreeTV شاشتك الرئيسية.</string>
+    <string name="a11y_does">ما تفعله: تراقب زرًا واحدًا فقط، زر الصفحة الرئيسية. عند الضغط عليه يُفتح BSfreeTV. تمر جميع الأزرار الأخرى كما هي دون تغيير.</string>
+    <string name="a11y_never">ما لا تفعله أبدًا: لا يمكنها رؤية ما على الشاشة، ولا تقرأ ما تكتبه أو تشاهده، ولا تجمع أو ترسل أي شيء. لا توقف Google TV ولا تغيّره.</string>
+    <string name="a11y_warning">سيحذّرك Android من أن الخدمة يمكنها مراقبة إجراءاتك والتحكم في الجهاز. هذا هو التحذير نفسه لكل خدمات إمكانية الوصول؛ ولا يستخدم BSfreeTV إلا جزء زر الصفحة الرئيسية.</string>
+    <string name="a11y_undo">للتراجع، أوقف الخدمة من إمكانية الوصول أو أزل BSfreeTV. سيفتح زر الصفحة الرئيسية Google TV مجددًا على الفور.</string>
+    <string name="a11y_steps">الخطوة التالية: في إمكانية الوصول، اختر زر الصفحة الرئيسية لـ BSfreeTV، وفعّله وأكّد. ثم اضغط رجوع للعودة إلى هنا.</string>
+    <string name="btn_open_accessibility">فتح إمكانية الوصول</string>
+    <string name="btn_not_now">ليس الآن</string>
+    <string name="restricted_intro">قد يحظر Android المفتاح للتطبيقات المثبتة من خارج متجر التطبيقات: يظهر باهتًا أو كإعداد مقيّد. هناك طريقتان للسماح به.</string>
+    <string name="restricted_app_info">على التلفزيون: افتح معلومات تطبيق BSfreeTV واختر السماح بالإعدادات المقيّدة، إن ظهر هذا الخيار. ثم جرّب المفتاح مرة أخرى.</string>
+    <string name="btn_app_info">فتح معلومات التطبيق</string>
+    <string name="restricted_adb">أو دع BSfreeTV يسمح به عبر تصحيح الأخطاء عبر الشبكة. يُنفَّذ أمر واحد يرفع هذا الحظر فقط؛ ولا يتغير أي شيء آخر على التلفزيون.</string>
+    <string name="btn_allow_restricted">السماح عبر تصحيح الأخطاء</string>
+    <string name="task_allow_restricted">السماح بالإعدادات المقيّدة</string>
 </resources>
