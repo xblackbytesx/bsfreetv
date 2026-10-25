@@ -163,6 +163,7 @@
     <string name="about_wallpapers">배경화면</string>
     <string name="about_wallpapers_credit">Andreu Massanet의 Impasto(github.com/andreumassanet/impasto)에서 가져왔으며 GPL-3.0입니다. 색상 추출도 Impasto 방식을 따릅니다.</string>
     <string name="about_your_wallpapers">내 배경화면</string>
+    <string name="about_author">만든 사람: %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">BSfreeTV는 NVIDIA Shield 같은 기존 Android TV 기기에서만 홈 앱이 될 수 있습니다. 앱 목록에서는 계속 열 수 있습니다.</string>
@@ -208,4 +209,14 @@
     <string name="restricted_adb">또는 네트워크 디버깅으로 BSfreeTV가 허용하게 하세요. 이 차단만 푸는 명령 하나를 실행하며, TV의 다른 것은 바꾸지 않습니다.</string>
     <string name="btn_allow_restricted">네트워크 디버깅으로 허용</string>
     <string name="task_allow_restricted">제한된 설정 허용</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">상태 표시</string>
+    <string name="status_vpn_desc">VPN이 연결된 동안 시계 옆에 작은 표시</string>
+    <string name="status_vpn_privacy">누르면 공인 IP 주소와 해당 국가를 보여 줍니다. BSfreeTV는 그때만 Cloudflare(1.1.1.1)에 묻고, 그 외에는 아무것도 보내지 않습니다.</string>
+    <string name="status_ip_looking">확인 중…</string>
+    <string name="status_ip_failed">IP를 확인하지 못했습니다</string>
+    <plurals name="value_on_count">
+        <item quantity="other">%d개 켜짐</item>
+    </plurals>
 </resources>

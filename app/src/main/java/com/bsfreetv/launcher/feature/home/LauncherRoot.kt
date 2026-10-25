@@ -48,6 +48,7 @@ fun LauncherRoot(vm: HomeViewModel) {
     val homeTick by vm.homeTick.collectAsStateWithLifecycle()
     val focusRequest by vm.focusRequest.collectAsStateWithLifecycle()
     val wallpaperList by vm.wallpaperList.collectAsStateWithLifecycle()
+    val status by vm.status.collectAsStateWithLifecycle()
 
     val setupVm: HomeSetupViewModel = hiltViewModel()
     val homeStatus by setupVm.status.collectAsStateWithLifecycle()
@@ -83,6 +84,7 @@ fun LauncherRoot(vm: HomeViewModel) {
                     focusRequest = focusRequest,
                     overlayOpen = overlay != Overlay.None || menuFor != null,
                     chromeHidden = overlay is Overlay.AllApps || overlay == Overlay.WallpaperPicker,
+                    status = status,
                     actions = vm,
                 )
                 when (val o = overlay) {

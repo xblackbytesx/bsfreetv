@@ -22,6 +22,8 @@ interface HomeActions {
     fun updateSettings(transform: (LauncherSettings) -> LauncherSettings)
     fun previewWallpaper(id: String?)
     fun chooseWallpaper(id: String)
+    /** VPN pill pressed: look up the public IP (the only network request it makes). */
+    fun lookUpIp()
 
     object None : HomeActions {
         override fun launch(pkg: String) = Unit
@@ -40,5 +42,6 @@ interface HomeActions {
         override fun updateSettings(transform: (LauncherSettings) -> LauncherSettings) = Unit
         override fun previewWallpaper(id: String?) = Unit
         override fun chooseWallpaper(id: String) = Unit
+        override fun lookUpIp() = Unit
     }
 }

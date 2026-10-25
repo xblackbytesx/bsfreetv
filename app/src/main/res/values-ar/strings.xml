@@ -188,6 +188,7 @@
     <string name="about_wallpapers">الخلفيات</string>
     <string name="about_wallpapers_credit">من Impasto لـ Andreu Massanet (github.com/andreumassanet/impasto)، بترخيص GPL-3.0. يُستخرج اللون بطريقة Impasto نفسها.</string>
     <string name="about_your_wallpapers">خلفياتك</string>
+    <string name="about_author">من إعداد %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">لا يمكن أن يصبح BSfreeTV الشاشة الرئيسية إلا على أجهزة Android TV الكلاسيكية مثل NVIDIA Shield. لا يزال بإمكانك فتحه من تطبيقاتك.</string>
@@ -233,4 +234,19 @@
     <string name="restricted_adb">أو دع BSfreeTV يسمح به عبر تصحيح الأخطاء عبر الشبكة. يُنفَّذ أمر واحد يرفع هذا الحظر فقط؛ ولا يتغير أي شيء آخر على التلفزيون.</string>
     <string name="btn_allow_restricted">السماح عبر تصحيح الأخطاء</string>
     <string name="task_allow_restricted">السماح بالإعدادات المقيّدة</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">مؤشرات الحالة</string>
+    <string name="status_vpn_desc">شارة صغيرة بجانب الساعة أثناء الاتصال بشبكة VPN</string>
+    <string name="status_vpn_privacy">اضغط عليها لرؤية عنوان IP العام وبلده. يسأل BSfreeTV خدمة Cloudflare (1.1.1.1) في تلك اللحظة فقط؛ ولا يُرسل أي شيء غير ذلك.</string>
+    <string name="status_ip_looking">جارٍ البحث…</string>
+    <string name="status_ip_failed">تعذّر معرفة عنوان IP</string>
+    <plurals name="value_on_count">
+        <item quantity="zero">مفعّل: %d</item>
+        <item quantity="one">مفعّل: %d</item>
+        <item quantity="two">مفعّل: %d</item>
+        <item quantity="few">مفعّل: %d</item>
+        <item quantity="many">مفعّل: %d</item>
+        <item quantity="other">مفعّل: %d</item>
+    </plurals>
 </resources>

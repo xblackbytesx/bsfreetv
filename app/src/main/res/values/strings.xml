@@ -199,6 +199,10 @@
     <string name="about_wallpapers">Wallpapers</string>
     <string name="about_wallpapers_credit">From Impasto by Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. Colour extraction follows Impasto\'s accent picker.</string>
     <string name="about_your_wallpapers">Your wallpapers</string>
+    <string name="author_handle" translatable="false">xblackbytesx</string>
+    <string name="about_source_url" translatable="false">github.com/xblackbytesx/bsfreetv</string>
+    <!-- About page: who made it; %1$s is the GitHub handle. -->
+    <string name="about_author">Made by %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">BSfreeTV can only become the Home app on classic Android TV devices such as the NVIDIA Shield. You can still open it from your apps.</string>
@@ -245,4 +249,16 @@
     <string name="restricted_adb">Or let BSfreeTV allow it over Network debugging. This runs a single command that lifts only this block; nothing else on the TV is changed.</string>
     <string name="btn_allow_restricted">Allow with Network debugging</string>
     <string name="task_allow_restricted">Allow restricted settings</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="status_vpn" translatable="false">VPN</string>
+    <string name="set_status">Status indicators</string>
+    <string name="status_vpn_desc">A small pill next to the clock while a VPN is connected</string>
+    <string name="status_vpn_privacy">Press it to see your public IP address and its country. BSfreeTV asks Cloudflare (1.1.1.1) only at that moment; nothing is sent otherwise.</string>
+    <string name="status_ip_looking">Looking up…</string>
+    <string name="status_ip_failed">IP lookup failed</string>
+    <plurals name="value_on_count">
+        <item quantity="one">%d on</item>
+        <item quantity="other">%d on</item>
+    </plurals>
 </resources>

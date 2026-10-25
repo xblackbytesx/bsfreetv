@@ -34,7 +34,10 @@ android {
         minSdk = 30
         targetSdk = 37
         versionCode = (project.findProperty("appVersionCode") as String?)?.toIntOrNull() ?: 1
-        versionName = (project.findProperty("appVersionName") as String?) ?: "0.1.0"
+        // Releases get the tag's version from CI (-PappVersionName). Local builds
+        // describe themselves from git: "0.4.0" on a clean tag, "0.4.0-3-gabc1234" after
+        // it, "-dirty" with uncommitted changes.
+        versionName = (project.findProperty("appVersionName") as String?) ?: gitVersion() ?: "0.0.0-dev"
     }
 
     signingConfigs {
@@ -161,3 +164,11 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.kotlinx.coroutines.test)
 }
+
+/** `git describe` for local builds; null without git or tags. safe.directory: the Docker build runs as another user. */
+fun gitVersion(): String? = runCatching {
+    providers.exec {
+        commandLine("git", "-c", "safe.directory=*", "describe", "--tags", "--dirty", "--match", "v[0-9]*")
+        isIgnoreExitValue = true
+    }.standardOutput.asText.get().trim().removePrefix("v").takeIf { it.isNotEmpty() }
+}.getOrNull()

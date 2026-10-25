@@ -168,6 +168,7 @@
     <string name="about_wallpapers">Achtergronden</string>
     <string name="about_wallpapers_credit">Van Impasto door Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. De kleuren worden gekozen zoals Impasto dat doet.</string>
     <string name="about_your_wallpapers">Je eigen achtergronden</string>
+    <string name="about_author">Gemaakt door %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">BSfreeTV kan alleen het startscherm worden op klassieke Android TV-apparaten zoals de NVIDIA Shield. Je kunt het nog steeds openen vanuit je apps.</string>
@@ -213,4 +214,15 @@
     <string name="restricted_adb">Of laat BSfreeTV het toestaan via Netwerkfoutopsporing. Dat voert één opdracht uit die alleen deze blokkade opheft; verder verandert er niets op de tv.</string>
     <string name="btn_allow_restricted">Toestaan via Netwerkfoutopsporing</string>
     <string name="task_allow_restricted">Beperkte instellingen toestaan</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">Statusindicatoren</string>
+    <string name="status_vpn_desc">Een klein label naast de klok zolang er een VPN verbonden is</string>
+    <string name="status_vpn_privacy">Druk erop om je publieke IP-adres en het land ervan te zien. BSfreeTV vraagt dat alleen op dat moment op bij Cloudflare (1.1.1.1); verder wordt er niets verstuurd.</string>
+    <string name="status_ip_looking">Opzoeken…</string>
+    <string name="status_ip_failed">IP opzoeken mislukt</string>
+    <plurals name="value_on_count">
+        <item quantity="one">%d aan</item>
+        <item quantity="other">%d aan</item>
+    </plurals>
 </resources>

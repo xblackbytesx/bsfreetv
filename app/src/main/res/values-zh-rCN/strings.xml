@@ -163,6 +163,7 @@
     <string name="about_wallpapers">壁纸</string>
     <string name="about_wallpapers_credit">来自 Andreu Massanet 的 Impasto（github.com/andreumassanet/impasto），GPL-3.0。颜色提取方式沿用 Impasto。</string>
     <string name="about_your_wallpapers">你的壁纸</string>
+    <string name="about_author">作者:%1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">BSfreeTV 只能在 NVIDIA Shield 等经典 Android TV 设备上成为主屏幕应用。你仍可以从应用列表打开它。</string>
@@ -208,4 +209,14 @@
     <string name="restricted_adb">或者让 BSfreeTV 通过网络调试来允许。只运行一条命令,仅解除这一限制;电视上的其他内容都不会改变。</string>
     <string name="btn_allow_restricted">通过网络调试允许</string>
     <string name="task_allow_restricted">允许受限设置</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">状态指示</string>
+    <string name="status_vpn_desc">连接 VPN 时在时钟旁显示一个小标签</string>
+    <string name="status_vpn_privacy">按下即可查看你的公网 IP 地址及其所属国家。BSfreeTV 只在那一刻向 Cloudflare(1.1.1.1)查询;除此之外不发送任何内容。</string>
+    <string name="status_ip_looking">正在查询…</string>
+    <string name="status_ip_failed">无法查询 IP</string>
+    <plurals name="value_on_count">
+        <item quantity="other">已开启 %d 个</item>
+    </plurals>
 </resources>

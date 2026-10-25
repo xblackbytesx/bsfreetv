@@ -19,6 +19,7 @@ import com.bsfreetv.launcher.domain.home.HomeStatus
 import com.bsfreetv.launcher.domain.home.StockLauncher
 import com.bsfreetv.launcher.domain.idle.IdlePhase
 import com.bsfreetv.launcher.domain.LauncherSettings
+import com.bsfreetv.launcher.domain.status.StatusUi
 import com.bsfreetv.launcher.domain.layout.AppInfo
 import com.bsfreetv.launcher.domain.layout.Section
 import com.bsfreetv.launcher.domain.palette.LauncherPalette
@@ -158,8 +159,15 @@ class ScreenshotTest {
     }
 
     @Composable
-    private fun Home(frame: WallpaperFrame, ui: HomeUi, next: List<NextUpItem> = emptyList(), idle: IdlePhase = IdlePhase.ACTIVE, overlay: Boolean = false, fullOverlay: Boolean = false) =
-        HomeContent(ui, frame, next, idle, moving = null, homeTick = 0, focusRequest = null, overlayOpen = overlay || fullOverlay, actions = HomeActions.None, chromeHidden = fullOverlay, clockOverride = clock)
+    private fun Home(
+        frame: WallpaperFrame,
+        ui: HomeUi,
+        next: List<NextUpItem> = emptyList(),
+        idle: IdlePhase = IdlePhase.ACTIVE,
+        overlay: Boolean = false,
+        fullOverlay: Boolean = false,
+        status: StatusUi = StatusUi(),
+    ) = HomeContent(ui, frame, next, idle, moving = null, homeTick = 0, focusRequest = null, overlayOpen = overlay || fullOverlay, actions = HomeActions.None, chromeHidden = fullOverlay, clockOverride = clock, status = status)
 
     /** The tools tray up close at 4K: round icons, sharp edges. */
     @Test @Config(qualifiers = "w960dp-h540dp-land-television-xxxhdpi")
@@ -176,6 +184,19 @@ class ScreenshotTest {
     @Test fun tools_large() {
         val f = wallpaper("japanese-castle-full-moon")
         shot("15-tools-large", f.palette) { Home(f, ui(LauncherSettings(toolSize = com.bsfreetv.launcher.domain.ToolSize.LARGE))) }
+    }
+
+    @Test fun home_vpn() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("16-home-vpn", f.palette) { Home(f, ui(LauncherSettings(statusVpn = true)), status = StatusUi(vpnShown = true)) }
+    }
+
+    @Test fun settings_status() {
+        val f = wallpaper("japanese-castle-full-moon")
+        shot("16-settings-status", f.palette) {
+            Home(f, ui(LauncherSettings(statusVpn = true)), overlay = true, status = StatusUi(vpnShown = true))
+            SettingsPanel(SettingsPage.STATUS, ui(LauncherSettings(statusVpn = true)), env(), HomeActions.None, SettingsActions.None)
+        }
     }
 
     @Test fun home_castle() {
