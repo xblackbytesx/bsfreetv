@@ -5,8 +5,10 @@
     <uses-feature android:name="android.software.leanback" android:required="true" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
-    <!-- Self-ADB to the Shield's own adbd (127.0.0.1:5555), Next Up posters. -->
+    <!-- Self-ADB to the Shield's own adbd (127.0.0.1:5555), Next Up posters, VPN pill IP lookup (on press). -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- VPN status indicator: is the default network a VPN. Normal permission, no prompt. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Next Up: other apps' Watch Next rows. Dangerous permission, user granted. -->
     <uses-permission android:name="android.permission.READ_TV_LISTINGS" />
     <!-- App menu: Uninstall. -->

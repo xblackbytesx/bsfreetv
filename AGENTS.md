@@ -54,6 +54,7 @@ posters only), dadb (self-ADB).
 | `data/AppCatalog.kt` | Leanback + launcher activities, banners/icons rasterised once off the main thread |
 | `data/Wallpapers.kt` | Built-in assets + `Android/data/<pkg>/files/wallpapers/`, decode, palette cache, import |
 | `data/WatchNext.kt` | TvProvider Watch Next reader (READ_TV_LISTINGS) |
+| `data/NetworkStatus.kt` + `domain/status/` | Status indicators: VPN state (default-network callback, only while the indicator is on) and the on-press IP lookup (`IpTrace` parses Cloudflare's trace) |
 | `data/LauncherStore.kt` | DataStore: layout + settings JSON, decode failure = defaults |
 | `system/HomeControl.kt` | Home status and self-ADB (dadb to 127.0.0.1:5555) |
 | `system/HomeButtonService.kt` + `HomeGuard.kt` | Google TV only: accessibility service that turns the Home key into "open BSfreeTV"; policy in `domain/home/HomeOverride.kt` (`HomeKeyPolicy`, `CrashGuard`, `BootLaunch`) |
@@ -98,6 +99,16 @@ posters only), dadb (self-ADB).
   every block of text on a settings page is focusable: rows, buttons or
   `InfoBlock`. Long material goes on a sub-page (`SettingsPage.parent` makes
   Back walk up one level). `DefaultHomePageTest` walks each page end to end.
+- **Status indicators** sit next to the clock and exist only while their state
+  is true; with none active the top bar is unchanged. All are off by default.
+  Settings get one row on the main page ("Status indicators"); everything else
+  lives on `SettingsPage.STATUS`. This is the pattern for power features: never
+  more than one new main row, depth behind a chevron.
+- **No network traffic without a press.** The VPN pill's IP lookup (one GET to
+  `1.1.1.1/cdn-cgi/trace`, 4 s timeouts, 4 KB cap, no redirects) runs only when
+  the user presses it, reused for a minute and forgotten when the VPN changes.
+  A "VPN is off" warning is deliberately absent: apps can't know whether a
+  VPN is meant to be on (always-on VPN is unreadable), so it would nag.
 - **First key after idle only wakes.** Root `onPreviewKeyEvent` in `LauncherRoot`.
 - **The Home switch never bricks a device.** It only acts on
   `DeviceKind.CLASSIC_ANDROID_TV` (tvlauncher present, no Google TV launcher).
@@ -180,6 +191,11 @@ posters only), dadb (self-ADB).
 
 - Possibly offer the Home button service on the Shield as a fallback when an
   OTA re-enables tvlauncher (currently ADB only, by choice).
+- Now playing indicator (phase 2 of status indicators): needs notification
+  access (`NotificationListenerService` + MediaSessionManager), granted via
+  self-ADB `cmd notification allow_listener` where the TV hides the setting.
+  Controls only on request.
+- VPN-off warning: only if someone asks, and only with a way to know intent.
 - DreamService screensaver using the built-in wallpapers.
 - Next Up straight from the Jellyfin API (`/Shows/NextUp`, `/UserItems/Resume`).
 - Layout/settings export and import.

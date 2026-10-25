@@ -43,7 +43,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRestorer
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.focus.onFocusEvent
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.FilterQuality
@@ -67,6 +72,8 @@ import com.bsfreetv.launcher.domain.LauncherSettings
 import com.bsfreetv.launcher.domain.Motion
 import com.bsfreetv.launcher.domain.ToolSize
 import com.bsfreetv.launcher.domain.ToolsStyle
+import com.bsfreetv.launcher.domain.status.IpLookup
+import com.bsfreetv.launcher.domain.status.StatusUi
 import com.bsfreetv.launcher.ui.BsfColors
 import com.bsfreetv.launcher.ui.BsfType
 import com.bsfreetv.launcher.ui.components.AppBannerCard
@@ -80,6 +87,7 @@ import com.bsfreetv.launcher.ui.components.tvClickable
 import com.bsfreetv.launcher.ui.LocalBsfColors
 import java.time.format.DateTimeFormatter
 import java.time.LocalDateTime
+import java.util.Locale
 import kotlinx.coroutines.delay
 import com.bsfreetv.launcher.ui.uiLocale
 import com.bsfreetv.launcher.ui.upper
@@ -108,6 +116,7 @@ fun HomeContent(
     /** Full-screen overlays (All apps, wallpaper picker) hide the home chrome entirely. */
     chromeHidden: Boolean = false,
     clockOverride: LocalDateTime? = null,
+    status: StatusUi = StatusUi(),
 ) {
     val s = ui.settings
     val motion = LocalMotion.current
@@ -190,6 +199,7 @@ fun HomeContent(
                 freshCount = ui.freshCount,
                 appsPill = appsPill,
                 clockOverride = clockOverride,
+                status = status,
                 actions = actions,
                 modifier = Modifier.align(Alignment.TopStart),
             )
@@ -390,11 +400,16 @@ private fun TopBar(
     freshCount: Int,
     appsPill: FocusRequester,
     clockOverride: LocalDateTime?,
+    status: StatusUi,
     actions: HomeActions,
     modifier: Modifier = Modifier,
 ) {
     Row(modifier.fillMaxWidth().padding(horizontal = Gutter, vertical = 26.dp), verticalAlignment = Alignment.CenterVertically) {
         if (settings.showClock) Clock(clockOverride)
+        // Status indicators: each shows only while its state is true; none, nothing.
+        if (status.vpnShown) {
+            VpnPill(status.ip, actions::lookUpIp, Modifier.padding(start = if (settings.showClock) 20.dp else 0.dp))
+        }
         Spacer(Modifier.weight(1f))
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Pill(
@@ -408,6 +423,62 @@ private fun TopBar(
         }
     }
 }
+
+/**
+ * VPN connected. OK reveals the public IP and its country inline (one lookup,
+ * on request only); it folds back after a while or when focus moves on.
+ */
+@Composable
+private fun VpnPill(ip: IpLookup, onLookUp: () -> Unit, modifier: Modifier = Modifier) {
+    var expanded by remember { mutableStateOf(false) }
+    LaunchedEffect(expanded) {
+        if (expanded) {
+            delay(VPN_DETAIL_MS)
+            expanded = false
+        }
+    }
+    val detail = when (ip) {
+        IpLookup.Idle, IpLookup.Loading -> stringResource(R.string.status_ip_looking)
+        IpLookup.Failed -> stringResource(R.string.status_ip_failed)
+        is IpLookup.Done -> {
+            val country = ip.info.countryCode?.let { code -> Locale("", code).getDisplayCountry(uiLocale()).ifBlank { code } }
+            listOfNotNull(ip.info.ip, country).joinToString(" · ")
+        }
+    }
+    val vpn = stringResource(R.string.status_vpn)
+    Pill(
+        if (expanded) "$vpn · $detail" else vpn,
+        modifier.onFocusChanged { if (!it.hasFocus) expanded = false },
+        leading = { LockGlyph(Modifier.padding(end = 6.dp)) },
+    ) {
+        expanded = !expanded
+        if (expanded) onLookUp()
+    }
+}
+
+/** A small padlock drawn in place: shackle and body, in the "ok" status green. */
+@Composable
+private fun LockGlyph(modifier: Modifier = Modifier) {
+    Canvas(modifier.size(width = 9.dp, height = 11.dp)) {
+        val green = Color(0xFFA6E3A1)
+        val stroke = size.width * 0.18f
+        val bodyTop = size.height * 0.45f
+        drawArc(
+            green,
+            startAngle = 180f,
+            sweepAngle = 180f,
+            useCenter = false,
+            topLeft = Offset(size.width * 0.18f, stroke / 2),
+            size = Size(size.width * 0.64f, size.height * 0.6f),
+            style = Stroke(stroke),
+        )
+        drawLine(green, Offset(size.width * 0.18f, size.height * 0.32f), Offset(size.width * 0.18f, bodyTop), stroke)
+        drawLine(green, Offset(size.width * 0.82f, size.height * 0.32f), Offset(size.width * 0.82f, bodyTop), stroke)
+        drawRoundRect(green, Offset(0f, bodyTop), Size(size.width, size.height - bodyTop), CornerRadius(size.width * 0.15f))
+    }
+}
+
+private const val VPN_DETAIL_MS = 10_000L
 
 @Composable
 private fun Clock(override: LocalDateTime?) {

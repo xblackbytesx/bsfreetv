@@ -178,6 +178,7 @@
     <string name="about_wallpapers">Tapety</string>
     <string name="about_wallpapers_credit">Z Impasto autorstwa Andreu Massaneta (github.com/andreumassanet/impasto), GPL-3.0. Kolory są dobierane tak jak w Impasto.</string>
     <string name="about_your_wallpapers">Twoje tapety</string>
+    <string name="about_author">Autor: %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">BSfreeTV może zostać ekranem głównym tylko na klasycznych urządzeniach Android TV, takich jak NVIDIA Shield. Nadal możesz go otwierać z listy aplikacji.</string>
@@ -223,4 +224,17 @@
     <string name="restricted_adb">Albo pozwól BSfreeTV zezwolić na to przez debugowanie sieciowe. Wykonywane jest jedno polecenie, które znosi tylko tę blokadę; nic innego na telewizorze się nie zmienia.</string>
     <string name="btn_allow_restricted">Zezwól przez debugowanie sieciowe</string>
     <string name="task_allow_restricted">Zezwól na ustawienia z ograniczeniami</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">Wskaźniki stanu</string>
+    <string name="status_vpn_desc">Mała etykieta obok zegara, gdy połączona jest sieć VPN</string>
+    <string name="status_vpn_privacy">Naciśnij, aby zobaczyć swój publiczny adres IP i jego kraj. BSfreeTV pyta Cloudflare (1.1.1.1) tylko w tym momencie; poza tym nic nie jest wysyłane.</string>
+    <string name="status_ip_looking">Sprawdzanie…</string>
+    <string name="status_ip_failed">Nie udało się sprawdzić IP</string>
+    <plurals name="value_on_count">
+        <item quantity="one">Włączone: %d</item>
+        <item quantity="few">Włączone: %d</item>
+        <item quantity="many">Włączone: %d</item>
+        <item quantity="other">Włączone: %d</item>
+    </plurals>
 </resources>

@@ -174,6 +174,7 @@
     <string name="about_wallpapers">Planos de fundo</string>
     <string name="about_wallpapers_credit">Do Impasto, de Andreu Massanet (github.com/andreumassanet/impasto), GPL-3.0. As cores são escolhidas como no Impasto.</string>
     <string name="about_your_wallpapers">Seus planos de fundo</string>
+    <string name="about_author">Criado por %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">O BSfreeTV só pode virar a tela inicial em aparelhos Android TV clássicos como a NVIDIA Shield. Você ainda pode abri-lo pelos seus apps.</string>
@@ -219,4 +220,16 @@
     <string name="restricted_adb">Ou deixe o BSfreeTV permitir pela depuração de rede. Isso executa um único comando que só remove este bloqueio; nada mais muda na TV.</string>
     <string name="btn_allow_restricted">Permitir com depuração de rede</string>
     <string name="task_allow_restricted">Permitir configurações restritas</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">Indicadores de status</string>
+    <string name="status_vpn_desc">Uma pequena etiqueta ao lado do relógio enquanto uma VPN estiver conectada</string>
+    <string name="status_vpn_privacy">Aperte para ver seu endereço IP público e o país dele. O BSfreeTV consulta a Cloudflare (1.1.1.1) só nesse momento; nada é enviado fora isso.</string>
+    <string name="status_ip_looking">Consultando…</string>
+    <string name="status_ip_failed">Falha ao consultar o IP</string>
+    <plurals name="value_on_count">
+        <item quantity="one">%d ativado</item>
+        <item quantity="many">%d ativados</item>
+        <item quantity="other">%d ativados</item>
+    </plurals>
 </resources>

@@ -163,6 +163,7 @@
     <string name="about_wallpapers">壁紙</string>
     <string name="about_wallpapers_credit">Andreu Massanet による Impasto (github.com/andreumassanet/impasto) より、GPL-3.0。色の選び方も Impasto に基づいています。</string>
     <string name="about_your_wallpapers">自分の壁紙</string>
+    <string name="about_author">作成: %1$s</string>
 
     <!-- Home switch safety (v0.2.1) -->
     <string name="dh_unsupported_other">BSfreeTV をホームアプリにできるのは、NVIDIA Shield などの従来の Android TV 端末だけです。アプリ一覧からは引き続き開けます。</string>
@@ -208,4 +209,14 @@
     <string name="restricted_adb">または、ネットワーク デバッグ経由で BSfreeTV に許可させます。このブロックだけを解除するコマンドを 1 つ実行し、テレビのほかの設定は変えません。</string>
     <string name="btn_allow_restricted">ネットワーク デバッグで許可</string>
     <string name="task_allow_restricted">制限付き設定を許可</string>
+
+    <!-- Status indicators (v0.5.0) -->
+    <string name="set_status">ステータス表示</string>
+    <string name="status_vpn_desc">VPN 接続中は時計の横に小さなラベルを表示</string>
+    <string name="status_vpn_privacy">押すと公開 IP アドレスとその国を表示します。BSfreeTV が Cloudflare (1.1.1.1) に問い合わせるのはその時だけで、それ以外は何も送信しません。</string>
+    <string name="status_ip_looking">確認中…</string>
+    <string name="status_ip_failed">IP を取得できませんでした</string>
+    <plurals name="value_on_count">
+        <item quantity="other">%d 件オン</item>
+    </plurals>
 </resources>

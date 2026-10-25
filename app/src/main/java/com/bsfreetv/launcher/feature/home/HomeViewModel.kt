@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.bsfreetv.launcher.data.AppCatalog
 import com.bsfreetv.launcher.data.AppEntry
 import com.bsfreetv.launcher.data.LauncherStore
+import com.bsfreetv.launcher.data.NetworkStatus
 import com.bsfreetv.launcher.data.NextUpItem
 import com.bsfreetv.launcher.data.Wallpaper
 import com.bsfreetv.launcher.data.Wallpapers
@@ -22,6 +23,8 @@ import com.bsfreetv.launcher.domain.layout.Section
 import com.bsfreetv.launcher.domain.palette.LauncherPalette
 import com.bsfreetv.launcher.domain.palette.PaletteBuilder
 import com.bsfreetv.launcher.domain.Rotation
+import com.bsfreetv.launcher.domain.status.IpLookup
+import com.bsfreetv.launcher.domain.status.StatusUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
 import javax.inject.Inject
@@ -32,11 +35,14 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -53,6 +59,8 @@ enum class SettingsPage(val parent: SettingsPage? = null) {
     /** Google TV: what the Home button service does, before the system screen. */
     HOME_ACCESSIBILITY(DEFAULT_HOME),
     HOME_RESTRICTED(DEFAULT_HOME),
+    /** Status indicators next to the clock (VPN now, Now playing later). */
+    STATUS(MAIN),
     NEXT_UP_APPS(MAIN),
     ABOUT(MAIN),
 }
@@ -88,6 +96,7 @@ class HomeViewModel @Inject constructor(
     private val store: LauncherStore,
     private val wallpapers: Wallpapers,
     private val watchNext: WatchNext,
+    private val network: NetworkStatus,
 ) : ViewModel(), HomeActions {
 
     val ui: StateFlow<HomeUi> = combine(catalog.apps, store.layout, store.settings) { apps, layout, settings ->
@@ -140,6 +149,17 @@ class HomeViewModel @Inject constructor(
     private val _nextUp = MutableStateFlow<List<NextUpItem>>(emptyList())
     val nextUp: StateFlow<List<NextUpItem>> = _nextUp.asStateFlow()
 
+    /** VPN state, watched only while the indicator is on (no callback otherwise). */
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private val vpn: StateFlow<Boolean> = store.settings.map { it.statusVpn }.distinctUntilChanged()
+        .flatMapLatest { on -> if (on) network.vpnActive else flowOf(false) }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+    private val _ip = MutableStateFlow<IpLookup>(IpLookup.Idle)
+    private var ipAt = 0L
+
+    val status: StateFlow<StatusUi> = combine(vpn, _ip) { on, ip -> StatusUi(vpnShown = on, ip = if (on) ip else IpLookup.Idle) }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, StatusUi())
+
     private val _idle = MutableStateFlow(IdlePhase.ACTIVE)
     val idle: StateFlow<IdlePhase> = _idle.asStateFlow()
     private var lastInput = SystemClock.elapsedRealtime()
@@ -164,6 +184,25 @@ class HomeViewModel @Inject constructor(
                 .collectLatest { refreshNextUp() }
         }
         viewModelScope.launch { store.settings.map { it.ambientAfterMin to it.blackAfterMin }.distinctUntilChanged().collect { scheduleIdle() } }
+        // A VPN going up or down changes the public IP: forget the last lookup.
+        viewModelScope.launch { vpn.collect { _ip.value = IpLookup.Idle } }
+    }
+
+    /** Only on an explicit press: one request to Cloudflare, reused for a minute. */
+    override fun lookUpIp() {
+        val current = _ip.value
+        if (current == IpLookup.Loading) return
+        if (current is IpLookup.Done && SystemClock.elapsedRealtime() - ipAt < IP_FRESH_MS) return
+        _ip.value = IpLookup.Loading
+        viewModelScope.launch {
+            val info = network.lookUpIp()
+            ipAt = SystemClock.elapsedRealtime()
+            _ip.value = info?.let { IpLookup.Done(it) } ?: IpLookup.Failed
+        }
+    }
+
+    private companion object {
+        const val IP_FRESH_MS = 60_000L
     }
 
     private suspend fun showWallpaper(id: String) {

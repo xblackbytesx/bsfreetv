@@ -35,6 +35,8 @@ data class LauncherSettings(
     val blackAfterMin: Int = 10,
     val wallpaperDrift: Boolean = false,
     val nextUp: Boolean = false,
+    /** Status indicator: a VPN pill next to the clock while a VPN is connected. */
+    val statusVpn: Boolean = false,
     /** Packages whose Watch Next rows show; null = the Media section. */
     val nextUpPackages: Set<String>? = null,
     /** Google TV Home button service: holding Home opens the stock home (the way back). */
@@ -44,6 +46,9 @@ data class LauncherSettings(
     /** Epoch day of the last daily rotation. */
     val rotatedOnDay: Long = 0,
 ) {
+    /** Status indicators switched on, for the settings row. */
+    val statusIndicatorCount: Int get() = listOf(statusVpn).count { it }
+
     companion object {
         const val DEFAULT_WALLPAPER = "japanese-castle-full-moon"
         val BrightnessSteps = listOf(1.0f, 0.9f, 0.8f, 0.7f, 0.6f)

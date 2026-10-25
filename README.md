@@ -15,6 +15,8 @@ NVIDIA SHIELD TV Pro, made to run on any TV box with Android 11 or newer.
 - OLED care: true black, wallpaper-only after a few idle minutes, then black,
   slow pixel shift on everything static.
 - Optional Next Up row from apps that publish Watch Next (Jellyfin does).
+- Optional status indicators next to the clock, shown only when there is
+  something to say: a VPN pill (press it for your public IP and country).
 - Makes itself the Home app from its own settings (self-ADB on Android TV, an
   opt-in Home button service on Google TV), with one-click undo.
 

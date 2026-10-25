@@ -97,5 +97,8 @@ class LayoutTest {
         assertEquals(false, s.showClock)
         // Settings saved before the tool size existed get the default.
         assertEquals(ToolSize.MEDIUM, s.toolSize)
+        // Status indicators are opt-in.
+        assertEquals(false, s.statusVpn)
+        assertEquals(0, s.statusIndicatorCount)
     }
 }

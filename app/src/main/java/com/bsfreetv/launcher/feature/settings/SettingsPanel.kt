@@ -144,6 +144,7 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
                         SettingsPage.HOME_RECOVERY -> R.string.dh_row_recovery
                         SettingsPage.HOME_ACCESSIBILITY -> R.string.a11y_title
                         SettingsPage.HOME_RESTRICTED -> R.string.dh_row_restricted
+                        SettingsPage.STATUS -> R.string.set_status
                         SettingsPage.NEXT_UP_APPS -> R.string.settings_next_up_apps
                         SettingsPage.ABOUT -> R.string.settings_about
                     },
@@ -160,6 +161,7 @@ fun SettingsPanel(page: SettingsPage, ui: HomeUi, env: SettingsEnv, actions: Hom
                     else DefaultHomePage(env, actions, setup, first)
                 SettingsPage.HOME_ACCESSIBILITY -> HomeAccessibilityPage(actions, setup, first)
                 SettingsPage.HOME_RESTRICTED -> HomeRestrictedPage(env, setup, first)
+                SettingsPage.STATUS -> StatusPage(ui, actions, first)
                 SettingsPage.HOME_DEBUGGING -> HomeDebuggingPage(first)
                 SettingsPage.HOME_PC -> HomePcPage(env, first)
                 SettingsPage.HOME_RECOVERY -> HomeRecoveryPage(env, setup, first)
@@ -206,6 +208,11 @@ private fun MainPage(ui: HomeUi, env: SettingsEnv, actions: HomeActions, setup: 
         SettingRow(stringResource(R.string.set_tool_size), s.toolSize.label()) { set { it.copy(toolSize = ToolSize.entries.after(it.toolSize)) } }
     }
     SettingRow(stringResource(R.string.set_clock), onOff(s.showClock)) { set { it.copy(showClock = !it.showClock) } }
+    SettingRow(
+        stringResource(R.string.set_status),
+        if (s.statusIndicatorCount == 0) stringResource(R.string.value_off) else pluralStringResource(R.plurals.value_on_count, s.statusIndicatorCount, s.statusIndicatorCount),
+        chevron = true,
+    ) { actions.open(Overlay.Settings(SettingsPage.STATUS)) }
     SettingRow(stringResource(R.string.set_animations), s.motion.label()) { set { it.copy(motion = Motion.entries.after(it.motion)) } }
     SettingRow(stringResource(R.string.set_sort_apps), pluralStringResource(R.plurals.value_unsorted, ui.unsorted.size, ui.unsorted.size), chevron = true) {
         actions.open(Overlay.AllApps(AppFilter.ALL))
@@ -518,6 +525,23 @@ private fun SetupResult(state: SetupState) {
     }
 }
 
+/**
+ * Status indicators: small pills next to the clock that show only while their
+ * state is true. All off by default; each one is a single row here. The power
+ * features live on this page, never on the main one.
+ */
+@Composable
+private fun StatusPage(ui: HomeUi, actions: HomeActions, first: FocusRequester) {
+    val colors = LocalBsfColors.current
+    SettingRow(
+        stringResource(R.string.status_vpn),
+        onOff(ui.settings.statusVpn),
+        description = stringResource(R.string.status_vpn_desc),
+        modifier = Modifier.focusRequester(first),
+    ) { actions.updateSettings { it.copy(statusVpn = !it.statusVpn) } }
+    InfoBlock { Text(stringResource(R.string.status_vpn_privacy), style = BsfType.label, color = colors.textMuted) }
+}
+
 @Composable
 private fun NextUpAppsPage(ui: HomeUi, actions: HomeActions, first: FocusRequester) {
     val chosen = ui.settings.nextUpPackages
@@ -546,6 +570,8 @@ private fun AboutPage(env: SettingsEnv, first: FocusRequester) {
         modifier = Modifier.focusRequester(first),
     ) {}
     Column(Modifier.padding(horizontal = 14.dp, vertical = 8.dp)) {
+        Text(stringResource(R.string.about_author, stringResource(R.string.author_handle)), style = BsfType.label, color = colors.textMuted)
+        Text(stringResource(R.string.about_source_url), style = BsfType.mono, color = colors.textMuted, modifier = Modifier.padding(bottom = 12.dp))
         Text(stringResource(R.string.about_wallpapers), style = BsfType.bodyStrong, color = colors.text)
         Text(stringResource(R.string.about_wallpapers_credit), style = BsfType.label, color = colors.textMuted)
         env.userDir?.let {
